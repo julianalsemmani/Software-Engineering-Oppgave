@@ -1,8 +1,7 @@
-@startuml
-"Administrator" -- "Opprette brukere"
-"Administrator" -- "Slette brukere"
-"Sluttbruker" -- "By på varer"
-"Butikk" -- "Legge ut varer"
-"Butikk" -- "Fjerne varer"
-"Sluttbruker" -- 
+@startuml use-case
+:Administrator: --> (Opprette brukere)
+:Administrator: --> (Slette brukere)
+:Sluttbruker: --> (By på varer)
+:Butikk: --> (Legge ut vare)
+:Butikk: --> (Fjerne varer)
 @enduml
