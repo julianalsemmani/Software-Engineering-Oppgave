@@ -1,0 +1,8 @@
+@startuml
+"Administrator" -- "Opprette brukere"
+"Administrator" -- "Slette brukere"
+"Sluttbruker" -- "By på varer"
+"Butikk" -- "Legge ut varer"
+"Butikk" -- "Fjerne varer"
+"Sluttbruker" -- 
+@enduml
