@@ -1,7 +1,48 @@
-@startuml use-case
-:Administrator: --> (Opprette brukere)
-:Administrator: --> (Slette brukere)
-:Sluttbruker: --> (By på varer)
-:Butikk: --> (Legge ut vare)
-:Butikk: --> (Fjerne varer)
+@startuml antikk shopify
+left to right direction
+/' Adminstrator har alle rettigheter andre brukere har '/
+/' UCA - use case administator'/
+/' UCB - use case butikk'/
+/' UCS - use case sluttbruker'/
+
+package antikk_shopify{
+  /' Usecases for en administator  '/
+  usecase "Opprette butikkbruker" as UCA1
+  usecase "Slett brukere/butikkbrukere" as UCA2
+
+  /' Usecases for en butikk  '/
+  usecase "Velge abonnement/provisjon" as UCB1
+  usecase "Sette opp auksjon" as UCB2
+  usecase "Gi admin rettigheter til ansatt" as UCB3
+  usecase "Oppdatere ordre" as UCB4
+  usecase "Se salgshistorikk" as UCB5
+  usecase "Kontakte tjenestesupport" as UCB6
+  usecase "Legge ut varer" as UCB7
+  usecase "Fjerne varer" as UCB8
+
+  /' Usecases for en sluttbruker '/
+  usecase "Oprette/slette/oppdatere sin egen konto" as UCS1
+  usecase "Kjøpe/by på varer" as UCS2
+  usecase "Se ordrehistorikk" as UCS3
+  usecase "Søke/Filtrere varer" as UCS4
+  usecase "Kontakte butikksupport" as UCS4
+}
+
+:Administrator: --> UCA1
+:Administrator: --> UCA2
+
+:Butikk: --> UCB1
+:Butikk: --> UCB2
+:Butikk: --> UCB3
+:Butikk: --> UCB4
+:Butikk: --> UCB5
+:Butikk: --> UCB6
+:Butikk: --> UCB7
+:Butikk: --> UCB8
+
+:Sluttbruker: --> UCS1
+:Sluttbruker: --> UCS2
+:Sluttbruker: --> UCS3
+:Sluttbruker: --> UCS4
+:Sluttbruker: --> UCB6
 @enduml
