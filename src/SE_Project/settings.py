@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'stores'
+    'stores',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -124,3 +125,7 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Use our own user model instead of Django's default
+AUTH_USER_MODEL = 'users.User'
