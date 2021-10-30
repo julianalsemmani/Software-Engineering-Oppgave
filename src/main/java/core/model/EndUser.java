@@ -7,8 +7,8 @@ public class EndUser extends User {
     public ArrayList<Product> favorites;
     public ArrayList<Product> productsBidOn;
 
-    public EndUser(String firstName, String lastName, String adress, String email, String userName, String password, int balance) {
-        super(firstName, lastName, adress, email, userName, password);
+    public EndUser(String firstName, String lastName, String address, String email, String userName, String password, int balance) {
+        super(firstName, lastName, address, email, userName, password);
         this.balance = balance;
     }
 }

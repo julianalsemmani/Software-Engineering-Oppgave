@@ -8,10 +8,10 @@ public abstract class User {
     public String userName;
     public String password;
 
-    public User(String firstName, String lastName, String adress, String email, String userName, String password) {
+    public User(String firstName, String lastName, String address, String email, String userName, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.address = adress;
+        this.address = address;
         this.email = email;
         this.userName = userName;
         this.password = password;
