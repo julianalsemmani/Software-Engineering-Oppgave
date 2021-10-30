@@ -1,4 +1,4 @@
-package core.controller;
+package web.controller;
 
 import core.repository.StartUpRepository;
 

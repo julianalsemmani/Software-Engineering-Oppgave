@@ -1,11 +1,10 @@
-package core;
+package web;
 
-import core.controller.ProductController;
-import core.controller.StartUpController;
-import core.controller.StoreController;
-import core.controller.UserController;
-import core.model.Product;
-import core.repository.StartUpJSONRepository;
+import web.controller.ProductController;
+import web.controller.StartUpController;
+import web.controller.StoreController;
+import web.controller.UserController;
+import persist.StartUpJSONRepository;
 import core.repository.StartUpRepository;
 import io.javalin.Javalin;
 

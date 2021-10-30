@@ -1,11 +1,11 @@
-package core.controller;
+package web.controller;
 
 import core.repository.StartUpRepository;
 
-public class ProductController {
+public class UserController {
     public final StartUpRepository startUpRepository;
 
-    public ProductController(StartUpRepository startUpRepository) {
+    public UserController(StartUpRepository startUpRepository) {
         this.startUpRepository = startUpRepository;
     }
 }
