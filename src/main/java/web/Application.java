@@ -1,5 +1,8 @@
 package web;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.javalin.plugin.json.JavalinJackson;
+import org.unbrokendome.jackson.beanvalidation.BeanValidationModule;
 import web.controller.ProductController;
 import web.controller.StartUpController;
 import web.controller.StoreController;
@@ -8,10 +11,20 @@ import persist.StartUpJSONRepository;
 import core.repository.StartUpRepository;
 import io.javalin.Javalin;
 
+import javax.validation.Validation;
+import javax.validation.ValidatorFactory;
+
+
 public class Application {
     public static void main(String[] args) {
         Javalin app = Javalin.create().start();
 
+        ValidatorFactory validatorFactory = Validation.byDefaultProvider().configure().buildValidatorFactory();
+
+        ObjectMapper objectMapper = new ObjectMapper()
+                .registerModule(new BeanValidationModule(validatorFactory));
+
+        JavalinJackson.configure(objectMapper);
         app.config.enableWebjars();
 
         app.get("/", ctx -> ctx.result("Hello World"));
@@ -25,7 +38,7 @@ public class Application {
         StoreController storeController = new StoreController(startUpRepository);
         UserController userController = new UserController(startUpRepository);
 
-        app.post("/api/store-user", userController::handleCreateStoreUser);
+        app.post("/api/store-user", userController::onPostStoreUser);
 
     }
 }

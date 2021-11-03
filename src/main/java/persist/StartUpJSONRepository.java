@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class StartUpJSONRepository implements StartUpRepository, Runnable {
@@ -45,22 +46,24 @@ public class StartUpJSONRepository implements StartUpRepository, Runnable {
     }
 
 
-    /************************      STORES      ************************/
+    /************************      STORES
+     * @return************************/
 
     @Override
-    public ArrayList<Store> getAllStores() {
+    public List<Store> getAllStores() {
         return new ArrayList<>(storesHashMap.values());
     }
 
     @Override
-    public Store getAStore(int storeId) {
+    public Store getStoreById(int storeId) {
         return storesHashMap.get(storeId);
     }
 
-    /************************ STORE USERS / EMPLOYEES ************************/
+    /************************ STORE USERS / EMPLOYEES
+     * @return************************/
     @Override
-    public ArrayList<StoreUser> getAllEmployees(int storeId) {
-        Store currentStore = getAStore(storeId);
+    public List<StoreUser> getAllEmployees(int storeId) {
+        Store currentStore = getStoreById(storeId);
 
         if (currentStore != null) {
             return currentStore.employees;
@@ -70,7 +73,7 @@ public class StartUpJSONRepository implements StartUpRepository, Runnable {
 
     @Override
     public StoreUser getAnEmployee(int storeId, String userName) {
-        return getAStore(storeId).getEmployee(userName);
+        return getStoreById(storeId).getEmployee(userName);
     }
 
     @Override
@@ -113,11 +116,12 @@ public class StartUpJSONRepository implements StartUpRepository, Runnable {
         run();
     }
 
-    /************************    PRODUCTS    ************************/
+    /************************    PRODUCTS
+     * @return************************/
 
     @Override
-    public ArrayList<Product> getAllProducts(int storeId) {
-        Store currentStore = getAStore(storeId);
+    public List<Product> getAllProducts(int storeId) {
+        Store currentStore = getStoreById(storeId);
 
         if (currentStore != null) {
             return currentStore.products;
@@ -128,7 +132,7 @@ public class StartUpJSONRepository implements StartUpRepository, Runnable {
     @Override
     public Product getAProduct(int storeId, int productId) {
 
-        return getAStore(storeId).getProduct(productId);
+        return getStoreById(storeId).getProduct(productId);
     }
 
     @Override

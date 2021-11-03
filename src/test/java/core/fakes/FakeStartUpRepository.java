@@ -1,6 +1,7 @@
 package core.fakes;
 
-import web.dtos.StoreUserDTO;
+import core.model.Product;
+import core.model.Store;
 import core.model.StoreUser;
 import core.repository.StartUpRepository;
 
@@ -9,6 +10,8 @@ import java.util.List;
 
 public class FakeStartUpRepository implements StartUpRepository {
     List<StoreUser> storeUserList = new ArrayList<>();
+    List<Store> storeList = new ArrayList<>();
+    List<Product> productList = new ArrayList<>();
 
 //    @Override
 //    public void createStoreUser(StoreUserDTO dto) {
@@ -17,5 +20,65 @@ public class FakeStartUpRepository implements StartUpRepository {
 
     public void dumpFakeData() {
         storeUserList.clear();
+    }
+
+    @Override
+    public List<Store> getAllStores() {
+        return storeList;
+    }
+
+    @Override
+    public List<StoreUser> getAllEmployees(int storeId) {
+        return storeUserList;
+    }
+
+    @Override
+    public List<Product> getAllProducts(int storeId) {
+        return productList;
+    }
+
+    @Override
+    public Store getStoreById(int storeId) {
+        return null;
+    }
+
+    @Override
+    public StoreUser getAnEmployee(int storeId, String userName) {
+        return null;
+    }
+
+    @Override
+    public Product getAProduct(int storeId, int productId) {
+        return null;
+    }
+
+    @Override
+    public void createStoreUser(int storeId, StoreUser newEmployee) {
+
+    }
+
+    @Override
+    public void updateStoreUser(int storeId, String oldUsername, StoreUser updatedEmployee) {
+
+    }
+
+    @Override
+    public void deleteStoreUser(int storeId, String userName) {
+
+    }
+
+    @Override
+    public void createProduct(int storeId, Product newProduct) {
+
+    }
+
+    @Override
+    public void updateProduct(int storeId, int productId, Product newProduct) {
+
+    }
+
+    @Override
+    public void deleteProduct(int storeId, int productId) {
+
     }
 }

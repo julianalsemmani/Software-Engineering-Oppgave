@@ -2,17 +2,17 @@ package core.repository;
 
 import core.model.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface StartUpRepository {
 
-    ArrayList<Store> getAllStores();
+    List<Store> getAllStores();
 
-    ArrayList<StoreUser> getAllEmployees(int storeId);
+    List<StoreUser> getAllEmployees(int storeId);
 
-    ArrayList<Product> getAllProducts(int storeId);
+    List<Product> getAllProducts(int storeId);
 
-    Store getAStore(int storeId);
+    Store getStoreById(int storeId);
 
     StoreUser getAnEmployee(int storeId, String userName);
 

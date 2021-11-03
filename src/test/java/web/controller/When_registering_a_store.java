@@ -1,6 +1,6 @@
 package web.controller;
 
-import web.dtos.StoreUserDTO;
+import web.dtos.PostStoreUser;
 import io.javalin.plugin.json.JavalinJson;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
@@ -28,20 +28,20 @@ public class When_registering_a_store {
 
     @Test
     public void creating_a_store_user() {
-        StoreUserDTO storeUserDTO = new StoreUserDTO();
-        storeUserDTO.address = "address to somewhere";
-        storeUserDTO.userName = "username";
-        storeUserDTO.firstName = "firstname";
-        storeUserDTO.lastName = "lastname";
-        storeUserDTO.email = "email@email.com";
-        storeUserDTO.password = "fakepassword";
+        PostStoreUser postStoreUser = new PostStoreUser();
+        postStoreUser.address = "address to somewhere";
+        postStoreUser.userName = "username";
+        postStoreUser.firstName = "firstname";
+        postStoreUser.lastName = "lastname";
+        postStoreUser.email = "email@email.com";
+        postStoreUser.password = "fakepassword";
 
         HttpResponse<String> response = Unirest.post("http://localhost:1234/api/store-user")
                 .header("content-type", "application/json")
-                .body(JavalinJson.toJson(storeUserDTO))
+                .body(JavalinJson.toJson(postStoreUser))
                 .asString();
 
-        assertEquals(JavalinJson.toJson(storeUserDTO), response.getBody());
+        assertEquals(JavalinJson.toJson(postStoreUser), response.getBody());
         assertEquals(201, response.getStatus());
 
         System.out.println("Created a store user with the following json structure:");
@@ -50,19 +50,22 @@ public class When_registering_a_store {
 
     @Test
     public void creating_a_store_user_but_missing_username() {
-        StoreUserDTO storeUserDTO = new StoreUserDTO();
-        storeUserDTO.address = "address to somewhere";
+        PostStoreUser postStoreUser = new PostStoreUser();
+        postStoreUser.address = "address to somewhere";
         // missing username
-        storeUserDTO.firstName = "firstname";
-        storeUserDTO.lastName = "lastname";
-        storeUserDTO.email = "email@email.com";
-        storeUserDTO.password = "fakepassword";
+        postStoreUser.firstName = "firstname";
+        postStoreUser.lastName = "lastname";
+        postStoreUser.email = "email@email.com";
+        postStoreUser.password = "fakepassword";
 
         HttpResponse<String> response = Unirest.post("http://localhost:1234/api/store-user")
                 .header("content-type", "application/json")
-                .body("{\"firstName\":\"firstname\",\"lastName\":\"lastname\",\"address\":\"address to somewhere\",\"email\":\"email@email.com\",\"password\":\"fakepassword\"}")
+                .body(JavalinJson.toJson(postStoreUser))
                 .asString();
-        System.out.println(response.getBody());
+
+        System.out.println("Status: " + response.getStatus());
+        System.out.println("Body: " + response.getBody());
+
         // Should return 400 (bad request) since username is missing
         assertEquals(400, response.getStatus());
     }
