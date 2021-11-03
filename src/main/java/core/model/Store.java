@@ -20,4 +20,30 @@ public class Store {
         this.employees = employees;
         this.products = products;
     }
+
+    public Product getProduct(int productId) {
+        for (Product aProduct : products) {
+            if (aProduct.productID == productId) {
+                return aProduct;
+            }
+        }
+        return null;
+    }
+
+    public StoreUser getEmployee(String userName) {
+        for (StoreUser employee : employees) {
+            if (employee.userName.equals(userName)) {
+                return employee;
+            }
+        }
+        return null;
+    }
+
+    public void addProduct(Product product) {
+        products.add(product);
+    }
+
+    public void addEmployee(StoreUser employee) {
+        employees.add(employee);
+    }
 }
