@@ -7,5 +7,12 @@ public class Product {
     public String productPicture;
     public int storeID;
 
+    public Product(int productID, String productName, float productPrice, String productPicture, int storeID) {
+        this.productID = productID;
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.productPicture = productPicture;
+        this.storeID = storeID;
+    }
 
 }
