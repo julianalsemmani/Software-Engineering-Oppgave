@@ -1,5 +1,7 @@
 package core.repository;
 
-public interface StartUpRepository {
+import core.dtos.StoreUserDTO;
 
+public interface StartUpRepository {
+    void createStoreUser(StoreUserDTO dto);
 }

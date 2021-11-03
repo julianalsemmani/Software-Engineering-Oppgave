@@ -24,5 +24,8 @@ public class Application {
         StartUpController startUpController = new StartUpController(startUpRepository);
         StoreController storeController = new StoreController(startUpRepository);
         UserController userController = new UserController(startUpRepository);
+
+        app.post("/api/store-user", userController::handleCreateStoreUser);
+
     }
 }

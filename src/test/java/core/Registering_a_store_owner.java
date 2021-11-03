@@ -19,6 +19,6 @@ public class Registering_a_store_owner {
         Store store = new Store("store1", "store_adress", 12345678, 0, storeUser, new ArrayList<>(), new ArrayList<>());
         StartUp startUp = new StartUp("a", "a", 12345678, new ArrayList<>(List.of(store)));
 
-        assertSame(storeUser, startUp.stores.get(0).Owner);
+        assertSame(storeUser, startUp.stores.get(0).owner);
     }
 }

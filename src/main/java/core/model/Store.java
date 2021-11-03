@@ -7,7 +7,7 @@ public class Store {
     public String address;
     public int phoneNumber;
     public int storeID;
-    public StoreUser Owner;
+    public StoreUser owner;
     public ArrayList<StoreUser> employees;
     public ArrayList<Product> products;
 
@@ -16,7 +16,7 @@ public class Store {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.storeID = storeID;
-        Owner = owner;
+        this.owner = owner;
         this.employees = employees;
         this.products = products;
     }
