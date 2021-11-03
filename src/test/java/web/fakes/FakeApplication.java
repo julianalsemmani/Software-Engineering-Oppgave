@@ -20,7 +20,7 @@ public class FakeApplication {
         Javalin app = Javalin.create().start(port);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.disable(SerializationFeature.)
+
         JavalinJackson.configure(objectMapper);
 
         // Controllers
