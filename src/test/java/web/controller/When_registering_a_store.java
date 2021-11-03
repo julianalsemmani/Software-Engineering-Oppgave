@@ -1,15 +1,11 @@
 package web.controller;
 
-import core.dtos.StoreUserDTO;
-import core.fakes.FakeStartUpRepository;
-import core.repository.StartUpRepository;
-import io.javalin.http.Context;
+import web.dtos.StoreUserDTO;
 import io.javalin.plugin.json.JavalinJson;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import web.fakes.FakeApplication;
 

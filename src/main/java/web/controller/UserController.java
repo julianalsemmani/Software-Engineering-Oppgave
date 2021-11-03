@@ -1,9 +1,8 @@
 package web.controller;
 
-import core.dtos.StoreUserDTO;
+import web.dtos.StoreUserDTO;
 import core.repository.StartUpRepository;
 import io.javalin.core.validation.BodyValidator;
-import io.javalin.http.BadRequestResponse;
 import io.javalin.http.Context;
 import io.javalin.http.HttpResponseException;
 import io.javalin.plugin.json.JavalinJson;

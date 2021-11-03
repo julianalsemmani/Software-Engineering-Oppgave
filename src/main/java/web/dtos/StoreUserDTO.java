@@ -1,4 +1,4 @@
-package core.dtos;
+package web.dtos;
 
 public class StoreUserDTO {
     public String firstName;
