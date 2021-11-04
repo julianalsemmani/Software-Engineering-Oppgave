@@ -11,6 +11,10 @@ public class UserResponse {
     public String email;
     // We do not include password here as that would be very bad if it was sent to front-end :D
 
+    public UserResponse() {
+
+    }
+
     public UserResponse(User user) {
         this.id = user.id;
         this.username = user.username;

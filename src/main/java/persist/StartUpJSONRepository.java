@@ -12,9 +12,12 @@ import java.util.List;
 import java.util.Map;
 
 
-public class StartUpJSONRepository implements StartUpRepository, Runnable {
+public class StartUpJSONRepository implements StartUpRepository {
+    //TODO(edward): We should implement multi-threading for writing to file here
     private Map<Integer, Store> idStoreMap;
     private Map<Integer, User> idUserMap;
+    private int nextUserId = 0;
+    private int nextStoreId = 0;
     private File storeDataFile;
 
     public StartUpJSONRepository(String fileName) {
@@ -38,8 +41,7 @@ public class StartUpJSONRepository implements StartUpRepository, Runnable {
         }
     }
 
-    @Override
-    public void run() {
+    public void writeToJSONFile() {
         try {
             ObjectMapper writeMapper = new ObjectMapper();
             writeMapper.writerWithDefaultPrettyPrinter().writeValue(storeDataFile, idStoreMap.values());
@@ -47,7 +49,6 @@ public class StartUpJSONRepository implements StartUpRepository, Runnable {
             e.printStackTrace();
         }
     }
-
 
     /************************      STORES
      * @return************************/
@@ -75,20 +76,39 @@ public class StartUpJSONRepository implements StartUpRepository, Runnable {
     }
 
     @Override
-    public void createUser(User newUser) {
-        idUserMap.put(newUser.id, newUser);
+    public User createUser(String username, String password, String firstName, String lastName, String address, String email) {
+         int id = ++nextUserId;
+         User newUser = new User(id, username, password, firstName, lastName, address, email);
+         idUserMap.put(id, newUser);
+
+         writeToJSONFile();
+
+         return newUser;
     }
 
     @Override
-    public void updateUser(int userId, User updatedUser) {
+    public User updateUser(int userId, String username, String password, String firstName, String lastName, String address, String email) {
+        User user = this.idUserMap.get(userId);
+        if(user != null) {
+            user.username = username;
+            user.password = password;
+            user.firstName = firstName;
+            user.lastName = lastName;
+            user.address = address;
+            user.email = email;
+        }
+
+        writeToJSONFile();
+
+        return user;
 
         /* ? */
 //        deleteUser(oldUserName);
 //        createUser(updatedEmployee);
 
-        idUserMap.put(userId, updatedUser);
+        //idUserMap.put(userId, updatedUser);
 
-        run();
+
 
         /* slik ville jeg egentlig gjort det, dersom vi hadde settere,
            ellers litt usikker på gjøremåte! :) ^
@@ -109,15 +129,16 @@ public class StartUpJSONRepository implements StartUpRepository, Runnable {
     }
 
     @Override
-    public void deleteUser(int id) {
+    public User deleteUser(int id) {
          User user = idUserMap.get(id);
          if(user != null) {
              for (Store store : getAllStores()) {
                  store.employees.removeIf(theEmployee -> theEmployee.id == id);
              }
 
-             run();
+             writeToJSONFile();
          }
+         return user;
     }
 
     /************************    PRODUCTS
@@ -144,7 +165,7 @@ public class StartUpJSONRepository implements StartUpRepository, Runnable {
         Store store = idStoreMap.get(storeId);
         store.addProduct(newProduct);
 
-        run();
+        writeToJSONFile();
     }
 
     @Override
@@ -153,7 +174,7 @@ public class StartUpJSONRepository implements StartUpRepository, Runnable {
         deleteProduct(storeId, productId);
         createProduct(storeId, newProduct);
 
-        run();
+        writeToJSONFile();
 
         /*
         ArrayList<Product> tempList = storesMap.get(storeId).products;
@@ -175,7 +196,7 @@ public class StartUpJSONRepository implements StartUpRepository, Runnable {
         Store store = idStoreMap.get(storeId);
         store.products.removeIf(aProduct -> aProduct.productID == productId);
 
-        run();
+        writeToJSONFile();
     }
 
 }

@@ -1,7 +1,7 @@
 package web.fakes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import core.fakes.FakeStartUpRepository;
+import core.repository.StartUpRepository;
 import io.javalin.Javalin;
 import io.javalin.plugin.json.JavalinJackson;
 import web.controller.ProductController;
@@ -19,7 +19,11 @@ import javax.validation.ValidatorFactory;
  */
 public class FakeApplication {
 
-    public final FakeStartUpRepository fakeStartUpRepository = new FakeStartUpRepository();
+    private StartUpRepository startUpRepository;
+
+    public FakeApplication(StartUpRepository startUpRepository) {
+        this.startUpRepository = startUpRepository;
+    }
 
     public void start(int port) {
         Javalin app = Javalin.create().start(port);
@@ -32,12 +36,13 @@ public class FakeApplication {
         JavalinJackson.configure(objectMapper);
 
         // Controllers
-        ProductController productController = new ProductController(fakeStartUpRepository);
-        StartUpController startUpController = new StartUpController(fakeStartUpRepository);
-        StoreController storeController = new StoreController(fakeStartUpRepository);
-        UserController userController = new UserController(fakeStartUpRepository);
+        ProductController productController = new ProductController(startUpRepository);
+        StartUpController startUpController = new StartUpController(startUpRepository);
+        StoreController storeController = new StoreController(startUpRepository);
+        UserController userController = new UserController(startUpRepository);
 
         app.post("/api/users", userController::onPostUser);
+        app.put("/api/users/:user-id", userController::onPutUser);
 
     }
 }

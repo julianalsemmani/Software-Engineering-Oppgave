@@ -19,7 +19,8 @@ public class User {
     public List<Product> favorites = new ArrayList<>();
     public List<Product> productsBidOn = new ArrayList<>();
 
-    public User(String firstName, String lastName, String address, String email, String username, String password) {
+    public User(int id, String username, String password, String firstName, String lastName, String address, String email) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;

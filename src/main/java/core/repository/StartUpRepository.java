@@ -18,11 +18,11 @@ public interface StartUpRepository {
 
     /*****************************************************/
 
-    void createUser(User newUser);
+    User createUser(String username, String password, String firstName, String lastName, String address, String email);
 
-    void updateUser(int userId, User updatedUser);
+    User updateUser(int userId, String username, String password, String firstName, String lastName, String address, String email);
 
-    void deleteUser(int userId);
+    User deleteUser(int userId);
 
     void createProduct(int storeId, Product newProduct);
 
