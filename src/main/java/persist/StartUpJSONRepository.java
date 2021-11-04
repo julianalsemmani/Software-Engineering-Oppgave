@@ -9,10 +9,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class StartUpJSONRepository implements StartUpRepository, Runnable {
-    private HashMap<Integer, Store> storesHashMap;
+    private Map<Integer, Store> idStoreMap;
+    private Map<Integer, User> idUserMap;
     private File storeDataFile;
 
     public StartUpJSONRepository(String fileName) {
@@ -22,13 +24,14 @@ public class StartUpJSONRepository implements StartUpRepository, Runnable {
 
     public void readFromJSONFile() {
         ObjectMapper readMapper = new ObjectMapper();
-        storesHashMap = new HashMap<>();
+        idStoreMap = new HashMap<>();
+        idUserMap = new HashMap<>();
 
         try {
             Store[] storesArray = readMapper.readValue(storeDataFile, Store[].class);
 
             for (Store aStore : storesArray) {
-                storesHashMap.put(aStore.storeID, aStore);
+                idStoreMap.put(aStore.id, aStore);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -39,7 +42,7 @@ public class StartUpJSONRepository implements StartUpRepository, Runnable {
     public void run() {
         try {
             ObjectMapper writeMapper = new ObjectMapper();
-            writeMapper.writerWithDefaultPrettyPrinter().writeValue(storeDataFile, storesHashMap.values());
+            writeMapper.writerWithDefaultPrettyPrinter().writeValue(storeDataFile, idStoreMap.values());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,18 +54,18 @@ public class StartUpJSONRepository implements StartUpRepository, Runnable {
 
     @Override
     public List<Store> getAllStores() {
-        return new ArrayList<>(storesHashMap.values());
+        return new ArrayList<>(idStoreMap.values());
     }
 
     @Override
     public Store getStoreById(int storeId) {
-        return storesHashMap.get(storeId);
+        return idStoreMap.get(storeId);
     }
 
     /************************ STORE USERS / EMPLOYEES
      * @return************************/
     @Override
-    public List<StoreUser> getAllEmployees(int storeId) {
+    public List<User> getAllEmployees(int storeId) {
         Store currentStore = getStoreById(storeId);
 
         if (currentStore != null) {
@@ -72,21 +75,18 @@ public class StartUpJSONRepository implements StartUpRepository, Runnable {
     }
 
     @Override
-    public StoreUser getAnEmployee(int storeId, String userName) {
-        return getStoreById(storeId).getEmployee(userName);
+    public void createUser(User newUser) {
+        idUserMap.put(newUser.id, newUser);
     }
 
     @Override
-    public void createStoreUser(int storeId, StoreUser newEmployee) {
-        storesHashMap.get(storeId).addEmployee(newEmployee);
-    }
-
-    @Override
-    public void updateStoreUser(int storeId, String oldUserName, StoreUser updatedEmployee) {
+    public void updateUser(int userId, User updatedUser) {
 
         /* ? */
-        deleteStoreUser(storeId, oldUserName);
-        createStoreUser(storeId, updatedEmployee);
+//        deleteUser(oldUserName);
+//        createUser(updatedEmployee);
+
+        idUserMap.put(userId, updatedUser);
 
         run();
 
@@ -109,11 +109,15 @@ public class StartUpJSONRepository implements StartUpRepository, Runnable {
     }
 
     @Override
-    public void deleteStoreUser(int storeId, String userName) {
-        Store aStore = storesHashMap.get(storeId);
-        aStore.employees.removeIf(theEmployee -> theEmployee.userName.equals(userName));
+    public void deleteUser(int id) {
+         User user = idUserMap.get(id);
+         if(user != null) {
+             for (Store store : getAllStores()) {
+                 store.employees.removeIf(theEmployee -> theEmployee.id == id);
+             }
 
-        run();
+             run();
+         }
     }
 
     /************************    PRODUCTS
@@ -137,7 +141,7 @@ public class StartUpJSONRepository implements StartUpRepository, Runnable {
 
     @Override
     public void createProduct(int storeId, Product newProduct) {
-        Store store = storesHashMap.get(storeId);
+        Store store = idStoreMap.get(storeId);
         store.addProduct(newProduct);
 
         run();
@@ -168,7 +172,7 @@ public class StartUpJSONRepository implements StartUpRepository, Runnable {
 
     @Override
     public void deleteProduct(int storeId, int productId) {
-        Store store = storesHashMap.get(storeId);
+        Store store = idStoreMap.get(storeId);
         store.products.removeIf(aProduct -> aProduct.productID == productId);
 
         run();

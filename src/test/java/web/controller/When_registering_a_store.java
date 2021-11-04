@@ -1,6 +1,6 @@
 package web.controller;
 
-import web.dtos.PostStoreUser;
+import web.dtos.PostUser;
 import io.javalin.plugin.json.JavalinJson;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
@@ -26,22 +26,26 @@ public class When_registering_a_store {
         fakeApplication.fakeStartUpRepository.dumpFakeData();
     }
 
-    @Test
-    public void creating_a_store_user() {
-        PostStoreUser postStoreUser = new PostStoreUser();
+    public PostUser setupFakeUserPostBody() {
+        PostUser postStoreUser = new PostUser();
         postStoreUser.address = "address to somewhere";
-        postStoreUser.userName = "username";
+        postStoreUser.username = "username";
         postStoreUser.firstName = "firstname";
         postStoreUser.lastName = "lastname";
         postStoreUser.email = "email@email.com";
         postStoreUser.password = "fakepassword";
+        return postStoreUser;
+    }
 
-        HttpResponse<String> response = Unirest.post("http://localhost:1234/api/store-user")
+    @Test
+    public void creating_a_store_user() {
+        PostUser postUserBody = setupFakeUserPostBody();
+
+        HttpResponse<String> response = Unirest.post("http://localhost:1234/api/users")
                 .header("content-type", "application/json")
-                .body(JavalinJson.toJson(postStoreUser))
+                .body(JavalinJson.toJson(postUserBody))
                 .asString();
 
-        assertEquals(JavalinJson.toJson(postStoreUser), response.getBody());
         assertEquals(201, response.getStatus());
 
         System.out.println("Created a store user with the following json structure:");
@@ -50,17 +54,12 @@ public class When_registering_a_store {
 
     @Test
     public void creating_a_store_user_but_missing_username() {
-        PostStoreUser postStoreUser = new PostStoreUser();
-        postStoreUser.address = "address to somewhere";
-        // missing username
-        postStoreUser.firstName = "firstname";
-        postStoreUser.lastName = "lastname";
-        postStoreUser.email = "email@email.com";
-        postStoreUser.password = "fakepassword";
+        PostUser postUserBody = setupFakeUserPostBody();
+        postUserBody.username = null; // missing username
 
-        HttpResponse<String> response = Unirest.post("http://localhost:1234/api/store-user")
+        HttpResponse<String> response = Unirest.post("http://localhost:1234/api/users")
                 .header("content-type", "application/json")
-                .body(JavalinJson.toJson(postStoreUser))
+                .body(JavalinJson.toJson(postUserBody))
                 .asString();
 
         System.out.println("Status: " + response.getStatus());

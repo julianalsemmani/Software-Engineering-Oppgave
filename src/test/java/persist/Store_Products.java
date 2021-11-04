@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class Store_Products {
 
     //Data for testing purposes
-    StoreUser storeUser = new StoreUser("first", "last", "address", "email", "store_owner", "abc");
+    User storeUser = new User("first", "last", "address", "email", "store_owner", "abc");
     Product product1 = new Product(1111, "product1", 111, "picture1", 0);
     Product product2 = new Product(2222, "product2", 222, "picture2", 0);
     Store store = new Store("store_name", "store_address", 23456789, 0, storeUser, new ArrayList<>(List.of(storeUser)), new ArrayList<>(List.of(product1, product2)));

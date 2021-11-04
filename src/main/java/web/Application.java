@@ -38,7 +38,7 @@ public class Application {
         StoreController storeController = new StoreController(startUpRepository);
         UserController userController = new UserController(startUpRepository);
 
-        app.post("/api/store-user", userController::onPostStoreUser);
+        app.post("/api/users", userController::onPostUser);
 
     }
 }

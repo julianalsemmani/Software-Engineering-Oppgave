@@ -1,19 +1,30 @@
 package core.model;
 
-public abstract class User {
+import java.util.ArrayList;
+import java.util.List;
+
+public class User {
+    public int id;
+
     public String firstName;
     public String lastName;
     public String address;
     public String email;
-    public String userName;
+    public String username;
     public String password;
 
-    public User(String firstName, String lastName, String address, String email, String userName, String password) {
+    public boolean isAdmin = false;
+
+    public int balance = 0;
+    public List<Product> favorites = new ArrayList<>();
+    public List<Product> productsBidOn = new ArrayList<>();
+
+    public User(String firstName, String lastName, String address, String email, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.email = email;
-        this.userName = userName;
+        this.username = username;
         this.password = password;
     }
 }

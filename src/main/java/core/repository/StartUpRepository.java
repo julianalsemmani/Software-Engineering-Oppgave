@@ -8,23 +8,21 @@ public interface StartUpRepository {
 
     List<Store> getAllStores();
 
-    List<StoreUser> getAllEmployees(int storeId);
+    List<User> getAllEmployees(int storeId);
 
     List<Product> getAllProducts(int storeId);
 
     Store getStoreById(int storeId);
 
-    StoreUser getAnEmployee(int storeId, String userName);
-
     Product getAProduct(int storeId, int productId);
 
     /*****************************************************/
 
-    void createStoreUser(int storeId, StoreUser newEmployee);
+    void createUser(User newUser);
 
-    void updateStoreUser(int storeId, String oldUsername, StoreUser updatedEmployee);
+    void updateUser(int userId, User updatedUser);
 
-    void deleteStoreUser(int storeId, String userName);
+    void deleteUser(int userId);
 
     void createProduct(int storeId, Product newProduct);
 

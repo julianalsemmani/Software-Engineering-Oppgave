@@ -37,7 +37,7 @@ public class FakeApplication {
         StoreController storeController = new StoreController(fakeStartUpRepository);
         UserController userController = new UserController(fakeStartUpRepository);
 
-        app.post("/api/store-user", userController::onPostStoreUser);
+        app.post("/api/users", userController::onPostUser);
 
     }
 }

@@ -1,21 +1,23 @@
 package core.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Store {
+    public int id;
+
     public String storeName;
     public String address;
     public int phoneNumber;
-    public int storeID;
-    public StoreUser owner;
-    public ArrayList<StoreUser> employees;
-    public ArrayList<Product> products;
+    public User owner;
+    public List<User> employees;
+    public List<Product> products;
 
-    public Store(String storeName, String address, int phoneNumber, int storeID, StoreUser owner, ArrayList<StoreUser> employees, ArrayList<Product> products) {
+    public Store(String storeName, String address, int phoneNumber, int id, User owner, ArrayList<User> employees, ArrayList<Product> products) {
+        this.id = id;
         this.storeName = storeName;
         this.address = address;
         this.phoneNumber = phoneNumber;
-        this.storeID = storeID;
         this.owner = owner;
         this.employees = employees;
         this.products = products;
@@ -30,9 +32,9 @@ public class Store {
         return null;
     }
 
-    public StoreUser getEmployee(String userName) {
-        for (StoreUser employee : employees) {
-            if (employee.userName.equals(userName)) {
+    public User getEmployee(String userName) {
+        for (User employee : employees) {
+            if (employee.username.equals(userName)) {
                 return employee;
             }
         }
@@ -43,7 +45,7 @@ public class Store {
         products.add(product);
     }
 
-    public void addEmployee(StoreUser employee) {
+    public void addEmployee(User employee) {
         employees.add(employee);
     }
 }
