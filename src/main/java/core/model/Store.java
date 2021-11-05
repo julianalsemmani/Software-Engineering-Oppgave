@@ -11,6 +11,7 @@ public class Store {
     public User owner;
     public List<User> employees;
     public List<Product> products;
+    public List<Auction> currentAuctions;
 
     public Store(int id, String storeName, User owner, List<User> employees, String address, int phoneNumber, List<Product> products) {
         this.id = id;

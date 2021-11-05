@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class Registering_a_store_with_a_user_as_owner {
+public class When_working_with_stores {
 
     public StartUpRepository startUpRepository;
     public User storeOwner;
@@ -21,7 +21,7 @@ public class Registering_a_store_with_a_user_as_owner {
     }
 
     @Test
-    public void registering_a_store() {
+    public void users_can_register_a_store_and_become_the_owner() {
         Store newStore = startUpRepository.createStore("test_store", storeOwner, "store_address", 12345678);
 
         assertNotNull(newStore);
