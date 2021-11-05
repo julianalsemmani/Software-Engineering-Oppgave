@@ -39,6 +39,8 @@ public class Application {
         UserController userController = new UserController(startUpRepository);
 
         app.post("/api/users", userController::onPostUser);
+        app.put("/api/users/:user-id", userController::onPutUser);
+        app.delete("/api/users/:user-id", userController::onDeleteUser);
 
     }
 }

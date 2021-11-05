@@ -63,6 +63,22 @@ public class StartUpJSONRepository implements StartUpRepository {
         return idStoreMap.get(storeId);
     }
 
+    @Override
+    public Store createStore(String storeName, User owner, String address, int phoneNumber) {
+        int storeId = ++nextStoreId;
+        Store newStore = new Store(storeId, storeName, owner, List.of(), address, phoneNumber, List.of());
+        idStoreMap.put(storeId, newStore);
+
+        writeToJSONFile();
+
+        return newStore;
+    }
+
+    @Override
+    public User getUserById(int userId) {
+        return idUserMap.get(userId);
+    }
+
     /************************ STORE USERS / EMPLOYEES
      * @return************************/
     @Override
@@ -90,12 +106,12 @@ public class StartUpJSONRepository implements StartUpRepository {
     public User updateUser(int userId, String username, String password, String firstName, String lastName, String address, String email) {
         User user = this.idUserMap.get(userId);
         if(user != null) {
-            user.username = username;
-            user.password = password;
-            user.firstName = firstName;
-            user.lastName = lastName;
-            user.address = address;
-            user.email = email;
+            if(username != null) user.username = username;
+            if(password != null) user.password = password;
+            if(firstName != null) user.firstName = firstName;
+            if(lastName != null) user.lastName = lastName;
+            if(address != null) user.address = address;
+            if(email != null) user.email = email;
         }
 
         writeToJSONFile();
@@ -129,16 +145,16 @@ public class StartUpJSONRepository implements StartUpRepository {
     }
 
     @Override
-    public User deleteUser(int id) {
-         User user = idUserMap.get(id);
-         if(user != null) {
+    public User deleteUser(int userId) {
+        User user = idUserMap.remove(userId);
+        if(user != null) {
              for (Store store : getAllStores()) {
-                 store.employees.removeIf(theEmployee -> theEmployee.id == id);
+                 store.employees.removeIf(theEmployee -> theEmployee.id == userId);
              }
 
-             writeToJSONFile();
-         }
-         return user;
+            writeToJSONFile();
+        }
+        return user;
     }
 
     /************************    PRODUCTS
@@ -194,7 +210,7 @@ public class StartUpJSONRepository implements StartUpRepository {
     @Override
     public void deleteProduct(int storeId, int productId) {
         Store store = idStoreMap.get(storeId);
-        store.products.removeIf(aProduct -> aProduct.productID == productId);
+        store.products.removeIf(aProduct -> aProduct.id == productId);
 
         writeToJSONFile();
     }

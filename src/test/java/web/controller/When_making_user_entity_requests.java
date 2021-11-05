@@ -1,37 +1,41 @@
 package web.controller;
 
-import core.fakes.FakeStartUpRepository;
-import persist.StartUpJSONRepository;
-import web.dtos.PostUser;
+import core.model.User;
+import core.repository.fakes.FakeStartUpRepository;
+import org.junit.jupiter.api.BeforeEach;
+import web.dtos.PostUserBody;
 import io.javalin.plugin.json.JavalinJson;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import web.dtos.PutUser;
-import web.dtos.UserResponse;
+import web.dtos.PutUserBody;
+import web.dtos.UserResponseBody;
 import web.fakes.FakeApplication;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class When_making_user_entity_requests {
-    private static final FakeApplication fakeApplication = new FakeApplication(new FakeStartUpRepository());
+    private static final FakeStartUpRepository fakeStartUpRepository = new FakeStartUpRepository();
+    private static final FakeApplication fakeApplication = new FakeApplication(fakeStartUpRepository);
+    private int testUserId;
 
     @BeforeAll
     public static void beforeAll() {
         fakeApplication.start(1234);
     }
 
-    @AfterEach
-    public void afterEach() {
+    @BeforeEach
+    public void setUp() {
         // Clear repository between tests
-        //TODO(edward): This is useless if the tests run in parallel and create race conditions anyway
-//        fakeApplication.fakeStartUpRepository.dumpFakeData();
+        fakeStartUpRepository.dumpFakeData();
+        User testUser = fakeStartUpRepository.createUser("test_user", "test_password", "test_first_name", "test_last_name", "test_address", "test_email");
+        testUserId = testUser.id;
     }
 
-    public PostUser setupFakeUserPostBody() {
-        PostUser postStoreUser = new PostUser();
+    public PostUserBody setupFakeUserPostBody() {
+        PostUserBody postStoreUser = new PostUserBody();
         postStoreUser.username = "username";
         postStoreUser.password = "fakepassword";
         postStoreUser.firstName = "firstname";
@@ -43,7 +47,7 @@ public class When_making_user_entity_requests {
 
     @Test
     public void creating_a_user() {
-        PostUser postUserBody = setupFakeUserPostBody();
+        PostUserBody postUserBody = setupFakeUserPostBody();
 
         HttpResponse<String> response = Unirest.post("http://localhost:1234/api/users")
                 .header("content-type", "application/json")
@@ -58,7 +62,7 @@ public class When_making_user_entity_requests {
 
     @Test
     public void creating_a_user_but_missing_username() {
-        PostUser postUserBody = setupFakeUserPostBody();
+        PostUserBody postUserBody = setupFakeUserPostBody();
         postUserBody.username = null; // missing username
 
         HttpResponse<String> response = Unirest.post("http://localhost:1234/api/users")
@@ -75,37 +79,32 @@ public class When_making_user_entity_requests {
 
     @Test
     public void updating_a_user() {
-        // First create a user to update
-        PostUser postUserBody = setupFakeUserPostBody();
-
-        HttpResponse<String> postResponse = Unirest.post("http://localhost:1234/api/users")
-                .header("content-type", "application/json")
-                .body(JavalinJson.toJson(postUserBody))
-                .asString();
-
-        UserResponse createdUser = JavalinJson.fromJson(postResponse.getBody(), UserResponse.class);
-
-        assertEquals(201, postResponse.getStatus());
-
         // Update user
-        PutUser putUserBody = new PutUser();
+        PutUserBody putUserBody = new PutUserBody();
         putUserBody.username = "new_username";
-        putUserBody.address = createdUser.address;
-        putUserBody.password = "new_password";
-        putUserBody.email = createdUser.email;
-        putUserBody.firstName =  createdUser.firstName;
-        putUserBody.lastName = createdUser.lastName;
 
-        System.out.println("http://localhost:1234/api/users/"+createdUser.id);
-        HttpResponse<String> putResponse = Unirest.put("http://localhost:1234/api/users/"+createdUser.id)
+        HttpResponse<String> putResponse = Unirest.put("http://localhost:1234/api/users/"+testUserId)
                 .header("content-type", "application/json")
                 .body(JavalinJson.toJson(putUserBody))
                 .asString();
 
         assertEquals(200, putResponse.getStatus());
 
-        UserResponse updatedUser = JavalinJson.fromJson(putResponse.getBody(), UserResponse.class);
+        UserResponseBody updatedUser = JavalinJson.fromJson(putResponse.getBody(), UserResponseBody.class);
 
         assertEquals("new_username", updatedUser.username);
+        assertNotNull(updatedUser.address); // Make sure that address was not reset even though it was not included in update
+    }
+
+    @Test
+    public void deleting_a_user() {
+        HttpResponse<String> putResponse = Unirest.delete("http://localhost:1234/api/users/"+testUserId)
+                .asString();
+
+        assertEquals(200, putResponse.getStatus());
+
+        UserResponseBody deletedUser = JavalinJson.fromJson(putResponse.getBody(), UserResponseBody.class);
+
+        assertNull(fakeStartUpRepository.getUserById(testUserId));
     }
 }

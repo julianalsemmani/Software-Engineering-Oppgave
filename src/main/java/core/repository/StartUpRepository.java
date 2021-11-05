@@ -12,11 +12,15 @@ public interface StartUpRepository {
 
     List<Product> getAllProducts(int storeId);
 
-    Store getStoreById(int storeId);
-
     Product getAProduct(int storeId, int productId);
 
     /*****************************************************/
+
+    Store getStoreById(int storeId);
+
+    Store createStore(String storeName, User owner, String address, int phoneNumber);
+
+    User getUserById(int userId);
 
     User createUser(String username, String password, String firstName, String lastName, String address, String email);
 

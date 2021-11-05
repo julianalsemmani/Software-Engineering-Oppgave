@@ -1,14 +1,14 @@
 package core.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class StartUp {
     public String name;
     public String address;
     public int phoneNumber;
-    public ArrayList<Store> stores;
+    public List<Store> stores;
 
-    public StartUp(String name, String address, int phoneNumber, ArrayList<Store> stores) {
+    public StartUp(String name, String address, int phoneNumber, List<Store> stores) {
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;

@@ -1,16 +1,16 @@
 package core.model;
 
 public class Product {
-    public int productID;
-    public String productName;
-    public float productPrice;
+    public int id;
+    public String name;
+    public float minimumBid;
     public String productPicture;
     public int storeID;
 
-    public Product(int productID, String productName, float productPrice, String productPicture, int storeID) {
-        this.productID = productID;
-        this.productName = productName;
-        this.productPrice = productPrice;
+    public Product(int id, String name, float minimumBid, String productPicture, int storeID) {
+        this.id = id;
+        this.name = name;
+        this.minimumBid = minimumBid;
         this.productPicture = productPicture;
         this.storeID = storeID;
     }

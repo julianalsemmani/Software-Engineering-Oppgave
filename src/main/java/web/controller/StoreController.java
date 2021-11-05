@@ -8,4 +8,6 @@ public class StoreController {
     public StoreController(StartUpRepository startUpRepository) {
         this.startUpRepository = startUpRepository;
     }
+
+
 }

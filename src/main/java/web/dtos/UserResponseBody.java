@@ -2,7 +2,7 @@ package web.dtos;
 
 import core.model.User;
 
-public class UserResponse {
+public class UserResponseBody {
     public int id;
     public String username;
     public String firstName;
@@ -11,11 +11,11 @@ public class UserResponse {
     public String email;
     // We do not include password here as that would be very bad if it was sent to front-end :D
 
-    public UserResponse() {
+    public UserResponseBody() {
 
     }
 
-    public UserResponse(User user) {
+    public UserResponseBody(User user) {
         this.id = user.id;
         this.username = user.username;
         this.firstName = user.firstName;

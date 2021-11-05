@@ -1,6 +1,5 @@
 package core.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Store {
@@ -13,7 +12,7 @@ public class Store {
     public List<User> employees;
     public List<Product> products;
 
-    public Store(String storeName, String address, int phoneNumber, int id, User owner, ArrayList<User> employees, ArrayList<Product> products) {
+    public Store(int id, String storeName, User owner, List<User> employees, String address, int phoneNumber, List<Product> products) {
         this.id = id;
         this.storeName = storeName;
         this.address = address;
@@ -25,7 +24,7 @@ public class Store {
 
     public Product getProduct(int productId) {
         for (Product aProduct : products) {
-            if (aProduct.productID == productId) {
+            if (aProduct.id == productId) {
                 return aProduct;
             }
         }
