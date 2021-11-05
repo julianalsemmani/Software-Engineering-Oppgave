@@ -28,9 +28,11 @@ public interface StartUpRepository {
 
     User deleteUser(int userId);
 
-    void createProduct(int storeId, Product newProduct);
+    Product createProduct(int storeId, String name, String productPicture);
 
-    void updateProduct(int storeId, int productId, Product newProduct);
+    Product updateProduct(int storeId, int productId, String name, String productPicture);
 
-    void deleteProduct(int storeId, int productId);
+    Product deleteProduct(int storeId, int productId);
+
+    void registerEmployee(int storeId, int newEmployeeId);
 }

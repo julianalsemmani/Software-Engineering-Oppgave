@@ -15,6 +15,7 @@ public class FakeStartUpRepository implements StartUpRepository {
     private final Map<Integer, User> idUserMap = new HashMap<>();
     private int nextUserId = 0;
     private int nextStoreId = 0;
+    private int nextProductId = 0;
 
     public void dumpFakeData() {
         idUserMap.clear();
@@ -33,7 +34,7 @@ public class FakeStartUpRepository implements StartUpRepository {
 
     @Override
     public List<Product> getAllProducts(int storeId) {
-        return idStoreMap.get(storeId).products;
+        return idStoreMap.get(storeId).getAllProducts();
     }
 
     @Override
@@ -49,7 +50,7 @@ public class FakeStartUpRepository implements StartUpRepository {
     @Override
     public Store createStore(String storeName, User owner, String address, int phoneNumber) {
         int storeId = ++nextStoreId;
-        Store newStore = new Store(storeId, storeName, owner, List.of(), address, phoneNumber, List.of());
+        Store newStore = new Store(storeId, storeName, owner, new ArrayList<>(), address, phoneNumber, new HashMap<>());
         idStoreMap.put(storeId, newStore);
         return newStore;
     }
@@ -95,17 +96,51 @@ public class FakeStartUpRepository implements StartUpRepository {
     }
 
     @Override
-    public void createProduct(int storeId, Product newProduct) {
+    public Product createProduct(int storeId, String name, String productPicture) {
+        Store store = idStoreMap.get(storeId);
+        if(store != null) {
+            int newProductId = ++nextProductId;
+            Product newProduct = new Product(newProductId, store, name, productPicture);
+            store.addProduct(newProduct);
 
+            return newProduct;
+        }
+
+        return null;
     }
 
     @Override
-    public void updateProduct(int storeId, int productId, Product newProduct) {
+    public Product updateProduct(int storeId, int productId, String name, String productPicture) {
+        Store store = getStoreById(storeId);
+        if(store != null) {
+            Product product = store.getProduct(productId);
+            if(product != null) {
+                if(name != null) product.name = name;
+                if(productPicture != null) product.productPicture = productPicture;
 
+                return product;
+            }
+        }
+
+        return null;
     }
 
     @Override
-    public void deleteProduct(int storeId, int productId) {
+    public Product deleteProduct(int storeId, int productId) {
+        Store store = idStoreMap.get(storeId);
+        if(store != null && store.idProductMap.containsKey(productId)) {
+            return store.idProductMap.remove(productId);
+        }
 
+        return null;
+    }
+
+    @Override
+    public void registerEmployee(int storeId, int newEmployeeId) {
+        Store store = idStoreMap.get(storeId);
+        User newEmployee = idUserMap.get(newEmployeeId);
+        if(store != null && newEmployee != null) {
+            store.employees.add(newEmployee);
+        }
     }
 }

@@ -1,6 +1,8 @@
 package core.model;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Store {
     public int id;
@@ -10,26 +12,21 @@ public class Store {
     public int phoneNumber;
     public User owner;
     public List<User> employees;
-    public List<Product> products;
+    public Map<Integer, Product> idProductMap;
     public List<Auction> currentAuctions;
 
-    public Store(int id, String storeName, User owner, List<User> employees, String address, int phoneNumber, List<Product> products) {
+    public Store(int id, String storeName, User owner, List<User> employees, String address, int phoneNumber, Map<Integer, Product> products) {
         this.id = id;
         this.storeName = storeName;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.owner = owner;
         this.employees = employees;
-        this.products = products;
+        this.idProductMap = products;
     }
 
     public Product getProduct(int productId) {
-        for (Product aProduct : products) {
-            if (aProduct.id == productId) {
-                return aProduct;
-            }
-        }
-        return null;
+        return idProductMap.get(productId);
     }
 
     public User getEmployee(String userName) {
@@ -42,7 +39,11 @@ public class Store {
     }
 
     public void addProduct(Product product) {
-        products.add(product);
+        idProductMap.put(product.id, product);
+    }
+
+    public List<Product> getAllProducts() {
+        return new ArrayList<>(idProductMap.values());
     }
 
     public void addEmployee(User employee) {
