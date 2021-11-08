@@ -7,30 +7,29 @@ import web.dtos.PostUserBody;
 import io.javalin.plugin.json.JavalinJson;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import web.dtos.PutUserBody;
 import web.dtos.UserResponseBody;
-import web.fakes.FakeApplication;
+import web.WebServer;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class When_making_user_entity_requests {
-    private static final FakeStartUpRepository fakeStartUpRepository = new FakeStartUpRepository();
-    private static final FakeApplication fakeApplication = new FakeApplication(fakeStartUpRepository);
+    private static final FakeStartUpRepository FAKE_START_UP_REPOSITORY = new FakeStartUpRepository();
+    private static final WebServer WEB_SERVER = new WebServer(FAKE_START_UP_REPOSITORY);
     private int testUserId;
 
     @BeforeAll
     public static void beforeAll() {
-        fakeApplication.start(1234);
+        WEB_SERVER.start(1234);
     }
 
     @BeforeEach
     public void setUp() {
         // Clear repository between tests
-        fakeStartUpRepository.dumpFakeData();
-        User testUser = fakeStartUpRepository.createUser("test_user", "test_password", "test_first_name", "test_last_name", "test_address", "test_email");
+        FAKE_START_UP_REPOSITORY.dumpFakeData();
+        User testUser = FAKE_START_UP_REPOSITORY.createUser("test_user", "test_password", "test_first_name", "test_last_name", "test_address", "test_email");
         testUserId = testUser.id;
     }
 
@@ -105,6 +104,6 @@ public class When_making_user_entity_requests {
 
         UserResponseBody deletedUser = JavalinJson.fromJson(putResponse.getBody(), UserResponseBody.class);
 
-        assertNull(fakeStartUpRepository.getUserById(testUserId));
+        assertNull(FAKE_START_UP_REPOSITORY.getUserById(testUserId));
     }
 }

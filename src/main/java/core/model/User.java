@@ -13,13 +13,14 @@ public class User {
     public String username;
     public String password;
 
-    public boolean isAdmin = false;
+    public boolean isAdmin;
 
-    public int balance = 0;
+    public int balance;
+
     public List<Product> favorites = new ArrayList<>();
     public List<Product> productsBidOn = new ArrayList<>();
 
-    public User(int id, String username, String password, String firstName, String lastName, String address, String email) {
+    public User(int id, String username, String password, String firstName, String lastName, String address, String email, int balance, boolean isAdmin) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -27,5 +28,11 @@ public class User {
         this.email = email;
         this.username = username;
         this.password = password;
+        this.isAdmin = isAdmin;
+        this.balance = balance;
+    }
+
+    public User() {
+
     }
 }

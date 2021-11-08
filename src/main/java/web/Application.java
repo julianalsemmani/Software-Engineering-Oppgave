@@ -1,46 +1,44 @@
 package web;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.javalin.plugin.json.JavalinJackson;
-import org.unbrokendome.jackson.beanvalidation.BeanValidationModule;
-import web.controller.ProductController;
-import web.controller.StartUpController;
-import web.controller.StoreController;
-import web.controller.UserController;
-import persist.StartUpJSONRepository;
 import core.repository.StartUpRepository;
-import io.javalin.Javalin;
-
-import javax.validation.Validation;
-import javax.validation.ValidatorFactory;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import persist.HibernateStartUpRepository;
 
 
 public class Application {
     public static void main(String[] args) {
-        Javalin app = Javalin.create().start();
 
-        ValidatorFactory validatorFactory = Validation.byDefaultProvider().configure().buildValidatorFactory();
+        String url = "jdbc:sqlite:src/main/resources/persist/sqlite/test.db";
 
-        ObjectMapper objectMapper = new ObjectMapper()
-                .registerModule(new BeanValidationModule(validatorFactory));
+//        try {
+//            this.connection = DriverManager.getConnection(url);
+//        } catch (SQLException e) {
+//            System.err.println(e.getMessage());
+//        }
 
-        JavalinJackson.configure(objectMapper);
-        app.config.enableWebjars();
+        SessionFactory sessionFactory = setupHibernate();
 
-        app.get("/", ctx -> ctx.result("Hello World"));
+        StartUpRepository startUpRepository = new HibernateStartUpRepository(sessionFactory);//new JSONStartUpRepository("example_users.json");
+        startUpRepository.createUser("edd", "lol", "edward", "langstrand", "rådyrfaret 24", "edd@edd.com");
 
-        // JSON Repository
-        StartUpRepository startUpRepository = new StartUpJSONRepository("example_users.json");
+        WebServer webServer = new WebServer(startUpRepository);
 
-        // Controllers
-        ProductController productController = new ProductController(startUpRepository);
-        StartUpController startUpController = new StartUpController(startUpRepository);
-        StoreController storeController = new StoreController(startUpRepository);
-        UserController userController = new UserController(startUpRepository);
+        webServer.start(7000);
+    }
 
-        app.post("/api/users", userController::onPostUser);
-        app.put("/api/users/:user-id", userController::onPutUser);
-        app.delete("/api/users/:user-id", userController::onDeleteUser);
-
+    private static SessionFactory setupHibernate() {
+        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+                .configure("persist/hibernate/hibernate.cfg.xml") // configures settings from hibernate.cfg.xml
+                .build();
+        try {
+            return new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        } catch (Exception e) {
+            StandardServiceRegistryBuilder.destroy( registry );
+            System.err.println(e.getMessage());
+            return null;
+        }
     }
 }

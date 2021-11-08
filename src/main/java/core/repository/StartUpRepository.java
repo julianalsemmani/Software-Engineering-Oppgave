@@ -14,8 +14,6 @@ public interface StartUpRepository {
 
     Product getAProduct(int storeId, int productId);
 
-    /*****************************************************/
-
     Store getStoreById(int storeId);
 
     Store createStore(String storeName, User owner, String address, int phoneNumber);

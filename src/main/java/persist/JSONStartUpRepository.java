@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class StartUpJSONRepository implements StartUpRepository {
+public class JSONStartUpRepository implements StartUpRepository {
     //TODO(edward): We should implement multi-threading for writing to file here
     private Map<Integer, Store> idStoreMap;
     private Map<Integer, User> idUserMap;
@@ -21,7 +21,7 @@ public class StartUpJSONRepository implements StartUpRepository {
     private int nextProductId = 0;
     private File storeDataFile;
 
-    public StartUpJSONRepository(String fileName) {
+    public JSONStartUpRepository(String fileName) {
         storeDataFile = new File(fileName);
         readFromJSONFile();
     }
@@ -95,7 +95,7 @@ public class StartUpJSONRepository implements StartUpRepository {
     @Override
     public User createUser(String username, String password, String firstName, String lastName, String address, String email) {
          int id = ++nextUserId;
-         User newUser = new User(id, username, password, firstName, lastName, address, email);
+         User newUser = new User(id, username, password, firstName, lastName, address, email, 0, false);
          idUserMap.put(id, newUser);
 
          writeToJSONFile();

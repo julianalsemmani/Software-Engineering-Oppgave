@@ -1,4 +1,4 @@
-package web.fakes;
+package web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.repository.StartUpRepository;
@@ -14,14 +14,13 @@ import javax.validation.Validation;
 import javax.validation.ValidatorFactory;
 
 /**
- * Used to start Javalin application with controllers for testing
- *
+ * Used to start Javalin application with controllers using given repository
  */
-public class FakeApplication {
+public class WebServer {
 
-    private StartUpRepository startUpRepository;
+    private final StartUpRepository startUpRepository;
 
-    public FakeApplication(StartUpRepository startUpRepository) {
+    public WebServer(StartUpRepository startUpRepository) {
         this.startUpRepository = startUpRepository;
     }
 

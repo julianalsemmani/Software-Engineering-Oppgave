@@ -11,17 +11,23 @@ repositories {
 
 dependencies {
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.6.0'
     testImplementation "org.mockito:mockito-core:3.+"
     testImplementation 'com.konghq:unirest-java:3.11.09'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 
+    // JSON Validation for web
     implementation 'org.unbroken-dome.jackson-bean-validation:jackson-bean-validation:0.6.0'
     implementation 'org.glassfish:jakarta.el:3.0.3'
     implementation 'org.hibernate.validator:hibernate-validator:6.2.0.Final'
 
+    // Persistance using hibernate with SQLite
+    implementation 'org.hibernate:hibernate-core:5.6.+'
+    implementation 'com.github.gwenn:sqlite-dialect:0.1.2'
+
     implementation 'io.javalin:javalin:3.13.4'
     implementation 'org.slf4j:slf4j-simple:1.7.26'
+
+    implementation 'org.xerial:sqlite-jdbc:3.36.0.3'
 
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.12.0'
     implementation 'org.webjars.npm:vue:2.6.12'
