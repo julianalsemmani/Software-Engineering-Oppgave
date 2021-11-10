@@ -3,6 +3,7 @@ package core.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Store {
     public int id;
@@ -11,11 +12,11 @@ public class Store {
     public String address;
     public int phoneNumber;
     public User owner;
-    public List<User> employees;
+    public Set<User> employees;
     public Map<Integer, Product> idProductMap;
     public List<Auction> currentAuctions;
 
-    public Store(int id, String storeName, User owner, List<User> employees, String address, int phoneNumber, Map<Integer, Product> products) {
+    public Store(int id, String storeName, User owner, Set<User> employees, String address, int phoneNumber, Map<Integer, Product> products) {
         this.id = id;
         this.storeName = storeName;
         this.address = address;
@@ -23,6 +24,10 @@ public class Store {
         this.owner = owner;
         this.employees = employees;
         this.idProductMap = products;
+    }
+
+    public Store() {
+
     }
 
     public Product getProduct(int productId) {

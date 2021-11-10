@@ -19,7 +19,7 @@ public class Application {
 //            System.err.println(e.getMessage());
 //        }
 
-        SessionFactory sessionFactory = setupHibernate();
+        SessionFactory sessionFactory = setupHibernateSessionFactory();
 
         StartUpRepository startUpRepository = new HibernateStartUpRepository(sessionFactory);//new JSONStartUpRepository("example_users.json");
         startUpRepository.createUser("edd", "lol", "edward", "langstrand", "rådyrfaret 24", "edd@edd.com");
@@ -29,7 +29,7 @@ public class Application {
         webServer.start(7000);
     }
 
-    private static SessionFactory setupHibernate() {
+    public static SessionFactory setupHibernateSessionFactory() {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure("persist/hibernate/hibernate.cfg.xml") // configures settings from hibernate.cfg.xml
                 .build();

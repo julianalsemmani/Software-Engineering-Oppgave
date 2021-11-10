@@ -6,10 +6,7 @@ import core.repository.StartUpRepository;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class JSONStartUpRepository implements StartUpRepository {
@@ -67,7 +64,7 @@ public class JSONStartUpRepository implements StartUpRepository {
     @Override
     public Store createStore(String storeName, User owner, String address, int phoneNumber) {
         int storeId = ++nextStoreId;
-        Store newStore = new Store(storeId, storeName, owner, new ArrayList<>(), address, phoneNumber, new HashMap<>());
+        Store newStore = new Store(storeId, storeName, owner, new HashSet<>(), address, phoneNumber, new HashMap<>());
         idStoreMap.put(storeId, newStore);
 
         writeToJSONFile();
@@ -83,7 +80,7 @@ public class JSONStartUpRepository implements StartUpRepository {
     /************************ STORE USERS / EMPLOYEES
      * @return************************/
     @Override
-    public List<User> getAllEmployees(int storeId) {
+    public Set<User> getAllEmployees(int storeId) {
         Store currentStore = getStoreById(storeId);
 
         if (currentStore != null) {

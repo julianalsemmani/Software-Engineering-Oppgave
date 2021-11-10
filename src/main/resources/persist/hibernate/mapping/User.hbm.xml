@@ -4,12 +4,13 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping default-access="field">
+<hibernate-mapping package="core.model" default-access="field" default-lazy="false">
 
-    <class name="core.model.User">
+    <class name="User">
         <id name="id">
             <generator class="increment"/>
         </id>
+        <property name="username"/>
         <property name="firstName"/>
         <property name="lastName"/>
         <property name="address"/>
@@ -17,6 +18,22 @@
         <property name="balance"/>
         <property name="email"/>
         <property name="isAdmin"/>
+    </class>
+
+    <class name="Store">
+        <id name="id">
+            <generator class="increment"/>
+        </id>
+
+        <property name="address"/>
+        <property name="phoneNumber"/>
+
+        <many-to-one name="owner" class="User" not-null="true"/>
+
+        <set name="employees" >
+            <key foreign-key="id" not-null="true"  />
+            <many-to-many class="User" />
+        </set>
     </class>
 
 </hibernate-mapping>

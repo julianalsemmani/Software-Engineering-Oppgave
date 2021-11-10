@@ -5,6 +5,8 @@ import core.model.Store;
 import core.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import persist.HibernateStartUpRepository;
+import web.Application;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,7 +18,8 @@ public class When_working_with_stores {
 
     @BeforeEach
     public void setUp() {
-        startUpRepository = new FakeStartUpRepository();
+        startUpRepository = new HibernateStartUpRepository(Application.setupHibernateSessionFactory());
+
         testUser = startUpRepository.createUser("store_owner", "password", "store", "owner", "address", "email@email.com");
     }
 
@@ -25,6 +28,6 @@ public class When_working_with_stores {
         Store newStore = startUpRepository.createStore("test_store", testUser, "store_address", 12345678);
 
         assertNotNull(newStore);
-        assertSame(testUser, newStore.owner);
+        assertEquals(testUser.id, startUpRepository.getStoreById(newStore.id).owner.id);
     }
 }

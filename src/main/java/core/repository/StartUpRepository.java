@@ -3,12 +3,13 @@ package core.repository;
 import core.model.*;
 
 import java.util.List;
+import java.util.Set;
 
 public interface StartUpRepository {
 
     List<Store> getAllStores();
 
-    List<User> getAllEmployees(int storeId);
+    Set<User> getAllEmployees(int storeId);
 
     List<Product> getAllProducts(int storeId);
 

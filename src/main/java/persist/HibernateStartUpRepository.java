@@ -7,8 +7,7 @@ import core.repository.StartUpRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import java.util.List;
-import java.util.function.Consumer;
+import java.util.*;
 import java.util.function.Function;
 
 public class HibernateStartUpRepository implements StartUpRepository {
@@ -41,7 +40,8 @@ public class HibernateStartUpRepository implements StartUpRepository {
     }
 
     @Override
-    public List<User> getAllEmployees(int storeId) {
+    public Set<User> getAllEmployees(int storeId) {
+//        return getStoreById(storeId).employees;
         return null;
     }
 
@@ -57,12 +57,14 @@ public class HibernateStartUpRepository implements StartUpRepository {
 
     @Override
     public Store getStoreById(int storeId) {
-        return null;
+        return callSession(session -> session.get(Store.class, storeId));
     }
 
     @Override
     public Store createStore(String storeName, User owner, String address, int phoneNumber) {
-        return null;
+        Store newStore = new Store(0, storeName, owner, new HashSet<>(), address, phoneNumber, new HashMap<>());
+        doUnitOfWork(session -> session.save(newStore));
+        return newStore;
     }
 
     @Override
@@ -125,6 +127,14 @@ public class HibernateStartUpRepository implements StartUpRepository {
 
     @Override
     public void registerEmployee(int storeId, int newEmployeeId) {
-
+        doUnitOfWork(session -> {
+            Store store = session.get(Store.class, storeId);
+            User newEmployee = session.get(User.class, newEmployeeId);
+            if(store != null && newEmployee != null) {
+                store.employees.add(newEmployee);
+                session.save(store);
+            }
+            return null;
+        });
     }
 }
