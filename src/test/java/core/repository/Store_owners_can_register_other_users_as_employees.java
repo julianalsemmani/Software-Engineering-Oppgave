@@ -4,36 +4,36 @@ import core.model.Store;
 import core.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import persist.HibernateStartUpRepository;
+import persist.HibernateRepository;
 import web.Application;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Store_owners_can_register_other_users_as_employees {
 
-    public StartUpRepository startUpRepository;
+    public Repository repository;
     public Store store;
     public User owner;
     public User testUser;
 
-//    public Store_owners_can_register_other_users_as_employees(StartUpRepository startUpRepository) {
-//        this.startUpRepository = startUpRepository;
+//    public Store_owners_can_register_other_users_as_employees(Repository repository) {
+//        this.repository = repository;
 //    }
 
     @BeforeEach
     public void setUp() {
-        startUpRepository = new HibernateStartUpRepository(Application.setupHibernateSessionFactory());
+        repository = new HibernateRepository(Application.setupHibernateSessionFactory());
 
-        owner = startUpRepository.createUser("test_owner", "test_password", "first_name", "last_name", "address", "email");
-        store = startUpRepository.createStore("test_store", owner, "test_address", 12345678);
-        testUser = startUpRepository.createUser("test_owner", "test_password", "first_name", "last_name", "address", "email");
+        owner = repository.createUser("test_owner", "test_password", "first_name", "last_name", "address", "email");
+        store = repository.createStore("test_store", owner, "test_address", 12345678);
+        testUser = repository.createUser("test_owner", "test_password", "first_name", "last_name", "address", "email");
     }
 
     @Test
     public void store_owners_can_register_other_users_as_employees() {
-        startUpRepository.registerEmployee(store.id, testUser.id);
+        repository.registerEmployee(store.id, testUser.id);
 
-        assertTrue(startUpRepository.getStoreById(store.id).employees.stream()
+        assertTrue(repository.getStoreById(store.id).employees.stream()
                 .anyMatch(user -> user.id == testUser.id));
     }
 }

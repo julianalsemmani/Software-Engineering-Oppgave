@@ -5,7 +5,7 @@ import core.model.*;
 import java.util.List;
 import java.util.Set;
 
-public interface StartUpRepository {
+public interface Repository {
 
     List<Store> getAllStores();
 

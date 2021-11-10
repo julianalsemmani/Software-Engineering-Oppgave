@@ -2,14 +2,14 @@ package persist;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.model.*;
-import core.repository.StartUpRepository;
+import core.repository.Repository;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
 
-public class JSONStartUpRepository implements StartUpRepository {
+public class JSONRepository implements Repository {
     //TODO(edward): We should implement multi-threading for writing to file here
     private Map<Integer, Store> idStoreMap;
     private Map<Integer, User> idUserMap;
@@ -18,7 +18,7 @@ public class JSONStartUpRepository implements StartUpRepository {
     private int nextProductId = 0;
     private File storeDataFile;
 
-    public JSONStartUpRepository(String fileName) {
+    public JSONRepository(String fileName) {
         storeDataFile = new File(fileName);
         readFromJSONFile();
     }

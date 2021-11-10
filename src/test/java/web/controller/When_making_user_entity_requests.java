@@ -1,7 +1,7 @@
 package web.controller;
 
 import core.model.User;
-import core.repository.fakes.FakeStartUpRepository;
+import core.repository.fakes.FakeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import web.dtos.PostUserBody;
 import io.javalin.plugin.json.JavalinJson;
@@ -16,7 +16,7 @@ import web.WebServer;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class When_making_user_entity_requests {
-    private static final FakeStartUpRepository FAKE_START_UP_REPOSITORY = new FakeStartUpRepository();
+    private static final FakeRepository FAKE_START_UP_REPOSITORY = new FakeRepository();
     private static final WebServer WEB_SERVER = new WebServer(FAKE_START_UP_REPOSITORY);
     private int testUserId;
 

@@ -1,30 +1,20 @@
 package web;
 
-import core.repository.StartUpRepository;
+import core.repository.Repository;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import persist.HibernateStartUpRepository;
+import persist.HibernateRepository;
 
 
 public class Application {
     public static void main(String[] args) {
-
-        String url = "jdbc:sqlite:src/main/resources/persist/sqlite/test.db";
-
-//        try {
-//            this.connection = DriverManager.getConnection(url);
-//        } catch (SQLException e) {
-//            System.err.println(e.getMessage());
-//        }
-
         SessionFactory sessionFactory = setupHibernateSessionFactory();
 
-        StartUpRepository startUpRepository = new HibernateStartUpRepository(sessionFactory);//new JSONStartUpRepository("example_users.json");
-        startUpRepository.createUser("edd", "lol", "edward", "langstrand", "rådyrfaret 24", "edd@edd.com");
+        Repository repository = new HibernateRepository(sessionFactory);//new JSONRepository("example_users.json");
 
-        WebServer webServer = new WebServer(startUpRepository);
+        WebServer webServer = new WebServer(repository);
 
         webServer.start(7000);
     }

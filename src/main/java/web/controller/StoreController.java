@@ -1,12 +1,12 @@
 package web.controller;
 
-import core.repository.StartUpRepository;
+import core.repository.Repository;
 
 public class StoreController {
-    public final StartUpRepository startUpRepository;
+    public final Repository repository;
 
-    public StoreController(StartUpRepository startUpRepository) {
-        this.startUpRepository = startUpRepository;
+    public StoreController(Repository repository) {
+        this.repository = repository;
     }
 
 

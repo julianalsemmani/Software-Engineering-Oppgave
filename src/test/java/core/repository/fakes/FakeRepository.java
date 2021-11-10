@@ -3,11 +3,11 @@ package core.repository.fakes;
 import core.model.Product;
 import core.model.Store;
 import core.model.User;
-import core.repository.StartUpRepository;
+import core.repository.Repository;
 
 import java.util.*;
 
-public class FakeStartUpRepository implements StartUpRepository {
+public class FakeRepository implements Repository {
     private final Map<Integer, Store> idStoreMap = new HashMap<>();
     private final Map<Integer, User> idUserMap = new HashMap<>();
     private int nextUserId = 0;

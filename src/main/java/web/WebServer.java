@@ -1,7 +1,7 @@
 package web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import core.repository.StartUpRepository;
+import core.repository.Repository;
 import io.javalin.Javalin;
 import io.javalin.plugin.json.JavalinJackson;
 import web.controller.ProductController;
@@ -18,10 +18,10 @@ import javax.validation.ValidatorFactory;
  */
 public class WebServer {
 
-    private final StartUpRepository startUpRepository;
+    private final Repository repository;
 
-    public WebServer(StartUpRepository startUpRepository) {
-        this.startUpRepository = startUpRepository;
+    public WebServer(Repository repository) {
+        this.repository = repository;
     }
 
     public void start(int port) {
@@ -35,12 +35,13 @@ public class WebServer {
         JavalinJackson.configure(objectMapper);
 
         // Controllers
-        ProductController productController = new ProductController(startUpRepository);
-        StartUpController startUpController = new StartUpController(startUpRepository);
-        StoreController storeController = new StoreController(startUpRepository);
-        UserController userController = new UserController(startUpRepository);
+        ProductController productController = new ProductController(repository);
+        StartUpController startUpController = new StartUpController(repository);
+        StoreController storeController = new StoreController(repository);
+        UserController userController = new UserController(repository);
 
         app.post("/api/users", userController::onPostUser);
+        app.get("/api/users/:user-id", userController::onGetUser);
         app.put("/api/users/:user-id", userController::onPutUser);
         app.delete("/api/users/:user-id", userController::onDeleteUser);
 

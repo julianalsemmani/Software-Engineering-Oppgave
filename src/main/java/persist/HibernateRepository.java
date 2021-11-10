@@ -3,18 +3,18 @@ package persist;
 import core.model.Product;
 import core.model.Store;
 import core.model.User;
-import core.repository.StartUpRepository;
+import core.repository.Repository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import java.util.*;
 import java.util.function.Function;
 
-public class HibernateStartUpRepository implements StartUpRepository {
+public class HibernateRepository implements Repository {
 
     private final SessionFactory sessionFactory;
 
-    public HibernateStartUpRepository(SessionFactory sessionFactory) {
+    public HibernateRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
