@@ -19,21 +19,9 @@ public class UserController {
         this.repository = repository;
     }
 
-    private void exceptionHandler(Context ctx, Runnable requestHandler) {
-        try {
-            requestHandler.run();
-        } catch (ConstraintViolationException exception) {
-            ctx.status(400).result(exception.getMessage());
-        } catch (HttpResponseException e) {
-            ctx.status(e.getStatus()).result(e.getMessage());
-        } catch (Exception e) {
-            ctx.status(500).result("Internal server error");
-            e.printStackTrace();
-        }
-    }
 
     public void onGetUser(Context ctx) {
-        exceptionHandler(ctx, ()->{
+        ControllerUtils.exceptionHandler(ctx, ()->{
             int id = ctx.pathParam("user-id", Integer.class).get();
 
             User user = repository.getUserById(id);
@@ -46,7 +34,7 @@ public class UserController {
     }
 
     public void onPostUser(Context ctx) {
-        exceptionHandler(ctx, ()->{
+        ControllerUtils.exceptionHandler(ctx, ()->{
             PostUserBody body = JavalinJson.fromJson(ctx.body(), PostUserBody.class);
             User newUser = repository.createUser(body.username, body.password, body.firstName, body.lastName, body.address, body.email);
 
@@ -55,7 +43,7 @@ public class UserController {
     }
 
     public void onPutUser(Context ctx) {
-        exceptionHandler(ctx, ()->{
+        ControllerUtils.exceptionHandler(ctx, ()->{
             int id = ctx.pathParam("user-id", Integer.class).get();
             PutUserBody body = JavalinJson.fromJson(ctx.body(), PutUserBody.class);
 
@@ -70,7 +58,7 @@ public class UserController {
     }
 
     public void onDeleteUser(Context ctx) {
-        exceptionHandler(ctx, ()->{
+        ControllerUtils.exceptionHandler(ctx, ()->{
             int id = ctx.pathParam("user-id", Integer.class).get();
 
             User deletedUser = repository.deleteUser(id);
