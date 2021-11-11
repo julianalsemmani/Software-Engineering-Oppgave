@@ -3,14 +3,11 @@ package core.repository.fakes;
 import core.model.Product;
 import core.model.Store;
 import core.model.User;
-import core.repository.StartUpRepository;
+import core.repository.Repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class FakeStartUpRepository implements StartUpRepository {
+public class FakeRepository implements Repository {
     private final Map<Integer, Store> idStoreMap = new HashMap<>();
     private final Map<Integer, User> idUserMap = new HashMap<>();
     private int nextUserId = 0;
@@ -28,7 +25,7 @@ public class FakeStartUpRepository implements StartUpRepository {
     }
 
     @Override
-    public List<User> getAllEmployees(int storeId) {
+    public Set<User> getAllEmployees(int storeId) {
         return idStoreMap.get(storeId).employees;
     }
 
@@ -50,7 +47,7 @@ public class FakeStartUpRepository implements StartUpRepository {
     @Override
     public Store createStore(String storeName, User owner, String address, int phoneNumber) {
         int storeId = ++nextStoreId;
-        Store newStore = new Store(storeId, storeName, owner, new ArrayList<>(), address, phoneNumber, new HashMap<>());
+        Store newStore = new Store(storeId, storeName, owner, new HashSet<>(), address, phoneNumber, new HashMap<>());
         idStoreMap.put(storeId, newStore);
         return newStore;
     }
@@ -63,7 +60,7 @@ public class FakeStartUpRepository implements StartUpRepository {
     @Override
     public User createUser(String username, String password, String firstName, String lastName, String address, String email) {
         int id = ++nextUserId;
-        User newUser = new User(id, username, password, firstName, lastName, address, email);
+        User newUser = new User(id, username, password, firstName, lastName, address, email, 0, false);
         idUserMap.put(id, newUser);
 
         return newUser;

@@ -1,13 +1,13 @@
 package web.controller;
 
-import core.repository.StartUpRepository;
+import core.repository.Repository;
 import io.javalin.http.Context;
 
 public class ProductController {
-    public final StartUpRepository startUpRepository;
+    public final Repository repository;
 
-    public ProductController(StartUpRepository startUpRepository) {
-        this.startUpRepository = startUpRepository;
+    public ProductController(Repository repository) {
+        this.repository = repository;
     }
 
     public void getAllProducts(Context context) {

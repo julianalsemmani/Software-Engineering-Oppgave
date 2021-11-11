@@ -2,17 +2,14 @@ package persist;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.model.*;
-import core.repository.StartUpRepository;
+import core.repository.Repository;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
-public class StartUpJSONRepository implements StartUpRepository {
+public class JSONRepository implements Repository {
     //TODO(edward): We should implement multi-threading for writing to file here
     private Map<Integer, Store> idStoreMap;
     private Map<Integer, User> idUserMap;
@@ -21,7 +18,7 @@ public class StartUpJSONRepository implements StartUpRepository {
     private int nextProductId = 0;
     private File storeDataFile;
 
-    public StartUpJSONRepository(String fileName) {
+    public JSONRepository(String fileName) {
         storeDataFile = new File(fileName);
         readFromJSONFile();
     }
@@ -67,7 +64,7 @@ public class StartUpJSONRepository implements StartUpRepository {
     @Override
     public Store createStore(String storeName, User owner, String address, int phoneNumber) {
         int storeId = ++nextStoreId;
-        Store newStore = new Store(storeId, storeName, owner, new ArrayList<>(), address, phoneNumber, new HashMap<>());
+        Store newStore = new Store(storeId, storeName, owner, new HashSet<>(), address, phoneNumber, new HashMap<>());
         idStoreMap.put(storeId, newStore);
 
         writeToJSONFile();
@@ -83,7 +80,7 @@ public class StartUpJSONRepository implements StartUpRepository {
     /************************ STORE USERS / EMPLOYEES
      * @return************************/
     @Override
-    public List<User> getAllEmployees(int storeId) {
+    public Set<User> getAllEmployees(int storeId) {
         Store currentStore = getStoreById(storeId);
 
         if (currentStore != null) {
@@ -95,7 +92,7 @@ public class StartUpJSONRepository implements StartUpRepository {
     @Override
     public User createUser(String username, String password, String firstName, String lastName, String address, String email) {
          int id = ++nextUserId;
-         User newUser = new User(id, username, password, firstName, lastName, address, email);
+         User newUser = new User(id, username, password, firstName, lastName, address, email, 0, false);
          idUserMap.put(id, newUser);
 
          writeToJSONFile();

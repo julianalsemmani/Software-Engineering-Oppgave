@@ -12,8 +12,6 @@ public class Auction {
     public Instant auctionStartTime, auctionEndTime;
     public List<AuctionBid> bidHistory;
 
-    public User winner;
-
     public AuctionBid getHighestBid() {
         if(bidHistory.size() > 0) {
             return bidHistory.get(bidHistory.size() - 1);
@@ -21,11 +19,22 @@ public class Auction {
         return null;
     }
 
+    public void doBid(AuctionBid bid) {
+        bidHistory.add(bid);
+    }
+
+    public User getWinner() {
+        if(hasWinner()) {
+            return getHighestBid().bidder;
+        }
+        return null;
+    }
+
     public boolean hasWinner() {
-        return winner != null;
+        return hasEnded() && bidHistory.size() > 0;
     }
 
     public boolean hasEnded() {
-        return hasWinner() || Instant.now().isAfter(auctionEndTime);
+        return Instant.now().isAfter(auctionEndTime) || (bidHistory.size() > 0 && getHighestBid().bidPrice >= buyoutPrice);
     }
 }

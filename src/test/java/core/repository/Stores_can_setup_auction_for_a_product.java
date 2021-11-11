@@ -3,23 +3,25 @@ package core.repository;
 import core.model.Product;
 import core.model.Store;
 import core.model.User;
-import core.repository.fakes.FakeStartUpRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import persist.HibernateRepository;
+import web.Application;
 
 public class Stores_can_setup_auction_for_a_product {
 
-    StartUpRepository startUpRepository;
+    Repository repository;
     Store store;
     User storeOwner;
     Product productToAuction;
 
     @BeforeEach
     public void setUp() {
-        startUpRepository = new FakeStartUpRepository();
-        storeOwner = startUpRepository.createUser("store_owner", "", "", "", "", "");
-        store = startUpRepository.createStore("test_store", storeOwner, "", 0);
-        productToAuction = startUpRepository.createProduct(store.id, "test_product", "");
+        repository = new HibernateRepository(Application.setupHibernateSessionFactory());
+
+        storeOwner = repository.createUser("store_owner", "", "", "", "", "");
+        store = repository.createStore("test_store", storeOwner, "", 0);
+        productToAuction = repository.createProduct(store.id, "test_product", "");
     }
 
     @Test

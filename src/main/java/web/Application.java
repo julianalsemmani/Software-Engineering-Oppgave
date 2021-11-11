@@ -1,46 +1,34 @@
 package web;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.javalin.plugin.json.JavalinJackson;
-import org.unbrokendome.jackson.beanvalidation.BeanValidationModule;
-import web.controller.ProductController;
-import web.controller.StartUpController;
-import web.controller.StoreController;
-import web.controller.UserController;
-import persist.StartUpJSONRepository;
-import core.repository.StartUpRepository;
-import io.javalin.Javalin;
-
-import javax.validation.Validation;
-import javax.validation.ValidatorFactory;
+import core.repository.Repository;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import persist.HibernateRepository;
 
 
 public class Application {
     public static void main(String[] args) {
-        Javalin app = Javalin.create().start();
+        SessionFactory sessionFactory = setupHibernateSessionFactory();
 
-        ValidatorFactory validatorFactory = Validation.byDefaultProvider().configure().buildValidatorFactory();
+        Repository repository = new HibernateRepository(sessionFactory);//new JSONRepository("example_users.json");
 
-        ObjectMapper objectMapper = new ObjectMapper()
-                .registerModule(new BeanValidationModule(validatorFactory));
+        WebServer webServer = new WebServer(repository);
 
-        JavalinJackson.configure(objectMapper);
-        app.config.enableWebjars();
+        webServer.start(7000);
+    }
 
-        app.get("/", ctx -> ctx.result("Hello World"));
-
-        // JSON Repository
-        StartUpRepository startUpRepository = new StartUpJSONRepository("example_users.json");
-
-        // Controllers
-        ProductController productController = new ProductController(startUpRepository);
-        StartUpController startUpController = new StartUpController(startUpRepository);
-        StoreController storeController = new StoreController(startUpRepository);
-        UserController userController = new UserController(startUpRepository);
-
-        app.post("/api/users", userController::onPostUser);
-        app.put("/api/users/:user-id", userController::onPutUser);
-        app.delete("/api/users/:user-id", userController::onDeleteUser);
-
+    public static SessionFactory setupHibernateSessionFactory() {
+        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+                .configure("persist/hibernate/hibernate.cfg.xml") // configures settings from hibernate.cfg.xml
+                .build();
+        try {
+            return new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        } catch (Exception e) {
+            StandardServiceRegistryBuilder.destroy( registry );
+            System.err.println(e.getMessage());
+            return null;
+        }
     }
 }
