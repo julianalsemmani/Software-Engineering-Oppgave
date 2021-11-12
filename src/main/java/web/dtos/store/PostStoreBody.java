@@ -5,6 +5,7 @@ import org.unbrokendome.jackson.beanvalidation.JsonValidated;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @JsonValidated
 public class PostStoreBody {
@@ -19,5 +20,5 @@ public class PostStoreBody {
     public int phoneNumber;
     @NotNull
     @NotEmpty
-    public int owner;
+    public UUID owner;
 }

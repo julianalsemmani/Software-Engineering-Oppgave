@@ -1,12 +1,13 @@
 package web.dtos.store;
 
-import core.model.User;
 import org.unbrokendome.jackson.beanvalidation.JsonValidated;
+
+import java.util.UUID;
 
 @JsonValidated
 public class PutStoreBody {
     public String storeName;
     public String address;
     public int phoneNumber;
-    public int owner;
+    public UUID owner;
 }

@@ -13,6 +13,8 @@ import web.dtos.store.PostStoreBody;
 import web.dtos.store.PutStoreBody;
 import web.dtos.store.StoreResponseBody;
 
+import java.util.UUID;
+
 public class StoreController {
     public final Repository repository;
 
@@ -22,7 +24,7 @@ public class StoreController {
 
     public void onGetStore(Context ctx) {
         ControllerUtils.exceptionHandler(ctx, () -> {
-            int id = ctx.pathParam("store-id", Integer.class).get();
+            UUID id = ctx.pathParam("store-id", UUID.class).get();
 
             Store store = repository.getStoreById(id);
 
@@ -58,7 +60,7 @@ public class StoreController {
 
     public void onDeleteStore(Context ctx) {
         ControllerUtils.exceptionHandler(ctx, () -> {
-            int id = ctx.pathParam("store-id", Integer.class).get();
+            UUID id = ctx.pathParam("store-id", UUID.class).get();
 
             Store deletedStore = repository.deleteStore(id);
 

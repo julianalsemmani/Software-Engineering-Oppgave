@@ -73,6 +73,16 @@ public class HibernateRepository implements Repository {
     }
 
     @Override
+    public Store updateStore(String storeName, User userById, String address, int phoneNumber) {
+        return null;
+    }
+
+    @Override
+    public Store deleteStore(UUID id) {
+        return null;
+    }
+
+    @Override
     public User createUser(String username, String password, String firstName, String lastName, String address, String email) {
         User newUser = new User(0, username, password, firstName, lastName, address, email, 0, false);
         doUnitOfWork(session -> session.save(newUser));
