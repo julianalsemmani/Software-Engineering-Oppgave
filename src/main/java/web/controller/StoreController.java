@@ -10,6 +10,7 @@ import web.dtos.PostUserBody;
 import web.dtos.PutUserBody;
 import web.dtos.UserResponseBody;
 import web.dtos.store.PostStoreBody;
+import web.dtos.store.PutStoreBody;
 import web.dtos.store.StoreResponseBody;
 
 public class StoreController {
@@ -41,30 +42,27 @@ public class StoreController {
         });
     }
 
-    public void onPutUser(Context ctx) {
+    public void onPutStore(Context ctx) {
         ControllerUtils.exceptionHandler(ctx, () -> {
-            int id = ctx.pathParam("user-id", Integer.class).get();
-            PutUserBody body = JavalinJson.fromJson(ctx.body(), PutUserBody.class);
+            int id = ctx.pathParam("store-id", Integer.class).get();
+            PutStoreBody body = JavalinJson.fromJson(ctx.body(), PutStoreBody.class);
 
-            User updatedUser = repository.updateUser(id, body.username, body.password, body.firstName,
-                    body.lastName, body.address, body.email);
+            Store updatedStore = repository.updateStore(body.storeName, repository.getUserById(body.owner), body.address, body.phoneNumber);
 
-            if (updatedUser == null)
+            if (updatedStore == null)
                 throw new NotFoundResponse();
 
-            ctx.status(200).json(new UserResponseBody(updatedUser));
+            ctx.status(200).json(new StoreResponseBody(updatedStore));
         });
     }
 
-    public void onDeleteUser(Context ctx) {
+    public void onDeleteStore(Context ctx) {
         ControllerUtils.exceptionHandler(ctx, () -> {
-            int id = ctx.pathParam("user-id", Integer.class).get();
+            int id = ctx.pathParam("store-id", Integer.class).get();
 
-            User deletedUser = repository.deleteUser(id);
+            Store deletedStore = repository.deleteStore(id);
 
-            ctx.status(200).json(new UserResponseBody(deletedUser));
+            ctx.status(200).json(new StoreResponseBody(deletedStore));
         });
     }
-
-
 }
