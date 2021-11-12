@@ -35,7 +35,7 @@ public class StoreController {
     public void onPostStore(Context ctx) {
         ControllerUtils.exceptionHandler(ctx, () -> {
             PostStoreBody body = JavalinJson.fromJson(ctx.body(), PostStoreBody.class);
-            Store newStore = repository.createStore(body.storeName, body.address, body.phoneNumber, body.owner);
+            Store newStore = repository.createStore(body.storeName, repository.getUserById(body.owner), body.address, body.phoneNumber);
 
             ctx.status(201).json(new StoreResponseBody(newStore));
         });

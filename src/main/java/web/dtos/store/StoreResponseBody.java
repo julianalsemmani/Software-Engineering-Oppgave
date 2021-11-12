@@ -8,7 +8,7 @@ public class StoreResponseBody {
     public String storeName;
     public String address;
     public int phoneNumber;
-    public User owner;
+    public int owner;
 
 
     public StoreResponseBody(Store store) {
@@ -16,6 +16,6 @@ public class StoreResponseBody {
         this.storeName = store.storeName;
         this.address = store.address;
         this.phoneNumber = store.phoneNumber;
-        this.owner = store.owner;
+        this.owner = store.owner.id;
     }
 }

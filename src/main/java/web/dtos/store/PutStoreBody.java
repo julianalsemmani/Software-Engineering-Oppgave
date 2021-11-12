@@ -8,5 +8,5 @@ public class PutStoreBody {
     public String storeName;
     public String address;
     public int phoneNumber;
-    public User owner;
+    public int owner;
 }
