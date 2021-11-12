@@ -3,6 +3,8 @@ package persist;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.model.*;
 import core.repository.Repository;
+import persist.json.JSONStructure;
+import persist.json.JSONUser;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,14 +26,12 @@ public class JSONRepository implements Repository {
 
     public void readFromJSONFile() {
         ObjectMapper readMapper = new ObjectMapper();
-//        idStoreMap = new HashMap<UUID, Store>();
-//        idUserMap = new HashMap<>();
-
         try {
-            Store[] storesArray = readMapper.readValue(storeDataFile, Store[].class);
+            JSONStructure structure = readMapper.readValue(storeDataFile, JSONStructure.class);
 
-            for (Store aStore : storesArray) {
-                idStoreMap.put(aStore.id, aStore);
+            for(JSONUser json : structure.users) {
+                User user = idUserMap.put(json.id, new User(json.id, json.username, json.password, json.firstName,
+                        json.lastName, json.address, json.email, json.balance, json.isAdmin));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -42,6 +42,10 @@ public class JSONRepository implements Repository {
         try {
             ObjectMapper writeMapper = new ObjectMapper();
             writeMapper.writerWithDefaultPrettyPrinter().writeValue(storeDataFile, idStoreMap.values());
+            JSONStructure structure = new JSONStructure();
+            for(User user : idUserMap.values()) {
+
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
