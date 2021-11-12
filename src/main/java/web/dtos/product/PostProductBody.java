@@ -9,10 +9,7 @@ import java.util.UUID;
 public class PostProductBody {
     @NotNull
     @NotEmpty
-    public UUID id;
-    @NotNull
-    @NotEmpty
-    public Store store;
+    public UUID store;
     @NotNull
     @NotEmpty
     public String name;

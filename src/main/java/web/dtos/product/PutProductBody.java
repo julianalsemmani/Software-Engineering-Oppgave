@@ -7,7 +7,6 @@ import java.util.UUID;
 
 @JsonValidated
 public class PutProductBody {
-    public UUID id;
     public Store store;
     public String name;
     public String productPicture;
