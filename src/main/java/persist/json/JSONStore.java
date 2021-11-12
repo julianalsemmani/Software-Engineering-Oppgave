@@ -13,7 +13,7 @@ public class JSONStore {
     public int phoneNumber;
     public UUID owner;
     public UUID[] employees;
-    public UUID[] products;
+    public JSONProduct[] products;
 //    public UUID[] currentAuctions;
 
     public JSONStore(Store store) {
@@ -23,7 +23,7 @@ public class JSONStore {
         phoneNumber = store.phoneNumber;
         owner = store.owner.id;
         employees = store.employees.stream().map(user -> user.id).toArray(UUID[]::new);
-        products = store.products.stream().map(product -> product.id).toArray(UUID[]::new);
+        products = store.products.stream().map(JSONProduct::new).toArray(JSONProduct[]::new);
 //        currentAuctions = store.currentAuctions.stream().map(auction -> auction.id).toArray(UUID[]::new);
     }
 

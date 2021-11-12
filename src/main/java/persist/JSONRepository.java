@@ -3,12 +3,14 @@ package persist;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.model.*;
 import core.repository.Repository;
+import persist.json.JSONStore;
 import persist.json.JSONStructure;
 import persist.json.JSONUser;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class JSONRepository implements Repository {
@@ -33,6 +35,15 @@ public class JSONRepository implements Repository {
                 User user = idUserMap.put(json.id, new User(json.id, json.username, json.password, json.firstName,
                         json.lastName, json.address, json.email, json.balance, json.isAdmin));
             }
+            for(JSONStore json : structure.stores) {
+                Store store = new Store(json.id, json.storeName, idUserMap.get(json.owner),
+                        Arrays.stream(json.employees).map(idUserMap::get).collect(Collectors.toSet()), json.address, json.phoneNumber,
+                        new HashSet<>());
+
+                store.products = Arrays.stream(json.products).map(jsonProduct -> new Product(jsonProduct.id, store, jsonProduct.name, jsonProduct.productPicture)).collect(Collectors.toSet());
+
+                idStoreMap.put(json.id, store);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,7 +55,10 @@ public class JSONRepository implements Repository {
             writeMapper.writerWithDefaultPrettyPrinter().writeValue(storeDataFile, idStoreMap.values());
             JSONStructure structure = new JSONStructure();
             for(User user : idUserMap.values()) {
-
+                structure.users.add(new JSONUser(user));
+            }
+            for(Store store : idStoreMap.values()) {
+                structure.stores.add(new JSONStore(store));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -80,6 +94,16 @@ public class JSONRepository implements Repository {
         Store newStore = new Store(UUID.randomUUID(), storeName, owner, new HashSet<>(), address, phoneNumber, new HashSet<>());
         idStoreMap.put(newStore.id, newStore);
         return newStore;
+    }
+
+    @Override
+    public Store updateStore(String storeName, User userById, String address, int phoneNumber) {
+        return null;
+    }
+
+    @Override
+    public Store deleteStore(UUID id) {
+        return null;
     }
 
     @Override
