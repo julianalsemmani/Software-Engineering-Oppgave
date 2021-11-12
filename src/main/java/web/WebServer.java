@@ -40,10 +40,21 @@ public class WebServer {
         StoreController storeController = new StoreController(repository);
         UserController userController = new UserController(repository);
 
+        // API requests for user methods
         app.post("/api/users", userController::onPostUser);
         app.get("/api/users/:user-id", userController::onGetUser);
         app.put("/api/users/:user-id", userController::onPutUser);
         app.delete("/api/users/:user-id", userController::onDeleteUser);
+
+        // API requests for store methods
+        app.post("/api/stores", storeController::onPostStore);
+        app.get("/api/stores/:store-id", storeController::onGetStore);
+        app.put("/api/stores/:store-id", storeController::onPutStore);
+        app.delete("/api/stores/:store-id", storeController::onDeleteStore);
+
+        // API requests for startUp methods
+
+        // API requests for product methods
 
     }
 }
