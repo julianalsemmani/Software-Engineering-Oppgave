@@ -3,14 +3,13 @@ package web.controller;
 import core.model.User;
 import core.repository.Repository;
 import io.javalin.http.Context;
-import io.javalin.http.HttpResponseException;
 import io.javalin.http.NotFoundResponse;
 import io.javalin.plugin.json.JavalinJson;
 import web.dtos.PostUserBody;
 import web.dtos.PutUserBody;
 import web.dtos.UserResponseBody;
 
-import javax.validation.ConstraintViolationException;
+import java.util.UUID;
 
 public class UserController {
     public final Repository repository;
@@ -22,7 +21,7 @@ public class UserController {
 
     public void onGetUser(Context ctx) {
         ControllerUtils.exceptionHandler(ctx, ()->{
-            int id = ctx.pathParam("user-id", Integer.class).get();
+            UUID id = ctx.pathParam("user-id", UUID.class).get();
 
             User user = repository.getUserById(id);
 
@@ -44,7 +43,7 @@ public class UserController {
 
     public void onPutUser(Context ctx) {
         ControllerUtils.exceptionHandler(ctx, ()->{
-            int id = ctx.pathParam("user-id", Integer.class).get();
+            UUID id = ctx.pathParam("user-id", UUID.class).get();
             PutUserBody body = JavalinJson.fromJson(ctx.body(), PutUserBody.class);
 
             User updatedUser = repository.updateUser(id, body.username, body.password, body.firstName,
@@ -59,7 +58,7 @@ public class UserController {
 
     public void onDeleteUser(Context ctx) {
         ControllerUtils.exceptionHandler(ctx, ()->{
-            int id = ctx.pathParam("user-id", Integer.class).get();
+            UUID id = ctx.pathParam("user-id", UUID.class).get();
 
             User deletedUser = repository.deleteUser(id);
 

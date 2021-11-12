@@ -8,15 +8,14 @@ import core.repository.Repository;
 import java.util.*;
 
 public class FakeRepository implements Repository {
-    private final Map<Integer, Store> idStoreMap = new HashMap<>();
-    private final Map<Integer, User> idUserMap = new HashMap<>();
-    private int nextUserId = 0;
-    private int nextStoreId = 0;
-    private int nextProductId = 0;
+    private final Map<UUID, Store> idStoreMap = new HashMap<>();
+    private final Map<UUID, User> idUserMap = new HashMap<>();
+    private final Map<UUID, Product> idProductMap = new HashMap<>();
 
     public void dumpFakeData() {
         idUserMap.clear();
         idStoreMap.clear();
+        idProductMap.clear();
     }
 
     @Override
@@ -25,49 +24,47 @@ public class FakeRepository implements Repository {
     }
 
     @Override
-    public Set<User> getAllEmployees(int storeId) {
+    public Set<User> getAllEmployees(UUID storeId) {
         return idStoreMap.get(storeId).employees;
     }
 
     @Override
-    public List<Product> getAllProducts(int storeId) {
+    public List<Product> getAllProducts(UUID storeId) {
         return idStoreMap.get(storeId).getAllProducts();
     }
 
     @Override
-    public Store getStoreById(int storeId) {
+    public Store getStoreById(UUID storeId) {
         return idStoreMap.get(storeId);
     }
 
     @Override
-    public Product getAProduct(int storeId, int productId) {
-        return null;
+    public Product getProductById(UUID productId) {
+        return idProductMap.get(productId);
     }
 
     @Override
     public Store createStore(String storeName, User owner, String address, int phoneNumber) {
-        int storeId = ++nextStoreId;
-        Store newStore = new Store(storeId, storeName, owner, new HashSet<>(), address, phoneNumber, new HashMap<>());
-        idStoreMap.put(storeId, newStore);
+        Store newStore = new Store(UUID.randomUUID(), storeName, owner, new HashSet<>(), address, phoneNumber, new HashSet<>());
+        idStoreMap.put(newStore.id, newStore);
         return newStore;
     }
 
     @Override
-    public User getUserById(int userId) {
+    public User getUserById(UUID userId) {
         return idUserMap.get(userId);
     }
 
     @Override
     public User createUser(String username, String password, String firstName, String lastName, String address, String email) {
-        int id = ++nextUserId;
-        User newUser = new User(id, username, password, firstName, lastName, address, email, 0, false);
-        idUserMap.put(id, newUser);
+        User newUser = new User(UUID.randomUUID(), username, password, firstName, lastName, address, email, 0, false);
+        idUserMap.put(newUser.id, newUser);
 
         return newUser;
     }
 
     @Override
-    public User updateUser(int userId, String username, String password, String firstName, String lastName, String address, String email) {
+    public User updateUser(UUID userId, String username, String password, String firstName, String lastName, String address, String email) {
         User user = this.idUserMap.get(userId);
         if(user != null) {
             if(username != null) user.username = username;
@@ -82,7 +79,7 @@ public class FakeRepository implements Repository {
     }
 
     @Override
-    public User deleteUser(int userId) {
+    public User deleteUser(UUID userId) {
         User user = idUserMap.remove(userId);
         if(user != null) {
             for (Store store : getAllStores()) {
@@ -93,11 +90,10 @@ public class FakeRepository implements Repository {
     }
 
     @Override
-    public Product createProduct(int storeId, String name, String productPicture) {
+    public Product createProduct(UUID storeId, String name, String productPicture) {
         Store store = idStoreMap.get(storeId);
         if(store != null) {
-            int newProductId = ++nextProductId;
-            Product newProduct = new Product(newProductId, store, name, productPicture);
+            Product newProduct = new Product(UUID.randomUUID(), store, name, productPicture);
             store.addProduct(newProduct);
 
             return newProduct;
@@ -107,33 +103,28 @@ public class FakeRepository implements Repository {
     }
 
     @Override
-    public Product updateProduct(int storeId, int productId, String name, String productPicture) {
-        Store store = getStoreById(storeId);
-        if(store != null) {
-            Product product = store.getProduct(productId);
-            if(product != null) {
-                if(name != null) product.name = name;
-                if(productPicture != null) product.productPicture = productPicture;
+    public Product updateProduct(UUID productId, String name, String productPicture) {
+        Product product = idProductMap.get(productId);
+        if(product != null) {
+            if(name != null) product.name = name;
+            if(productPicture != null) product.productPicture = productPicture;
 
-                return product;
-            }
+            return product;
         }
 
         return null;
     }
 
     @Override
-    public Product deleteProduct(int storeId, int productId) {
-        Store store = idStoreMap.get(storeId);
-        if(store != null && store.idProductMap.containsKey(productId)) {
-            return store.idProductMap.remove(productId);
-        }
-
-        return null;
+    public Product deleteProduct(UUID productId) {
+        Product product = idProductMap.get(productId);
+        product.store.products.remove(product);
+        idProductMap.remove(productId);
+        return product;
     }
 
     @Override
-    public void registerEmployee(int storeId, int newEmployeeId) {
+    public void registerEmployee(UUID storeId, UUID newEmployeeId) {
         Store store = idStoreMap.get(storeId);
         User newEmployee = idUserMap.get(newEmployeeId);
         if(store != null && newEmployee != null) {

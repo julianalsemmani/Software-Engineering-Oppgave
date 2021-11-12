@@ -1,38 +1,35 @@
 package core.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Store {
-    public int id;
+    public UUID id;
 
     public String storeName;
     public String address;
     public int phoneNumber;
     public User owner;
     public Set<User> employees;
-    public Map<Integer, Product> idProductMap;
+    public Set<Product> products;
     public List<Auction> currentAuctions;
 
-    public Store(int id, String storeName, User owner, Set<User> employees, String address, int phoneNumber, Map<Integer, Product> products) {
+    public Store(UUID id, String storeName, User owner, Set<User> employees, String address, int phoneNumber, Set<Product> products) {
         this.id = id;
         this.storeName = storeName;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.owner = owner;
         this.employees = employees;
-        this.idProductMap = products;
+        this.products = products;
     }
 
     public Store() {
 
     }
 
-    public Product getProduct(int productId) {
-        return idProductMap.get(productId);
-    }
+//    public Product getProduct(UUID productId) {
+//        return products.(productId);
+//    }
 
     public User getEmployee(String userName) {
         for (User employee : employees) {
@@ -44,11 +41,11 @@ public class Store {
     }
 
     public void addProduct(Product product) {
-        idProductMap.put(product.id, product);
+        products.add(product);
     }
 
     public List<Product> getAllProducts() {
-        return new ArrayList<>(idProductMap.values());
+        return new ArrayList<>(products);
     }
 
     public void addEmployee(User employee) {

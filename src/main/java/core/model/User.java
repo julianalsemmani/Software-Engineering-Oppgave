@@ -2,9 +2,10 @@ package core.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class User {
-    public int id;
+    public UUID id;
 
     public String firstName;
     public String lastName;
@@ -20,7 +21,7 @@ public class User {
     public List<Product> favorites = new ArrayList<>();
     public List<Product> productsBidOn = new ArrayList<>();
 
-    public User(int id, String username, String password, String firstName, String lastName, String address, String email, int balance, boolean isAdmin) {
+    public User(UUID id, String username, String password, String firstName, String lastName, String address, String email, int balance, boolean isAdmin) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

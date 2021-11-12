@@ -13,12 +13,14 @@ import web.dtos.PutUserBody;
 import web.dtos.UserResponseBody;
 import web.WebServer;
 
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class When_making_user_entity_requests {
     private static final FakeRepository FAKE_START_UP_REPOSITORY = new FakeRepository();
     private static final WebServer WEB_SERVER = new WebServer(FAKE_START_UP_REPOSITORY);
-    private int testUserId;
+    private UUID testUserId;
 
     @BeforeAll
     public static void beforeAll() {

@@ -4,34 +4,35 @@ import core.model.*;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 public interface Repository {
 
     List<Store> getAllStores();
 
-    Set<User> getAllEmployees(int storeId);
+    Set<User> getAllEmployees(UUID storeId);
 
-    List<Product> getAllProducts(int storeId);
+    List<Product> getAllProducts(UUID storeId);
 
-    Product getAProduct(int storeId, int productId);
+    Product getProductById(UUID productId);
 
-    Store getStoreById(int storeId);
+    Store getStoreById(UUID storeId);
 
     Store createStore(String storeName, User owner, String address, int phoneNumber);
 
-    User getUserById(int userId);
+    User getUserById(UUID userId);
 
     User createUser(String username, String password, String firstName, String lastName, String address, String email);
 
-    User updateUser(int userId, String username, String password, String firstName, String lastName, String address, String email);
+    User updateUser(UUID userId, String username, String password, String firstName, String lastName, String address, String email);
 
-    User deleteUser(int userId);
+    User deleteUser(UUID userId);
 
-    Product createProduct(int storeId, String name, String productPicture);
+    Product createProduct(UUID storeId, String name, String productPicture);
 
-    Product updateProduct(int storeId, int productId, String name, String productPicture);
+    Product updateProduct(UUID productId, String name, String productPicture);
 
-    Product deleteProduct(int storeId, int productId);
+    Product deleteProduct(UUID productId);
 
-    void registerEmployee(int storeId, int newEmployeeId);
+    void registerEmployee(UUID storeId, UUID newEmployeeId);
 }

@@ -2,8 +2,10 @@ package web.dtos;
 
 import core.model.User;
 
+import java.util.UUID;
+
 public class UserResponseBody {
-    public int id;
+    public UUID id;
     public String username;
     public String firstName;
     public String lastName;
