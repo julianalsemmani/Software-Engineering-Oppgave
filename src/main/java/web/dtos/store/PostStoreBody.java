@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @JsonValidated
-public class PostStoreBody<Int> {
+public class PostStoreBody {
     @NotNull
     @NotEmpty
     public String storeName;
@@ -19,5 +19,5 @@ public class PostStoreBody<Int> {
     public int phoneNumber;
     @NotNull
     @NotEmpty
-    public Int owner;
+    public int owner;
 }
