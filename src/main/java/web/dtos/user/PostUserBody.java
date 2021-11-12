@@ -7,17 +7,23 @@ import javax.validation.constraints.NotNull;
 
 @JsonValidated
 public class PostUserBody {
-    @NotNull @NotEmpty
+    @NotNull
+    @NotEmpty
     public String username;
-    @NotNull @NotEmpty
+    @NotNull
+    @NotEmpty
     public String password;
-    @NotNull @NotEmpty
+    @NotNull
+    @NotEmpty
     public String firstName;
-    @NotNull @NotEmpty
+    @NotNull
+    @NotEmpty
     public String lastName;
-    @NotNull @NotEmpty
+    @NotNull
+    @NotEmpty
     public String address;
-    @NotNull @NotEmpty
+    @NotNull
+    @NotEmpty
     public String email;
 
 }
