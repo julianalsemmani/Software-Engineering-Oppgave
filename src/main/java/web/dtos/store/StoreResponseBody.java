@@ -3,12 +3,14 @@ package web.dtos.store;
 import core.model.Store;
 import core.model.User;
 
+import java.util.UUID;
+
 public class StoreResponseBody {
-    public int id;
+    public UUID id;
     public String storeName;
     public String address;
     public int phoneNumber;
-    public int owner;
+    public UUID owner;
 
 
     public StoreResponseBody(Store store) {

@@ -20,12 +20,12 @@ public class UserController {
 
 
     public void onGetUser(Context ctx) {
-        ControllerUtils.exceptionHandler(ctx, ()->{
+        ControllerUtils.exceptionHandler(ctx, () -> {
             UUID id = ctx.pathParam("user-id", UUID.class).get();
 
             User user = repository.getUserById(id);
 
-            if(user == null)
+            if (user == null)
                 throw new NotFoundResponse();
 
             ctx.json(new UserResponseBody(user));
@@ -33,7 +33,7 @@ public class UserController {
     }
 
     public void onPostUser(Context ctx) {
-        ControllerUtils.exceptionHandler(ctx, ()->{
+        ControllerUtils.exceptionHandler(ctx, () -> {
             PostUserBody body = JavalinJson.fromJson(ctx.body(), PostUserBody.class);
             User newUser = repository.createUser(body.username, body.password, body.firstName, body.lastName, body.address, body.email);
 
@@ -42,14 +42,14 @@ public class UserController {
     }
 
     public void onPutUser(Context ctx) {
-        ControllerUtils.exceptionHandler(ctx, ()->{
+        ControllerUtils.exceptionHandler(ctx, () -> {
             UUID id = ctx.pathParam("user-id", UUID.class).get();
             PutUserBody body = JavalinJson.fromJson(ctx.body(), PutUserBody.class);
 
             User updatedUser = repository.updateUser(id, body.username, body.password, body.firstName,
                     body.lastName, body.address, body.email);
 
-            if(updatedUser == null)
+            if (updatedUser == null)
                 throw new NotFoundResponse();
 
             ctx.status(200).json(new UserResponseBody(updatedUser));
@@ -57,7 +57,7 @@ public class UserController {
     }
 
     public void onDeleteUser(Context ctx) {
-        ControllerUtils.exceptionHandler(ctx, ()->{
+        ControllerUtils.exceptionHandler(ctx, () -> {
             UUID id = ctx.pathParam("user-id", UUID.class).get();
 
             User deletedUser = repository.deleteUser(id);
