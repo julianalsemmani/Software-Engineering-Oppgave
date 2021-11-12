@@ -1,22 +1,51 @@
 package persist;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import core.model.*;
 import core.repository.Repository;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 
 public class JSONRepository implements Repository {
+    //TODO(edward): We should implement multi-threading for writing to file here
     private final Map<UUID, Store> idStoreMap = new HashMap<>();
     private final Map<UUID, User> idUserMap = new HashMap<>();
     private final Map<UUID, Product> idProductMap = new HashMap<>();
 
-    public void dumpFakeData() {
-        idUserMap.clear();
-        idStoreMap.clear();
-        idProductMap.clear();
+    private final File storeDataFile;
+
+    public JSONRepository(String fileName) {
+        storeDataFile = new File(fileName);
+        readFromJSONFile();
     }
 
+    public void readFromJSONFile() {
+        ObjectMapper readMapper = new ObjectMapper();
+//        idStoreMap = new HashMap<UUID, Store>();
+//        idUserMap = new HashMap<>();
+
+        try {
+            Store[] storesArray = readMapper.readValue(storeDataFile, Store[].class);
+
+            for (Store aStore : storesArray) {
+                idStoreMap.put(aStore.id, aStore);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void writeToJSONFile() {
+        try {
+            ObjectMapper writeMapper = new ObjectMapper();
+            writeMapper.writerWithDefaultPrettyPrinter().writeValue(storeDataFile, idStoreMap.values());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public List<Store> getAllStores() {
         return new ArrayList<>(idStoreMap.values());
