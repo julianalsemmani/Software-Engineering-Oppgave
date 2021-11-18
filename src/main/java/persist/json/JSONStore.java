@@ -1,9 +1,11 @@
 package persist.json;
 
+import core.model.Product;
 import core.model.Store;
+import core.model.User;
 
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class JSONStore {
     public UUID id;
@@ -14,7 +16,10 @@ public class JSONStore {
     public UUID owner;
     public UUID[] employees;
     public JSONProduct[] products;
-//    public UUID[] currentAuctions;
+
+    public JSONStore() {
+
+    }
 
     public JSONStore(Store store) {
         id = store.id;
@@ -27,5 +32,17 @@ public class JSONStore {
 //        currentAuctions = store.currentAuctions.stream().map(auction -> auction.id).toArray(UUID[]::new);
     }
 
+    public Store toStore(Map<UUID, User> idUserMap) {
+        Store store = new Store(id, storeName, idUserMap.get(owner),
+                Arrays.stream(employees).map(idUserMap::get).collect(Collectors.toCollection(HashSet::new)),
+                address, phoneNumber,
+                new HashSet<>());
+
+        store.products = Arrays.stream(products)
+                .map(jsonProduct -> new Product(jsonProduct.id, store, jsonProduct.name, jsonProduct.productPicture))
+                .collect(Collectors.toCollection(HashSet::new));
+
+        return store;
+    }
 
 }

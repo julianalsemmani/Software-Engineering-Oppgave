@@ -51,6 +51,16 @@ public class FakeRepository implements Repository {
     }
 
     @Override
+    public Store updateStore(String storeName, User userById, String address, int phoneNumber) {
+        return null;
+    }
+
+    @Override
+    public Store deleteStore(UUID id) {
+        return null;
+    }
+
+    @Override
     public User getUserById(UUID userId) {
         return idUserMap.get(userId);
     }

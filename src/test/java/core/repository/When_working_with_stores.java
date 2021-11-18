@@ -5,11 +5,10 @@ import core.model.Store;
 import core.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import persist.HibernateRepository;
-import web.Application;
+import persist.JSONRepository;
 
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class When_working_with_stores {
 
@@ -19,7 +18,7 @@ public class When_working_with_stores {
 
     @BeforeEach
     public void setUp() {
-        repository = new HibernateRepository(Application.setupHibernateSessionFactory());
+        repository = new JSONRepository("src/main/resources/persist/test.db.json");
 
         user1 = repository.createUser("store_owner", "password", "store", "owner", "address", "email@email.com");
         store1 = repository.createStore("test_store", user1, "store_address", 12345678);
