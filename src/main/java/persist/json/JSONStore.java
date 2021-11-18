@@ -28,7 +28,7 @@ public class JSONStore {
         phoneNumber = store.phoneNumber;
         owner = store.owner.id;
         employees = store.employees.stream().map(user -> user.id).toArray(UUID[]::new);
-//        products = store.products.stream().map(JSONProduct::new).toArray(JSONProduct[]::new);
+        products = store.getAllProducts().stream().map(JSONProduct::new).toArray(JSONProduct[]::new);
 //        currentAuctions = store.currentAuctions.stream().map(auction -> auction.id).toArray(UUID[]::new);
     }
 

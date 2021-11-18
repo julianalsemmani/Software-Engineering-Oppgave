@@ -1,6 +1,6 @@
 {
   "users" : [ {
-    "id" : "1d8fc6a5-f4e4-4dc5-809f-b03d9215a405",
+    "id" : "2830a1ec-e754-478a-8795-d7cbaa47b9ad",
     "firstName" : "store",
     "lastName" : "owner",
     "address" : "address",
@@ -12,7 +12,7 @@
     "favorites" : [ ],
     "productsBidOn" : [ ]
   }, {
-    "id" : "54d7ba6d-0349-4258-aab7-ecf2dd4c5f3d",
+    "id" : "31b2ca2e-916d-4aac-87f7-a86951ab947f",
     "firstName" : "store",
     "lastName" : "owner",
     "address" : "address",
@@ -25,32 +25,40 @@
     "productsBidOn" : [ ]
   } ],
   "stores" : [ {
-    "id" : "37abbfb1-06da-430a-9f89-b3189c9626cb",
-    "storeName" : "test_store",
-    "address" : "store_address",
-    "phoneNumber" : 12345678,
-    "owner" : "54d7ba6d-0349-4258-aab7-ecf2dd4c5f3d",
-    "employees" : [ ],
-    "products" : [ {
-      "id" : "68403ee8-cb6f-4195-8af0-d1e55d631026",
-      "name" : "test_product",
-      "productPicture" : "url"
-    } ]
-  }, {
-    "id" : "1ee7e726-3d48-4cd4-9daf-37190e3e2519",
+    "id" : "59831624-ba24-446b-a3ec-4034deef5e8c",
     "storeName" : "new_store",
     "address" : "store_address",
     "phoneNumber" : 12345678,
-    "owner" : "1d8fc6a5-f4e4-4dc5-809f-b03d9215a405",
+    "owner" : "2830a1ec-e754-478a-8795-d7cbaa47b9ad",
     "employees" : [ ],
     "products" : [ ]
   }, {
-    "id" : "42a69f4a-8343-4b6d-a8c9-35c7fb94dfb5",
+    "id" : "7d26f952-d2bd-4160-8970-c4e9f438d84c",
     "storeName" : "test_store",
     "address" : "store_address",
     "phoneNumber" : 12345678,
-    "owner" : "1d8fc6a5-f4e4-4dc5-809f-b03d9215a405",
+    "owner" : "2830a1ec-e754-478a-8795-d7cbaa47b9ad",
     "employees" : [ ],
     "products" : [ ]
+  }, {
+    "id" : "3f44840e-b835-47e1-ae05-687f0de90212",
+    "storeName" : "test_store",
+    "address" : "store_address",
+    "phoneNumber" : 12345678,
+    "owner" : "31b2ca2e-916d-4aac-87f7-a86951ab947f",
+    "employees" : [ ],
+    "products" : [ {
+      "id" : "a5d3ad4e-2051-42cd-b388-7f90d4a8f0e1",
+      "name" : "WOOHOO",
+      "productPicture" : "pspd"
+    }, {
+      "id" : "b80803c8-2b86-4ce1-9a25-21a06de6e4c2",
+      "name" : "WOOHOO",
+      "productPicture" : "pspd"
+    }, {
+      "id" : "47db6522-0799-49a8-a4ba-6925886ee502",
+      "name" : "test_product",
+      "productPicture" : "url"
+    } ]
   } ]
 }

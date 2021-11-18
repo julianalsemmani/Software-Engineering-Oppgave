@@ -71,7 +71,7 @@ public class WebServer {
         app.put("/api/products/:product-id", productController::onPutProduct);
         app.delete("/api/products/:product-id", productController::onDeleteProduct);
 
-        app.get("/store", new VueComponent("store-frontpage"));
+        app.get("/stores/:store-id", new VueComponent("store-frontpage"));
 
     }
 }

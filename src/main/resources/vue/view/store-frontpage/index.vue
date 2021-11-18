@@ -11,7 +11,8 @@
       </div>
       <div class="row">
         <!-- Single Product -->
-        <div class="col-md-6 col-lg-4 col-xl-3">
+
+        <div v-for="product in store.products" class="col-md-6 col-lg-4 col-xl-3" >
           <div id="product-1" class="single-product">
             <div class="part-1">
               <ul>
@@ -22,7 +23,7 @@
               </ul>
             </div>
             <div class="part-2">
-              <h3 class="product-title">Here Product Title</h3>
+              <h3 class="product-title">{{product.name}}</h3>
               <h4 class="product-old-price">$79.99</h4>
               <h4 class="product-price">$49.99</h4>
             </div>
@@ -37,15 +38,14 @@
 Vue.component("store-frontpage", {
   template: "#store-frontpage",
   data: () => ({
-    store: {},
-    products: [],
-    storeId: "37abbfb1-06da-430a-9f89-b3189c9626cb"
+    store: {}
   }),
   created() {
-    fetch(`/api/stores/${this.storeId}`)
+    const storeId = this.$javalin.pathParams["store-id"];
+    fetch(`/api/stores/${storeId}`)
         .then(res => res.json())
         .then(res => { this.store = res; console.log(res); })
-        .catch(() => alert("Data not found"))
+        .catch(() => alert("Data not found"));
   }
 });
 </script>

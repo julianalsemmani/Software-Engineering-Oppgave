@@ -1,6 +1,6 @@
 {
   "users" : [ {
-    "id" : "c87410d7-fbed-4e4f-be23-c5349b4206a5",
+    "id" : "2e879592-c54c-417d-a15d-b3fa2c2b2cf7",
     "firstName" : "ba",
     "lastName" : "ab",
     "address" : "va",
@@ -13,14 +13,14 @@
     "productsBidOn" : [ ]
   } ],
   "stores" : [ {
-    "id" : "4d586754-fc64-42b9-bafb-fcbf16749da2",
+    "id" : "5faf3efe-9630-4b51-a6de-485985a7cfc5",
     "storeName" : "store1",
     "address" : "address",
     "phoneNumber" : 0,
-    "owner" : "c87410d7-fbed-4e4f-be23-c5349b4206a5",
+    "owner" : "2e879592-c54c-417d-a15d-b3fa2c2b2cf7",
     "employees" : [ ],
     "products" : [ {
-      "id" : "a3f3e271-bc3b-4dfd-96a2-d97a7f5acdbc",
+      "id" : "d93b3387-31f6-4d71-9f69-ac7aa69c4021",
       "name" : "product1",
       "productPicture" : "pic"
     } ]
