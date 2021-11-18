@@ -6,7 +6,7 @@ import persist.JSONRepository;
 
 public class Application {
     public static void main(String[] args) {
-        Repository repository = new JSONRepository("resources/persist/test.db.json");
+        Repository repository = new JSONRepository("src/main/resources/persist/test.db.json");
 
         WebServer webServer = new WebServer(repository);
 

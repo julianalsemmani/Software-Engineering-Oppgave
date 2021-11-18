@@ -3,6 +3,7 @@ package web;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.repository.Repository;
 import io.javalin.Javalin;
+import io.javalin.core.validation.JavalinValidation;
 import io.javalin.plugin.json.JavalinJackson;
 import io.javalin.plugin.rendering.vue.VueComponent;
 import web.controller.ProductController;
@@ -13,6 +14,7 @@ import org.unbrokendome.jackson.beanvalidation.BeanValidationModule;
 
 import javax.validation.Validation;
 import javax.validation.ValidatorFactory;
+import java.util.UUID;
 
 /**
  * Used to start Javalin application with controllers using given repository
@@ -28,12 +30,16 @@ public class WebServer {
     public void start(int port) {
         Javalin app = Javalin.create().start(port);
 
+        app.config.enableWebjars();
+
         ValidatorFactory validatorFactory = Validation.byDefaultProvider().configure().buildValidatorFactory();
 
         ObjectMapper objectMapper = new ObjectMapper()
                 .registerModule(new BeanValidationModule(validatorFactory));
 
         JavalinJackson.configure(objectMapper);
+
+        JavalinValidation.register(UUID.class, UUID::fromString);
 
         // Controllers
         ProductController productController = new ProductController(repository);
@@ -65,7 +71,7 @@ public class WebServer {
         app.put("/api/products/:product-id", productController::onPutProduct);
         app.delete("/api/products/:product-id", productController::onDeleteProduct);
 
-        app.get("store", new VueComponent("store-frontpage"));
+        app.get("/store", new VueComponent("store-frontpage"));
 
     }
 }
