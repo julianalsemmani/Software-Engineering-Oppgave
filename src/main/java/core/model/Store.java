@@ -2,7 +2,7 @@ package core.model;
 
 import java.util.*;
 
-public class Store {
+public class Store implements Identified {
     public UUID id;
 
     public String storeName;
@@ -50,5 +50,10 @@ public class Store {
 
     public void addEmployee(User employee) {
         employees.add(employee);
+    }
+
+    @Override
+    public UUID getId() {
+        return id;
     }
 }

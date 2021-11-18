@@ -2,7 +2,7 @@ package core.model;
 
 import java.util.UUID;
 
-public class Product {
+public class Product implements Identified {
     public UUID id;
     public Store store;
     public String name;
@@ -19,4 +19,8 @@ public class Product {
         this.productPicture = productPicture;
     }
 
+    @Override
+    public UUID getId() {
+        return id;
+    }
 }

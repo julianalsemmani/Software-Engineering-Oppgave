@@ -4,8 +4,7 @@ import core.model.Store;
 import core.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import persist.HibernateRepository;
-import web.Application;
+import persist.JSONRepository;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -22,7 +21,7 @@ public class Store_owners_can_register_other_users_as_employees {
 
     @BeforeEach
     public void setUp() {
-        repository = new HibernateRepository(Application.setupHibernateSessionFactory());
+        repository = new JSONRepository("resources/persist/test.db.json");
 
         owner = repository.createUser("test_owner", "test_password", "first_name", "last_name", "address", "email");
         store = repository.createStore("test_store", owner, "test_address", 12345678);

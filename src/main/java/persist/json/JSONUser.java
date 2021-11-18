@@ -1,10 +1,7 @@
 package persist.json;
 
-import core.model.Product;
 import core.model.User;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public class JSONUser {
@@ -34,7 +31,12 @@ public class JSONUser {
         password = user.password;
         isAdmin = user.isAdmin;
         balance = user.balance;
-        favorites = user.favorites.stream().map(product -> product.id).toArray(UUID[]::new);
-        productsBidOn = user.productsBidOn.stream().map(product -> product.id).toArray(UUID[]::new);
+        favorites = JSONUtils.mapToIds(user.favorites);
+        productsBidOn = JSONUtils.mapToIds(user.productsBidOn);
+    }
+    
+    public User toUser() {
+        return new User(id, username, password, firstName,
+                lastName, address, email, balance, isAdmin);
     }
 }

@@ -1,6 +1,8 @@
 package persist;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectReader;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import core.model.*;
 import core.repository.Repository;
 import persist.json.JSONStore;
@@ -27,22 +29,15 @@ public class JSONRepository implements Repository {
     }
 
     public void readFromJSONFile() {
-        ObjectMapper readMapper = new ObjectMapper();
+        ObjectReader readMapper = new ObjectMapper().reader();
         try {
             JSONStructure structure = readMapper.readValue(storeDataFile, JSONStructure.class);
 
             for(JSONUser json : structure.users) {
-                User user = idUserMap.put(json.id, new User(json.id, json.username, json.password, json.firstName,
-                        json.lastName, json.address, json.email, json.balance, json.isAdmin));
+                idUserMap.put(json.id, json.toUser());
             }
             for(JSONStore json : structure.stores) {
-                Store store = new Store(json.id, json.storeName, idUserMap.get(json.owner),
-                        Arrays.stream(json.employees).map(idUserMap::get).collect(Collectors.toSet()), json.address, json.phoneNumber,
-                        new HashSet<>());
-
-                store.products = Arrays.stream(json.products).map(jsonProduct -> new Product(jsonProduct.id, store, jsonProduct.name, jsonProduct.productPicture)).collect(Collectors.toSet());
-
-                idStoreMap.put(json.id, store);
+                idStoreMap.put(json.id, json.toStore(idUserMap));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -51,15 +46,18 @@ public class JSONRepository implements Repository {
 
     public void writeToJSONFile() {
         try {
-            ObjectMapper writeMapper = new ObjectMapper();
-            writeMapper.writerWithDefaultPrettyPrinter().writeValue(storeDataFile, idStoreMap.values());
+            ObjectWriter writeMapper = new ObjectMapper().writerWithDefaultPrettyPrinter();
+
             JSONStructure structure = new JSONStructure();
+
             for(User user : idUserMap.values()) {
                 structure.users.add(new JSONUser(user));
             }
             for(Store store : idStoreMap.values()) {
                 structure.stores.add(new JSONStore(store));
             }
+
+            writeMapper.writeValue(storeDataFile, structure);
         } catch (IOException e) {
             e.printStackTrace();
         }

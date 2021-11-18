@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class User {
+public class User implements Identified{
     public UUID id;
 
     public String firstName;
@@ -35,5 +35,10 @@ public class User {
 
     public User() {
 
+    }
+
+    @Override
+    public UUID getId() {
+        return id;
     }
 }

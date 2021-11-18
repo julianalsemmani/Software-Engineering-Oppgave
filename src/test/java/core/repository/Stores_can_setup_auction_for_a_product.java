@@ -5,8 +5,7 @@ import core.model.Store;
 import core.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import persist.HibernateRepository;
-import web.Application;
+import persist.JSONRepository;
 
 public class Stores_can_setup_auction_for_a_product {
 
@@ -17,7 +16,7 @@ public class Stores_can_setup_auction_for_a_product {
 
     @BeforeEach
     public void setUp() {
-        repository = new HibernateRepository(Application.setupHibernateSessionFactory());
+        repository = new JSONRepository("resources/persist/test.db.json");
 
         storeOwner = repository.createUser("store_owner", "", "", "", "", "");
         store = repository.createStore("test_store", storeOwner, "", 0);
