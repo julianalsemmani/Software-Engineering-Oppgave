@@ -53,6 +53,10 @@ public class WebServer {
         app.delete("/api/stores/:store-id", storeController::onDeleteStore);
 
         // API requests for startUp methods
+        app.post("/api/startUp", startUpController::onPostStartUp);
+        app.get("/api/startUp/:startUp-id", startUpController::onGetStartUp);
+        app.put("/api/startUp/:startUp-id", startUpController::onPutStartUp);
+        app.delete("/api/startUp/:startUp-id", startUpController::onDeleteStartUp);
 
         // API requests for product methods
         app.post("/api/products", productController::onPostProduct);

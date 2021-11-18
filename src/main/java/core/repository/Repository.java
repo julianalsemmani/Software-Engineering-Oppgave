@@ -39,4 +39,12 @@ public interface Repository {
     Product deleteProduct(UUID productId);
 
     void registerEmployee(UUID storeId, UUID newEmployeeId);
+
+    StartUp getStartUpById(UUID id);
+
+    StartUp createStartUp(String startUpName, int phoneNumber, String address);
+
+    StartUp updateStartUp(UUID id, String startUpName, int phoneNumber, String address);
+
+    StartUp deleteStartUp(UUID id);
 }
