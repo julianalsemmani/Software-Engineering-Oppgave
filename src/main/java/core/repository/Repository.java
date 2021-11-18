@@ -18,7 +18,7 @@ public interface Repository {
 
     Store createStore(String storeName, User owner, String address, int phoneNumber);
 
-    Store updateStore(String storeName, User userById, String address, int phoneNumber);
+    Store updateStore(UUID storeId, String storeName, User owner, String address, int phoneNumber);
 
     Store deleteStore(UUID id);
 

@@ -38,7 +38,7 @@ public class JSONStore {
                 address, phoneNumber,
                 new HashSet<>());
 
-        store.products = Arrays.stream(products)
+        store.products = store.getAllProducts().stream()
                 .map(jsonProduct -> new Product(jsonProduct.id, store, jsonProduct.name, jsonProduct.productPicture))
                 .collect(Collectors.toCollection(HashSet::new));
 

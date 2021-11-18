@@ -1,14 +1,10 @@
 package web.controller;
 
 import core.model.Store;
-import core.model.User;
 import core.repository.Repository;
 import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
 import io.javalin.plugin.json.JavalinJson;
-import web.dtos.PostUserBody;
-import web.dtos.PutUserBody;
-import web.dtos.UserResponseBody;
 import web.dtos.store.PostStoreBody;
 import web.dtos.store.PutStoreBody;
 import web.dtos.store.StoreResponseBody;
@@ -46,10 +42,10 @@ public class StoreController {
 
     public void onPutStore(Context ctx) {
         ControllerUtils.exceptionHandler(ctx, () -> {
-            int id = ctx.pathParam("store-id", Integer.class).get();
+            UUID id = ctx.pathParam("store-id", UUID.class).get();
             PutStoreBody body = JavalinJson.fromJson(ctx.body(), PutStoreBody.class);
 
-            Store updatedStore = repository.updateStore(body.storeName, repository.getUserById(body.owner), body.address, body.phoneNumber);
+            Store updatedStore = repository.updateStore(id, body.storeName, repository.getUserById(body.owner), body.address, body.phoneNumber);
 
             if (updatedStore == null)
                 throw new NotFoundResponse();

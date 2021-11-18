@@ -1,6 +1,7 @@
 package core.model;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Store implements Identified {
     public UUID id;
@@ -10,7 +11,7 @@ public class Store implements Identified {
     public int phoneNumber;
     public User owner;
     public Set<User> employees;
-    public Set<Product> products;
+    public Map<UUID, Product> products;
     public List<Auction> currentAuctions;
 
     public Store(UUID id, String storeName, User owner, Set<User> employees, String address, int phoneNumber, Set<Product> products) {
@@ -20,7 +21,7 @@ public class Store implements Identified {
         this.phoneNumber = phoneNumber;
         this.owner = owner;
         this.employees = employees;
-        this.products = products;
+        this.products = products.stream().collect(Collectors.toMap(Product::getId, (product)->product));
     }
 
     public Store() {
@@ -41,11 +42,11 @@ public class Store implements Identified {
     }
 
     public void addProduct(Product product) {
-        products.add(product);
+        products.put(product.id, product);
     }
 
     public List<Product> getAllProducts() {
-        return new ArrayList<>(products);
+        return new ArrayList<>(products.values());
     }
 
     public void addEmployee(User employee) {

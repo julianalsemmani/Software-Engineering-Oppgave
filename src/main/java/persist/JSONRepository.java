@@ -10,9 +10,9 @@ import persist.json.JSONStructure;
 import persist.json.JSONUser;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 public class JSONRepository implements Repository {
@@ -39,6 +39,8 @@ public class JSONRepository implements Repository {
             for(JSONStore json : structure.stores) {
                 idStoreMap.put(json.id, json.toStore(idUserMap));
             }
+        } catch(FileNotFoundException ignored) {
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -91,29 +93,44 @@ public class JSONRepository implements Repository {
     public Store createStore(String storeName, User owner, String address, int phoneNumber) {
         Store newStore = new Store(UUID.randomUUID(), storeName, owner, new HashSet<>(), address, phoneNumber, new HashSet<>());
         idStoreMap.put(newStore.id, newStore);
+
+        writeToJSONFile();
+
         return newStore;
     }
 
     @Override
-    public Store updateStore(String storeName, User userById, String address, int phoneNumber) {
-        return null;
+    public Store updateStore(UUID storeId, String storeName, User owner, String address, int phoneNumber) {
+        Store store = idStoreMap.get(storeId);
+        if(store != null) {
+            store.storeName = storeName;
+            store.owner = owner;
+            store.address = address;
+            store.phoneNumber = phoneNumber;
+            writeToJSONFile();
+        }
+        return store;
     }
 
     @Override
     public Store deleteStore(UUID id) {
-        return null;
+        Store deletedStore = idStoreMap.remove(id);
+        writeToJSONFile();
+        return deletedStore;
     }
 
     @Override
     public User getUserById(UUID userId) {
-        return idUserMap.get(userId);
+        User deletedUser = idUserMap.get(userId);
+        writeToJSONFile();
+        return deletedUser;
     }
 
     @Override
     public User createUser(String username, String password, String firstName, String lastName, String address, String email) {
         User newUser = new User(UUID.randomUUID(), username, password, firstName, lastName, address, email, 0, false);
         idUserMap.put(newUser.id, newUser);
-
+        writeToJSONFile();
         return newUser;
     }
 
@@ -128,6 +145,7 @@ public class JSONRepository implements Repository {
             if(address != null) user.address = address;
             if(email != null) user.email = email;
         }
+        writeToJSONFile();
 
         return user;
     }
@@ -139,7 +157,9 @@ public class JSONRepository implements Repository {
             for (Store store : getAllStores()) {
                 store.employees.removeIf(theEmployee -> theEmployee.id == userId);
             }
+            writeToJSONFile();
         }
+
         return user;
     }
 
@@ -149,6 +169,8 @@ public class JSONRepository implements Repository {
         if(store != null) {
             Product newProduct = new Product(UUID.randomUUID(), store, name, productPicture);
             store.addProduct(newProduct);
+
+            writeToJSONFile();
 
             return newProduct;
         }
@@ -163,6 +185,8 @@ public class JSONRepository implements Repository {
             if(name != null) product.name = name;
             if(productPicture != null) product.productPicture = productPicture;
 
+            writeToJSONFile();
+
             return product;
         }
 
@@ -174,6 +198,7 @@ public class JSONRepository implements Repository {
         Product product = idProductMap.get(productId);
         product.store.products.remove(product);
         idProductMap.remove(productId);
+        writeToJSONFile();
         return product;
     }
 
@@ -183,6 +208,27 @@ public class JSONRepository implements Repository {
         User newEmployee = idUserMap.get(newEmployeeId);
         if(store != null && newEmployee != null) {
             store.employees.add(newEmployee);
+            writeToJSONFile();
         }
+    }
+
+    @Override
+    public StartUp getStartUpById(UUID id) {
+        return null;
+    }
+
+    @Override
+    public StartUp createStartUp(String startUpName, int phoneNumber, String address) {
+        return null;
+    }
+
+    @Override
+    public StartUp updateStartUp(UUID id, String startUpName, int phoneNumber, String address) {
+        return null;
+    }
+
+    @Override
+    public StartUp deleteStartUp(UUID id) {
+        return null;
     }
 }

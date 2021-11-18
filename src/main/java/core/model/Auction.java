@@ -3,7 +3,7 @@ package core.model;
 import java.time.Instant;
 import java.util.List;
 
-public class Auction {
+public class Auction implements SaleMethod {
     public Product product;
     public Store store;
     public int minimumBid;

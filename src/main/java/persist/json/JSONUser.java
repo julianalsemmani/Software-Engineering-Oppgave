@@ -21,6 +21,10 @@ public class JSONUser {
     public UUID[] favorites;
     public UUID[] productsBidOn;
 
+    public JSONUser() {
+
+    }
+
     public JSONUser(User user) {
         id = user.id;
         firstName = user.firstName;

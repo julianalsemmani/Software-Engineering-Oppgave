@@ -7,6 +7,7 @@ public class Product implements Identified {
     public Store store;
     public String name;
     public String productPicture;
+    public SaleMethod saleMethod;
 
     public Product() {
 

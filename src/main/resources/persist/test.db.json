@@ -1,0 +1,56 @@
+{
+  "users" : [ {
+    "id" : "1d8fc6a5-f4e4-4dc5-809f-b03d9215a405",
+    "firstName" : "store",
+    "lastName" : "owner",
+    "address" : "address",
+    "email" : "email@email.com",
+    "username" : "store_owner",
+    "password" : "password",
+    "isAdmin" : false,
+    "balance" : 0,
+    "favorites" : [ ],
+    "productsBidOn" : [ ]
+  }, {
+    "id" : "54d7ba6d-0349-4258-aab7-ecf2dd4c5f3d",
+    "firstName" : "store",
+    "lastName" : "owner",
+    "address" : "address",
+    "email" : "email@email.com",
+    "username" : "store_owner",
+    "password" : "password",
+    "isAdmin" : false,
+    "balance" : 0,
+    "favorites" : [ ],
+    "productsBidOn" : [ ]
+  } ],
+  "stores" : [ {
+    "id" : "37abbfb1-06da-430a-9f89-b3189c9626cb",
+    "storeName" : "test_store",
+    "address" : "store_address",
+    "phoneNumber" : 12345678,
+    "owner" : "54d7ba6d-0349-4258-aab7-ecf2dd4c5f3d",
+    "employees" : [ ],
+    "products" : [ {
+      "id" : "68403ee8-cb6f-4195-8af0-d1e55d631026",
+      "name" : "test_product",
+      "productPicture" : "url"
+    } ]
+  }, {
+    "id" : "1ee7e726-3d48-4cd4-9daf-37190e3e2519",
+    "storeName" : "new_store",
+    "address" : "store_address",
+    "phoneNumber" : 12345678,
+    "owner" : "1d8fc6a5-f4e4-4dc5-809f-b03d9215a405",
+    "employees" : [ ],
+    "products" : [ ]
+  }, {
+    "id" : "42a69f4a-8343-4b6d-a8c9-35c7fb94dfb5",
+    "storeName" : "test_store",
+    "address" : "store_address",
+    "phoneNumber" : 12345678,
+    "owner" : "1d8fc6a5-f4e4-4dc5-809f-b03d9215a405",
+    "employees" : [ ],
+    "products" : [ ]
+  } ]
+}

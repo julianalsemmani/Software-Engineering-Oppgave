@@ -1,6 +1,7 @@
 package core.repository.fakes;
 
 import core.model.Product;
+import core.model.StartUp;
 import core.model.Store;
 import core.model.User;
 import core.repository.Repository;
@@ -51,7 +52,7 @@ public class FakeRepository implements Repository {
     }
 
     @Override
-    public Store updateStore(String storeName, User userById, String address, int phoneNumber) {
+    public Store updateStore(UUID storeId, String storeName, User owner, String address, int phoneNumber) {
         return null;
     }
 
@@ -140,5 +141,25 @@ public class FakeRepository implements Repository {
         if(store != null && newEmployee != null) {
             store.employees.add(newEmployee);
         }
+    }
+
+    @Override
+    public StartUp getStartUpById(UUID id) {
+        return null;
+    }
+
+    @Override
+    public StartUp createStartUp(String startUpName, int phoneNumber, String address) {
+        return null;
+    }
+
+    @Override
+    public StartUp updateStartUp(UUID id, String startUpName, int phoneNumber, String address) {
+        return null;
+    }
+
+    @Override
+    public StartUp deleteStartUp(UUID id) {
+        return null;
     }
 }
