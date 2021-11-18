@@ -1,6 +1,5 @@
 <template id="store-frontpage">
   <section class="section-products">
-    <h1>{{store.storeName}}</h1>
     <div class="container">
       <div class="row justify-content-center text-center">
         <div class="col-md-8 col-lg-6">

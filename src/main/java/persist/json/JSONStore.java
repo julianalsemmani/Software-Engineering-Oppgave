@@ -38,9 +38,13 @@ public class JSONStore {
                 address, phoneNumber,
                 new HashSet<>());
 
-//        store.products = store.getAllProducts().stream()
+        for(JSONProduct jsonProduct : products) {
+            store.products.put(jsonProduct.id, new Product(jsonProduct.id, store, jsonProduct.name, jsonProduct.productPicture));
+        }
+
+//        store.products = Arrays.stream(products)
 //                .map(jsonProduct -> new Product(jsonProduct.id, store, jsonProduct.name, jsonProduct.productPicture))
-//                .collect(Collectors.toCollection(HashSet::new));
+//                .collect(Collectors.toMap(Product::getId, product -> product));
 
         return store;
     }

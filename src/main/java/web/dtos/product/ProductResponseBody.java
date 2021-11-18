@@ -16,7 +16,7 @@ public class ProductResponseBody {
 
     public ProductResponseBody(Product product) {
         this.id = product.id;
-        this.store = product.store;
+//        this.store = product.store;
         this.name = product.name;
         this.productPicture = product.productPicture;
     }
