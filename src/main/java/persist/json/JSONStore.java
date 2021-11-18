@@ -28,7 +28,7 @@ public class JSONStore {
         phoneNumber = store.phoneNumber;
         owner = store.owner.id;
         employees = store.employees.stream().map(user -> user.id).toArray(UUID[]::new);
-        products = store.products.stream().map(JSONProduct::new).toArray(JSONProduct[]::new);
+//        products = store.products.stream().map(JSONProduct::new).toArray(JSONProduct[]::new);
 //        currentAuctions = store.currentAuctions.stream().map(auction -> auction.id).toArray(UUID[]::new);
     }
 
@@ -38,9 +38,9 @@ public class JSONStore {
                 address, phoneNumber,
                 new HashSet<>());
 
-        store.products = store.getAllProducts().stream()
-                .map(jsonProduct -> new Product(jsonProduct.id, store, jsonProduct.name, jsonProduct.productPicture))
-                .collect(Collectors.toCollection(HashSet::new));
+//        store.products = store.getAllProducts().stream()
+//                .map(jsonProduct -> new Product(jsonProduct.id, store, jsonProduct.name, jsonProduct.productPicture))
+//                .collect(Collectors.toCollection(HashSet::new));
 
         return store;
     }

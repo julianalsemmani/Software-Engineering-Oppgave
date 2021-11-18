@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import core.repository.Repository;
 import io.javalin.Javalin;
 import io.javalin.plugin.json.JavalinJackson;
+import io.javalin.plugin.rendering.vue.VueComponent;
 import web.controller.ProductController;
 import web.controller.StartUpController;
 import web.controller.StoreController;
@@ -63,6 +64,8 @@ public class WebServer {
         app.get("/api/products/:product-id", productController::onGetProduct);
         app.put("/api/products/:product-id", productController::onPutProduct);
         app.delete("/api/products/:product-id", productController::onDeleteProduct);
+
+        app.get("store", new VueComponent("store-frontpage"));
 
     }
 }

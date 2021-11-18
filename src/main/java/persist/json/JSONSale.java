@@ -24,8 +24,8 @@ public class JSONSale {
     }
 
 
-    public Sale toUser(Map<UUID, Store> storeIdMap) {
-        Store store = storeIdMap.get(store.id);
-        return new Sale(price, store.products.get);
-    }
+//    public Sale toUser(Map<UUID, Store> storeIdMap) {
+////        Store store = storeIdMap.get(store.id);
+////        return new Sale(price, store.products.get);
+//    }
 }
