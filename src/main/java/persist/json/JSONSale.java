@@ -10,8 +10,6 @@ import java.util.UUID;
 
 public class JSONSale {
     public int price;
-    public UUID product;
-    public UUID store;
 
     public JSONSale() {
 
@@ -19,8 +17,6 @@ public class JSONSale {
 
     public JSONSale(Sale sale) {
         price = sale.price;
-        product = sale.product.id;
-        store = sale.store.id;
     }
 
 

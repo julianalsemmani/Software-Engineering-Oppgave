@@ -2,6 +2,7 @@ package web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.repository.Repository;
+import core.service.Service;
 import io.javalin.Javalin;
 import io.javalin.core.validation.JavalinValidation;
 import io.javalin.plugin.json.JavalinJackson;
@@ -21,10 +22,10 @@ import java.util.UUID;
  */
 public class WebServer {
 
-    private final Repository repository;
+    private final Service service;
 
-    public WebServer(Repository repository) {
-        this.repository = repository;
+    public WebServer(Service service) {
+        this.service = service;
     }
 
     public void start(int port) {
@@ -42,10 +43,10 @@ public class WebServer {
         JavalinValidation.register(UUID.class, UUID::fromString);
 
         // Controllers
-        ProductController productController = new ProductController(repository);
-        StartUpController startUpController = new StartUpController(repository);
-        StoreController storeController = new StoreController(repository);
-        UserController userController = new UserController(repository);
+        ProductController productController = new ProductController(service);
+        StartUpController startUpController = new StartUpController(service);
+        StoreController storeController = new StoreController(service);
+        UserController userController = new UserController(service);
 
         // API requests for user methods
         app.post("/api/users", userController::onPostUser);
@@ -60,16 +61,14 @@ public class WebServer {
         app.delete("/api/stores/:store-id", storeController::onDeleteStore);
 
         // API requests for startUp methods
-        app.post("/api/startUp", startUpController::onPostStartUp);
         app.get("/api/startUp/:startUp-id", startUpController::onGetStartUp);
         app.put("/api/startUp/:startUp-id", startUpController::onPutStartUp);
-        app.delete("/api/startUp/:startUp-id", startUpController::onDeleteStartUp);
 
         // API requests for product methods
-        app.post("/api/products", productController::onPostProduct);
-        app.get("/api/products/:product-id", productController::onGetProduct);
-        app.put("/api/products/:product-id", productController::onPutProduct);
-        app.delete("/api/products/:product-id", productController::onDeleteProduct);
+        app.post("/api/stores/:store-id/products", productController::onPostProduct);
+        app.get("/api/stores/:store-id/products/:product-id", productController::onGetProduct);
+        app.put("/api/stores/:store-id/products/:product-id", productController::onPutProduct);
+        app.delete("/api/stores/:store-id/products/:product-id", productController::onDeleteProduct);
 
         app.get("/stores/:store-id", new VueComponent("store-frontpage"));
 

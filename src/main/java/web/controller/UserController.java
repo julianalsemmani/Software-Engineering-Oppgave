@@ -2,6 +2,7 @@ package web.controller;
 
 import core.model.User;
 import core.repository.Repository;
+import core.service.Service;
 import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
 import io.javalin.plugin.json.JavalinJson;
@@ -12,10 +13,10 @@ import web.dtos.UserResponseBody;
 import java.util.UUID;
 
 public class UserController {
-    public final Repository repository;
+    private final Service service;
 
-    public UserController(Repository repository) {
-        this.repository = repository;
+    public UserController(Service service) {
+        this.service = service;
     }
 
 
@@ -23,7 +24,7 @@ public class UserController {
         ControllerUtils.exceptionHandler(ctx, () -> {
             UUID id = ctx.pathParam("user-id", UUID.class).get();
 
-            User user = repository.getUserById(id);
+            User user = service.repository.getUserById(id);
 
             if (user == null)
                 throw new NotFoundResponse();
@@ -35,7 +36,7 @@ public class UserController {
     public void onPostUser(Context ctx) {
         ControllerUtils.exceptionHandler(ctx, () -> {
             PostUserBody body = JavalinJson.fromJson(ctx.body(), PostUserBody.class);
-            User newUser = repository.createUser(body.username, body.password, body.firstName, body.lastName, body.address, body.email);
+            User newUser = service.createUser(body.username, body.password, body.firstName, body.lastName, body.address, body.email);
 
             ctx.status(201).json(new UserResponseBody(newUser));
         });
@@ -46,7 +47,7 @@ public class UserController {
             UUID id = ctx.pathParam("user-id", UUID.class).get();
             PutUserBody body = JavalinJson.fromJson(ctx.body(), PutUserBody.class);
 
-            User updatedUser = repository.updateUser(id, body.username, body.password, body.firstName,
+            User updatedUser = service.updateUser(id, body.username, body.password, body.firstName,
                     body.lastName, body.address, body.email);
 
             if (updatedUser == null)
@@ -60,7 +61,7 @@ public class UserController {
         ControllerUtils.exceptionHandler(ctx, () -> {
             UUID id = ctx.pathParam("user-id", UUID.class).get();
 
-            User deletedUser = repository.deleteUser(id);
+            User deletedUser = service.deleteUser(id);
 
             ctx.status(200).json(new UserResponseBody(deletedUser));
         });

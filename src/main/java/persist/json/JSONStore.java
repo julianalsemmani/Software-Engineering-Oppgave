@@ -39,12 +39,8 @@ public class JSONStore {
                 new HashSet<>());
 
         for(JSONProduct jsonProduct : products) {
-            store.products.put(jsonProduct.id, new Product(jsonProduct.id, store, jsonProduct.name, jsonProduct.productPicture));
+            store.products.put(jsonProduct.id, new Product(jsonProduct.id, jsonProduct.name, jsonProduct.productPicture));
         }
-
-//        store.products = Arrays.stream(products)
-//                .map(jsonProduct -> new Product(jsonProduct.id, store, jsonProduct.name, jsonProduct.productPicture))
-//                .collect(Collectors.toMap(Product::getId, product -> product));
 
         return store;
     }

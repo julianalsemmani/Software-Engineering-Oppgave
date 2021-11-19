@@ -9,7 +9,6 @@ public class StartUpResponseBody {
     public String startUpName;
     public String address;
     public int phoneNumber;
-    public int owner;
 
     public StartUpResponseBody(StartUp startup){
         this.startUpName = startup.name;

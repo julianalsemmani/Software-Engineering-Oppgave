@@ -23,9 +23,9 @@ public class Store_owners_can_register_other_users_as_employees {
     public void setUp() {
         repository = new JSONRepository("resources/persist/test.db.json");
 
-        owner = repository.createUser("test_owner", "test_password", "first_name", "last_name", "address", "email");
-        store = repository.createStore("test_store", owner, "test_address", 12345678);
-        testUser = repository.createUser("test_owner", "test_password", "first_name", "last_name", "address", "email");
+        owner = repository.addUser("test_owner", "test_password", "first_name", "last_name", "address", "email");
+        store = repository.addStore("test_store", owner, "test_address", 12345678);
+        testUser = repository.addUser("test_owner", "test_password", "first_name", "last_name", "address", "email");
     }
 
     @Test

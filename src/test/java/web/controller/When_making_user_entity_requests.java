@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class When_making_user_entity_requests {
     private static final FakeRepository FAKE_START_UP_REPOSITORY = new FakeRepository();
-    private static final WebServer WEB_SERVER = new WebServer(FAKE_START_UP_REPOSITORY);
+    private static final WebServer WEB_SERVER = new WebServer(FAKE_START_UP_REPOSITORY, service);
     private UUID testUserId;
 
     @BeforeAll

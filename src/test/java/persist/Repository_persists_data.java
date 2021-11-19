@@ -3,8 +3,6 @@ import core.model.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,8 +17,8 @@ public class Repository_persists_data {
         } catch (Exception e) { }
 
         JSONRepository repository1 = new JSONRepository(jsonPath);
-        User user1 = repository1.createUser("user1", "aaa", "ba", "ab", "va", "email");
-        Store store1 = repository1.createStore("store1", user1, "address", 0);
+        User user1 = repository1.addUser("user1", "aaa", "ba", "ab", "va", "email");
+        Store store1 = repository1.addStore("store1", user1, "address", 0);
         Product product1 = repository1.createProduct(store1.id, "product1", "pic");
 
         JSONRepository repository2 = new JSONRepository(jsonPath);

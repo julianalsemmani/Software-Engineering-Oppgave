@@ -18,8 +18,8 @@ public class Stores_can_setup_auction_for_a_product {
     public void setUp() {
         repository = new JSONRepository("resources/persist/test.db.json");
 
-        storeOwner = repository.createUser("store_owner", "", "", "", "", "");
-        store = repository.createStore("test_store", storeOwner, "", 0);
+        storeOwner = repository.addUser("store_owner", "", "", "", "", "");
+        store = repository.addStore("test_store", storeOwner, "", 0);
         productToAuction = repository.createProduct(store.id, "test_product", "");
     }
 

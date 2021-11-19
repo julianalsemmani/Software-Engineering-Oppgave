@@ -20,13 +20,13 @@ public class When_working_with_stores {
     public void setUp() {
         repository = new JSONRepository("src/main/resources/persist/test.db.json");
 
-        user1 = repository.createUser("store_owner", "password", "store", "owner", "address", "email@email.com");
-        store1 = repository.createStore("test_store", user1, "store_address", 12345678);
+        user1 = repository.addUser("store_owner", "password", "store", "owner", "address", "email@email.com");
+        store1 = repository.addStore("test_store", user1, "store_address", 12345678);
     }
 
     @Test
     public void users_can_register_a_store_and_become_the_owner() {
-        Store newStore = repository.createStore("new_store", user1, "store_address", 12345678);
+        Store newStore = repository.addStore("new_store", user1, "store_address", 12345678);
 
         assertNotNull(newStore);
         assertEquals(user1.id, repository.getStoreById(newStore.id).owner.id);
