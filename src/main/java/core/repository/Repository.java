@@ -27,5 +27,5 @@ public interface Repository {
 
     StartUp getStartUp();
 
-    StartUp updateStartUp(UUID id, String startUpName, int phoneNumber, String address);
+    void updateStartUp();
 }

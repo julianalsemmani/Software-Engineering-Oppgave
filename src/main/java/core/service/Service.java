@@ -1,6 +1,7 @@
 package core.service;
 
 import core.model.Product;
+import core.model.StartUp;
 import core.model.Store;
 import core.model.User;
 import core.repository.Repository;
@@ -129,6 +130,17 @@ public class Service {
         store.addEmployee(newEmployee);
 
         repository.updateStore(store);
+    }
+
+    public StartUp updateStartUp(String name, String address, int phoneNumber) {
+        StartUp startUp = repository.getStartUp();
+        if(name != null) startUp.name = name;
+        if(address != null) startUp.address = address;
+        if(phoneNumber != 0) startUp.phoneNumber = phoneNumber;
+
+        repository.updateStartUp();
+
+        return startUp;
     }
 
 }

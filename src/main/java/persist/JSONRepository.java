@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import core.model.*;
 import core.repository.Repository;
+import persist.json.JSONStartUp;
 import persist.json.JSONStore;
 import persist.json.JSONStructure;
 import persist.json.JSONUser;
@@ -19,6 +20,7 @@ public class JSONRepository implements Repository {
     //TODO(edward): We should implement multi-threading for writing to file here
     private final Map<UUID, Store> idStoreMap = new HashMap<>();
     private final Map<UUID, User> idUserMap = new HashMap<>();
+    private StartUp startUp = new StartUp("", "", 0);
 
     private final File storeDataFile;
 
@@ -38,6 +40,7 @@ public class JSONRepository implements Repository {
             for(JSONStore json : structure.stores) {
                 idStoreMap.put(json.id, json.toStore(idUserMap));
             }
+            startUp = structure.startUp.toStartUp();
         } catch(FileNotFoundException ignored) {
 
         } catch (IOException e) {
@@ -57,6 +60,7 @@ public class JSONRepository implements Repository {
             for(Store store : idStoreMap.values()) {
                 structure.stores.add(new JSONStore(store));
             }
+            structure.startUp = new JSONStartUp(startUp);
 
             writeMapper.writeValue(storeDataFile, structure);
         } catch (IOException e) {
@@ -121,12 +125,12 @@ public class JSONRepository implements Repository {
 
     @Override
     public StartUp getStartUp() {
-        return null;
+        return startUp;
     }
 
     @Override
-    public StartUp updateStartUp(UUID id, String startUpName, int phoneNumber, String address) {
-        return null;
+    public void updateStartUp() {
+        writeToJSONFile();
     }
 
 }
