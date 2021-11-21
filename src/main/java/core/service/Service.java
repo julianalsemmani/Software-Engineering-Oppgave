@@ -1,15 +1,10 @@
 package core.service;
 
-import core.model.Product;
-import core.model.StartUp;
-import core.model.Store;
-import core.model.User;
+import core.model.*;
 import core.repository.Repository;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.time.Instant;
+import java.util.*;
 
 public class Service {
     public final Repository repository;
@@ -90,12 +85,34 @@ public class Service {
 
     public Product createProduct(UUID storeId, String name, String productPicture) {
         Store store = repository.getStoreById(storeId);
-        Product newProduct = new Product(UUID.randomUUID(), name, productPicture);
+        Product newProduct = new Product(UUID.randomUUID(), name, productPicture, null);
         store.addProduct(newProduct);
 
         repository.updateStore(store);
 
         return newProduct;
+    }
+
+    public Auction registerAuction(UUID storeId, UUID productId, int minimumBid, int minimumBidIncrement, int buyoutPrice, Instant auctionStartTime, Instant auctionEndTime) {
+        Store store = repository.getStoreById(storeId);
+        Product product = store.products.get(productId);
+        Auction auction = new Auction(minimumBid, minimumBidIncrement, buyoutPrice, auctionStartTime, auctionEndTime, new ArrayList<>());
+        product.saleMethod = auction;
+
+        repository.updateStore(store);
+
+        return auction;
+    }
+
+    public Sale registerSale(UUID storeId, UUID productId, int price) {
+        Store store = repository.getStoreById(storeId);
+        Product product = store.products.get(productId);
+        Sale sale = new Sale(price);
+        product.saleMethod = sale;
+
+        repository.updateStore(store);
+
+        return sale;
     }
 
     public Product updateProduct(UUID storeId, UUID productId, String name, String productPicture) {

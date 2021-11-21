@@ -12,7 +12,6 @@ public class Store implements Identified {
     public User owner;
     public Set<User> employees;
     public Map<UUID, Product> products;
-    public List<Auction> currentAuctions;
 
     public Store(UUID id, String storeName, User owner, Set<User> employees, String address, int phoneNumber, Set<Product> products) {
         this.id = id;

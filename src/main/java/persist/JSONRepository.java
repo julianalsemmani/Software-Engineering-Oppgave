@@ -3,6 +3,7 @@ package persist;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import core.model.*;
 import core.repository.Repository;
 import persist.json.JSONStartUp;
@@ -22,25 +23,28 @@ public class JSONRepository implements Repository {
     private final Map<UUID, User> idUserMap = new HashMap<>();
     private StartUp startUp = new StartUp("", "", 0);
 
+    private final ObjectMapper objectMapper;
     private final File storeDataFile;
 
     public JSONRepository(String fileName) {
         storeDataFile = new File(fileName);
+
+        objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
+
         readFromJSONFile();
     }
 
     public void readFromJSONFile() {
-        ObjectReader readMapper = new ObjectMapper().reader();
         try {
-            JSONStructure structure = readMapper.readValue(storeDataFile, JSONStructure.class);
+            JSONStructure structure = objectMapper.readValue(storeDataFile, JSONStructure.class);
 
             for(JSONUser json : structure.users) {
-                idUserMap.put(json.id, json.toUser());
+                idUserMap.put(json.id, json.deserialize(idUserMap, idStoreMap));
             }
             for(JSONStore json : structure.stores) {
-                idStoreMap.put(json.id, json.toStore(idUserMap));
+                idStoreMap.put(json.id, json.deserialize(idUserMap, idStoreMap));
             }
-            startUp = structure.startUp.toStartUp();
+            startUp = structure.startUp.deserialize(idUserMap, idStoreMap);
         } catch(FileNotFoundException ignored) {
 
         } catch (IOException e) {
@@ -50,7 +54,7 @@ public class JSONRepository implements Repository {
 
     public void writeToJSONFile() {
         try {
-            ObjectWriter writeMapper = new ObjectMapper().writerWithDefaultPrettyPrinter();
+            ObjectWriter writeMapper = objectMapper.writerWithDefaultPrettyPrinter();
 
             JSONStructure structure = new JSONStructure();
 

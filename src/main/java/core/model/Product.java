@@ -8,14 +8,11 @@ public class Product implements Identified {
     public String productPicture;
     public SaleMethod saleMethod;
 
-    public Product() {
-
-    }
-
-    public Product(UUID id, String name, String productPicture) {
+    public Product(UUID id, String name, String productPicture, SaleMethod saleMethod) {
         this.id = id;
         this.name = name;
         this.productPicture = productPicture;
+        this.saleMethod = saleMethod;
     }
 
     @Override

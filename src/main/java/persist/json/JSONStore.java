@@ -1,13 +1,12 @@
 package persist.json;
 
-import core.model.Product;
 import core.model.Store;
 import core.model.User;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class JSONStore {
+public class JSONStore implements JSONDeserializer<Store> {
     public UUID id;
 
     public String storeName;
@@ -29,20 +28,19 @@ public class JSONStore {
         owner = store.owner.id;
         employees = store.employees.stream().map(user -> user.id).toArray(UUID[]::new);
         products = store.getAllProducts().stream().map(JSONProduct::new).toArray(JSONProduct[]::new);
-//        currentAuctions = store.currentAuctions.stream().map(auction -> auction.id).toArray(UUID[]::new);
     }
 
-    public Store toStore(Map<UUID, User> idUserMap) {
+    @Override
+    public Store deserialize(Map<UUID, User> idUserMap, Map<UUID, Store> idStoreMap) {
         Store store = new Store(id, storeName, idUserMap.get(owner),
                 Arrays.stream(employees).map(idUserMap::get).collect(Collectors.toCollection(HashSet::new)),
                 address, phoneNumber,
                 new HashSet<>());
 
         for(JSONProduct jsonProduct : products) {
-            store.products.put(jsonProduct.id, new Product(jsonProduct.id, jsonProduct.name, jsonProduct.productPicture));
+            store.products.put(jsonProduct.id, jsonProduct.deserialize(idUserMap, idStoreMap));
         }
 
         return store;
     }
-
 }

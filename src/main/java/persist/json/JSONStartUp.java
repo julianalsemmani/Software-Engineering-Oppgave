@@ -1,11 +1,20 @@
 package persist.json;
 
 import core.model.StartUp;
+import core.model.Store;
+import core.model.User;
 
-public class JSONStartUp {
+import java.util.Map;
+import java.util.UUID;
+
+public class JSONStartUp implements JSONDeserializer<StartUp> {
     public String name;
     public String address;
     public int phoneNumber;
+
+    public JSONStartUp() {
+
+    }
 
     public JSONStartUp(StartUp startUp) {
         name = startUp.name;
@@ -13,7 +22,8 @@ public class JSONStartUp {
         phoneNumber = startUp.phoneNumber;
     }
 
-    public StartUp toStartUp() {
+    @Override
+    public StartUp deserialize(Map<UUID, User> idUserMap, Map<UUID, Store> idStoreMap) {
         return new StartUp(name, address, phoneNumber);
     }
 }

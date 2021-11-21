@@ -1,28 +1,239 @@
 {
   "users" : [ {
-    "id" : "2e879592-c54c-417d-a15d-b3fa2c2b2cf7",
-    "firstName" : "ba",
-    "lastName" : "ab",
-    "address" : "va",
-    "email" : "email",
-    "username" : "user1",
-    "password" : "aaa",
+    "id" : "e6988fd4-275c-4f57-a049-5431fed89b46",
+    "firstName" : "store",
+    "lastName" : "owner",
+    "address" : "address",
+    "email" : "email@email.com",
+    "username" : "store_owner",
+    "password" : "password",
+    "isAdmin" : false,
+    "balance" : 0,
+    "favorites" : [ ],
+    "productsBidOn" : [ ]
+  }, {
+    "id" : "b2d8e3ab-7f9c-493e-a688-c04a74c1cb23",
+    "firstName" : "store",
+    "lastName" : "owner",
+    "address" : "address",
+    "email" : "email@email.com",
+    "username" : "store_owner",
+    "password" : "password",
+    "isAdmin" : false,
+    "balance" : 0,
+    "favorites" : [ ],
+    "productsBidOn" : [ ]
+  }, {
+    "id" : "06e397b0-45d2-4908-8051-a4ab10e3ffa5",
+    "firstName" : "store",
+    "lastName" : "owner",
+    "address" : "address",
+    "email" : "email@email.com",
+    "username" : "store_owner",
+    "password" : "password",
+    "isAdmin" : false,
+    "balance" : 0,
+    "favorites" : [ ],
+    "productsBidOn" : [ ]
+  }, {
+    "id" : "dae31696-3dfe-4c5e-add0-c8ff480327cf",
+    "firstName" : "store",
+    "lastName" : "owner",
+    "address" : "address",
+    "email" : "email@email.com",
+    "username" : "store_owner",
+    "password" : "password",
+    "isAdmin" : false,
+    "balance" : 0,
+    "favorites" : [ ],
+    "productsBidOn" : [ ]
+  }, {
+    "id" : "5a728037-fbea-44a0-8252-fae3fc9724f0",
+    "firstName" : "store",
+    "lastName" : "owner",
+    "address" : "address",
+    "email" : "email@email.com",
+    "username" : "store_owner",
+    "password" : "password",
+    "isAdmin" : false,
+    "balance" : 0,
+    "favorites" : [ ],
+    "productsBidOn" : [ ]
+  }, {
+    "id" : "28588909-b718-4bf8-9767-5de5f39035a8",
+    "firstName" : "store",
+    "lastName" : "owner",
+    "address" : "address",
+    "email" : "email@email.com",
+    "username" : "store_owner",
+    "password" : "password",
+    "isAdmin" : false,
+    "balance" : 0,
+    "favorites" : [ ],
+    "productsBidOn" : [ ]
+  }, {
+    "id" : "27e1c613-2161-4028-b622-cb0578392639",
+    "firstName" : "store",
+    "lastName" : "owner",
+    "address" : "address",
+    "email" : "email@email.com",
+    "username" : "store_owner",
+    "password" : "password",
+    "isAdmin" : false,
+    "balance" : 0,
+    "favorites" : [ ],
+    "productsBidOn" : [ ]
+  }, {
+    "id" : "5ae72545-42b1-40f8-93ef-f52fd53bae1d",
+    "firstName" : "store",
+    "lastName" : "owner",
+    "address" : "address",
+    "email" : "email@email.com",
+    "username" : "store_owner",
+    "password" : "password",
     "isAdmin" : false,
     "balance" : 0,
     "favorites" : [ ],
     "productsBidOn" : [ ]
   } ],
   "stores" : [ {
-    "id" : "5faf3efe-9630-4b51-a6de-485985a7cfc5",
-    "storeName" : "store1",
-    "address" : "address",
-    "phoneNumber" : 0,
-    "owner" : "2e879592-c54c-417d-a15d-b3fa2c2b2cf7",
+    "id" : "f163cfff-8cf2-429b-ba45-6df70194cbf3",
+    "storeName" : "test_store",
+    "address" : "store_address",
+    "phoneNumber" : 12345678,
+    "owner" : "28588909-b718-4bf8-9767-5de5f39035a8",
     "employees" : [ ],
     "products" : [ {
-      "id" : "d93b3387-31f6-4d71-9f69-ac7aa69c4021",
-      "name" : "product1",
-      "productPicture" : "pic"
+      "id" : "0c1a908c-2b45-4cf0-8922-6d28cde8f8c2",
+      "name" : "product_for_auction",
+      "productPicture" : "url",
+      "auction" : {
+        "minimumBid" : 100,
+        "minimumBidIncrement" : 10,
+        "buyoutPrice" : 2000,
+        "auctionStartTime" : 1637534865.073597900,
+        "auctionEndTime" : 1638139665.073597900,
+        "bidHistory" : [ ]
+      },
+      "sale" : null
     } ]
-  } ]
+  }, {
+    "id" : "87cfe8b6-132c-4400-8cd2-4fd97e2c4e33",
+    "storeName" : "test_store",
+    "address" : "store_address",
+    "phoneNumber" : 12345678,
+    "owner" : "5ae72545-42b1-40f8-93ef-f52fd53bae1d",
+    "employees" : [ ],
+    "products" : [ {
+      "id" : "dc3a9fc4-a91f-42a4-9741-ef939a95ef23",
+      "name" : "product_for_sale",
+      "productPicture" : "url",
+      "auction" : null,
+      "sale" : {
+        "price" : 100
+      }
+    } ]
+  }, {
+    "id" : "f97a5c16-863c-4b0f-b971-094b8c16c421",
+    "storeName" : "test_store",
+    "address" : "store_address",
+    "phoneNumber" : 12345678,
+    "owner" : "27e1c613-2161-4028-b622-cb0578392639",
+    "employees" : [ ],
+    "products" : [ {
+      "id" : "93d94695-2ba3-4ece-8bcf-de9df200923c",
+      "name" : "product_for_sale",
+      "productPicture" : "url",
+      "auction" : null,
+      "sale" : {
+        "price" : 100
+      }
+    } ]
+  }, {
+    "id" : "1fd38a6a-1ce3-4455-aded-5083cd5201c0",
+    "storeName" : "test_store",
+    "address" : "store_address",
+    "phoneNumber" : 12345678,
+    "owner" : "5a728037-fbea-44a0-8252-fae3fc9724f0",
+    "employees" : [ ],
+    "products" : [ {
+      "id" : "74892ee2-b7c7-474d-9eab-520141d19b15",
+      "name" : "test_product",
+      "productPicture" : "url",
+      "auction" : null,
+      "sale" : null
+    } ]
+  }, {
+    "id" : "4fa8a0dc-59e7-41c6-89ac-7281c45038ae",
+    "storeName" : "new_store",
+    "address" : "store_address",
+    "phoneNumber" : 12345678,
+    "owner" : "e6988fd4-275c-4f57-a049-5431fed89b46",
+    "employees" : [ ],
+    "products" : [ ]
+  }, {
+    "id" : "5153fb6e-b652-4dfa-8181-5885e486902f",
+    "storeName" : "test_store",
+    "address" : "store_address",
+    "phoneNumber" : 12345678,
+    "owner" : "b2d8e3ab-7f9c-493e-a688-c04a74c1cb23",
+    "employees" : [ ],
+    "products" : [ ]
+  }, {
+    "id" : "be4801ca-3bd8-42de-8409-4425a769a0a8",
+    "storeName" : "new_store",
+    "address" : "store_address",
+    "phoneNumber" : 12345678,
+    "owner" : "b2d8e3ab-7f9c-493e-a688-c04a74c1cb23",
+    "employees" : [ ],
+    "products" : [ ]
+  }, {
+    "id" : "b4967692-f0c4-438d-817e-f120ca7ef376",
+    "storeName" : "test_store",
+    "address" : "store_address",
+    "phoneNumber" : 12345678,
+    "owner" : "e6988fd4-275c-4f57-a049-5431fed89b46",
+    "employees" : [ ],
+    "products" : [ ]
+  }, {
+    "id" : "fa9a0ee7-25e6-49b5-b2d4-2c4b70b38faf",
+    "storeName" : "test_store",
+    "address" : "store_address",
+    "phoneNumber" : 12345678,
+    "owner" : "06e397b0-45d2-4908-8051-a4ab10e3ffa5",
+    "employees" : [ ],
+    "products" : [ {
+      "id" : "93140c85-68c8-449b-8a37-57175500adfa",
+      "name" : "product_for_auction",
+      "productPicture" : "url",
+      "auction" : {
+        "minimumBid" : 100,
+        "minimumBidIncrement" : 10,
+        "buyoutPrice" : 2000,
+        "auctionStartTime" : 1637534717.038508800,
+        "auctionEndTime" : 1638139517.038508800,
+        "bidHistory" : [ ]
+      },
+      "sale" : null
+    } ]
+  }, {
+    "id" : "798918a2-2083-4d58-a3f1-5b1852ed22c9",
+    "storeName" : "test_store",
+    "address" : "store_address",
+    "phoneNumber" : 12345678,
+    "owner" : "dae31696-3dfe-4c5e-add0-c8ff480327cf",
+    "employees" : [ ],
+    "products" : [ {
+      "id" : "f8b6d38a-0047-4fce-932f-7277a8f17542",
+      "name" : "test_product",
+      "productPicture" : "url",
+      "auction" : null,
+      "sale" : null
+    } ]
+  } ],
+  "startUp" : {
+    "name" : "",
+    "address" : "",
+    "phoneNumber" : 0
+  }
 }

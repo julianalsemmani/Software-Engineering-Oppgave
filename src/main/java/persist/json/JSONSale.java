@@ -8,7 +8,7 @@ import core.model.User;
 import java.util.Map;
 import java.util.UUID;
 
-public class JSONSale {
+public class JSONSale implements JSONDeserializer<Sale> {
     public int price;
 
     public JSONSale() {
@@ -19,9 +19,8 @@ public class JSONSale {
         price = sale.price;
     }
 
-
-//    public Sale toUser(Map<UUID, Store> storeIdMap) {
-////        Store store = storeIdMap.get(store.id);
-////        return new Sale(price, store.products.get);
-//    }
+    @Override
+    public Sale deserialize(Map<UUID, User> idUserMap, Map<UUID, Store> idStoreMap) {
+        return new Sale(price);
+    }
 }

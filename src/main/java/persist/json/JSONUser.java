@@ -1,10 +1,12 @@
 package persist.json;
 
+import core.model.Store;
 import core.model.User;
 
+import java.util.Map;
 import java.util.UUID;
 
-public class JSONUser {
+public class JSONUser implements JSONDeserializer<User> {
     public UUID id;
 
     public String firstName;
@@ -38,8 +40,9 @@ public class JSONUser {
         favorites = JSONUtils.mapToIds(user.favorites);
         productsBidOn = JSONUtils.mapToIds(user.productsBidOn);
     }
-    
-    public User toUser() {
+
+    @Override
+    public User deserialize(Map<UUID, User> idUserMap, Map<UUID, Store> idStoreMap) {
         return new User(id, username, password, firstName,
                 lastName, address, email, balance, isAdmin);
     }

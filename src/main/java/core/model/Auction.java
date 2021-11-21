@@ -10,6 +10,15 @@ public class Auction implements SaleMethod {
     public Instant auctionStartTime, auctionEndTime;
     public List<AuctionBid> bidHistory;
 
+    public Auction(int minimumBid, int minimumBidIncrement, int buyoutPrice, Instant auctionStartTime, Instant auctionEndTime, List<AuctionBid> bidHistory) {
+        this.minimumBid = minimumBid;
+        this.minimumBidIncrement = minimumBidIncrement;
+        this.buyoutPrice = buyoutPrice;
+        this.auctionStartTime = auctionStartTime;
+        this.auctionEndTime = auctionEndTime;
+        this.bidHistory = bidHistory;
+    }
+
     public AuctionBid getHighestBid() {
         if(bidHistory.size() > 0) {
             return bidHistory.get(bidHistory.size() - 1);
