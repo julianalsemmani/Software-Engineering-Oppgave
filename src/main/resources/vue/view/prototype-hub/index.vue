@@ -1,17 +1,18 @@
 <template id="prototype-hub">
   <div>
-    <a href="/register">Lag ny bruker</a>
 
     <h1>Butikker</h1>
     <ul>
       <li v-for="store in stores" >
         <a :href="`/stores/${store.id}`">{{store.storeName}}</a>
+        <p>Eier: {{users.find(user => user.id === store.owner).username}}</p>
       </li>
     </ul>
     <h1>Brukere</h1>
+    <a href="/register">Lag ny bruker</a>
     <ul>
       <li v-for="user in users" >
-        <a :href="`/login/${user.id}`">{{user.username}}</a>
+        <a :href="`/login/${user.id}`">Log inn som {{user.username}}</a>
       </li>
     </ul>
   </div>

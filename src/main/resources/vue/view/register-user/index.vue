@@ -1,5 +1,6 @@
 
 <template id="register-user">
+  <div id="container">
   <form class="text-center">
     <h1 class="h3 mb-3 fw-normal">Registrer bruker</h1>
 
@@ -30,6 +31,7 @@
 
     <button class="w-100 btn btn-lg btn-primary" type="submit" v-on:click=submitUser()>Registrer</button>
   </form>
+  </div>
 </template>
 
 <script>
@@ -61,7 +63,7 @@ Vue.component("register-user", {
 })
 </script>
 
-<style>
+<style scoped>
   .bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
@@ -76,12 +78,7 @@ Vue.component("register-user", {
     }
   }
 
-  html,
-  body {
-    height: 100%;
-  }
-
-  body {
+  #container {
     display: flex;
     align-items: center;
     justify-content: center;
