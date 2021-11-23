@@ -8,8 +8,8 @@
     </ul>
     <h1>Brukere</h1>
     <ul>
-      <li v-for="store in stores" >
-        <a :href="`/stores/${store.id}`">{{store.storeName}}</a>
+      <li v-for="user in users" >
+        <a :href="`/users/${user.id}`">{{user.username}}</a>
       </li>
     </ul>
   </div>
@@ -29,6 +29,12 @@ Vue.component("prototype-hub", {
         this.stores = res
         console.log(res)
       })
+    fetch('/api/users')
+        .then(res => res.json())
+        .then(res => {
+          this.users = res
+          console.log(res)
+        })
 
   }
 })

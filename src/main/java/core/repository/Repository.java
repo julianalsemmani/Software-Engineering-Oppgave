@@ -17,6 +17,8 @@ public interface Repository {
 
     void deleteStore(Store store);
 
+    List<User> getAllUsers();
+
     User getUserById(UUID userId);
 
     void addUser(User user);

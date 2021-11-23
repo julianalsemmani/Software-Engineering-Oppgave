@@ -100,6 +100,11 @@ public class JSONRepository implements Repository {
     }
 
     @Override
+    public List<User> getAllUsers() {
+        return new ArrayList<>(idUserMap.values());
+    }
+
+    @Override
     public User getUserById(UUID userId) {
         return idUserMap.get(userId);
     }

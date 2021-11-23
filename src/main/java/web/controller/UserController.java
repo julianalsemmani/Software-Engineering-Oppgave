@@ -1,5 +1,6 @@
 package web.controller;
 
+import core.model.Store;
 import core.model.User;
 import core.repository.Repository;
 import core.service.Service;
@@ -9,7 +10,9 @@ import io.javalin.plugin.json.JavalinJson;
 import web.dtos.PostUserBody;
 import web.dtos.PutUserBody;
 import web.dtos.UserResponseBody;
+import web.dtos.store.StoreResponseBody;
 
+import java.util.List;
 import java.util.UUID;
 
 public class UserController {
@@ -19,6 +22,13 @@ public class UserController {
         this.service = service;
     }
 
+    public void onGetAllUsers(Context ctx) {
+        ControllerUtils.exceptionHandler(ctx, () -> {
+            List<User> users = service.repository.getAllUsers();
+
+            ctx.json(users.stream().map(UserResponseBody::new).toArray());
+        });
+    }
 
     public void onGetUser(Context ctx) {
         ControllerUtils.exceptionHandler(ctx, () -> {
