@@ -1,6 +1,7 @@
 package web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import core.repository.Repository;
 import core.service.Service;
 import io.javalin.Javalin;
@@ -36,7 +37,8 @@ public class WebServer {
         ValidatorFactory validatorFactory = Validation.byDefaultProvider().configure().buildValidatorFactory();
 
         ObjectMapper objectMapper = new ObjectMapper()
-                .registerModule(new BeanValidationModule(validatorFactory));
+                .registerModule(new BeanValidationModule(validatorFactory))
+                .registerModule(new JavaTimeModule()); // This allows serialization of Instant class
 
         JavalinJackson.configure(objectMapper);
 
