@@ -22,7 +22,7 @@ public class StoreController {
 
     public void onGetAllStores(Context ctx) {
         ControllerUtils.exceptionHandler(ctx, () -> {
-            List<Store> store = repository.getAllStores();
+            List<Store> store = service.repository.getAllStores();
 
             ctx.json(store.stream().map(StoreResponseBody::new).toArray());
         });
