@@ -1,5 +1,7 @@
 <template id="prototype-hub">
   <div>
+    <a href="/register">Lag ny bruker</a>
+
     <h1>Butikker</h1>
     <ul>
       <li v-for="store in stores" >
@@ -30,12 +32,11 @@ Vue.component("prototype-hub", {
         console.log(res)
       })
     fetch('/api/users')
-        .then(res => res.json())
-        .then(res => {
-          this.users = res
-          console.log(res)
-        })
-
+      .then(res => res.json())
+      .then(res => {
+        this.users = res
+        console.log(res)
+      })
   }
 })
 </script>

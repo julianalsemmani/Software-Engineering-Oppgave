@@ -11,6 +11,18 @@
     "balance" : 0,
     "favorites" : [ ],
     "productsBidOn" : [ ]
+  }, {
+    "id" : "cfdb5415-3ea5-4bb2-93ee-70dc1de28885",
+    "firstName" : "uasdsd",
+    "lastName" : "lkajsf",
+    "address" : "aøisffsa",
+    "email" : "email@ajsdjas.com",
+    "username" : "dsadsa",
+    "password" : "øaoisdøfa",
+    "isAdmin" : false,
+    "balance" : 0,
+    "favorites" : [ ],
+    "productsBidOn" : [ ]
   } ],
   "stores" : [ {
     "id" : "a55d118b-966a-4647-b8d8-0dd086b4e6b4",
