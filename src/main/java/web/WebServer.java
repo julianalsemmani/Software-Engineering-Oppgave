@@ -50,12 +50,15 @@ public class WebServer {
         StoreController storeController = new StoreController(service);
         UserController userController = new UserController(service);
 
+        app.get("/login/:user-id", userController::onLogin);
+
         // API requests for user methods
         app.get("/api/users", userController::onGetAllUsers);
         app.post("/api/users", userController::onPostUser);
         app.get("/api/users/:user-id", userController::onGetUser);
         app.put("/api/users/:user-id", userController::onPutUser);
         app.delete("/api/users/:user-id", userController::onDeleteUser);
+
 
         // API requests for store methods
         app.get("/api/stores", storeController::onGetAllStores);

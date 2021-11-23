@@ -22,6 +22,19 @@ public class UserController {
         this.service = service;
     }
 
+    public void onLogin(Context ctx) {
+        ControllerUtils.exceptionHandler(ctx, () -> {
+            UUID userId = ctx.pathParam("user-id", UUID.class).get();
+
+            if(service.repository.getUserById(userId) != null) {
+                ctx.cookie("user", userId.toString());
+                ctx.redirect("/");
+            } else {
+                throw new NotFoundResponse();
+            }
+        });
+    }
+
     public void onGetAllUsers(Context ctx) {
         ControllerUtils.exceptionHandler(ctx, () -> {
             List<User> users = service.repository.getAllUsers();

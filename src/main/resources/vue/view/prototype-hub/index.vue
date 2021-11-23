@@ -9,7 +9,7 @@
     <h1>Brukere</h1>
     <ul>
       <li v-for="user in users" >
-        <a :href="`/users/${user.id}`">{{user.username}}</a>
+        <a :href="`/login/${user.id}`">{{user.username}}</a>
       </li>
     </ul>
   </div>
