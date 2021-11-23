@@ -10,6 +10,7 @@ import web.dtos.store.PostStoreBody;
 import web.dtos.store.PutStoreBody;
 import web.dtos.store.StoreResponseBody;
 
+import java.util.List;
 import java.util.UUID;
 
 public class StoreController {
@@ -17,6 +18,14 @@ public class StoreController {
 
     public StoreController(Service service) {
         this.service = service;
+    }
+
+    public void onGetAllStores(Context ctx) {
+        ControllerUtils.exceptionHandler(ctx, () -> {
+            List<Store> store = repository.getAllStores();
+
+            ctx.json(store.stream().map(StoreResponseBody::new).toArray());
+        });
     }
 
     public void onGetStore(Context ctx) {

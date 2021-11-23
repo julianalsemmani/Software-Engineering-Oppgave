@@ -57,6 +57,7 @@ public class WebServer {
         app.delete("/api/users/:user-id", userController::onDeleteUser);
 
         // API requests for store methods
+        app.get("/api/stores", storeController::onGetAllStores);
         app.post("/api/stores", storeController::onPostStore);
         app.get("/api/stores/:store-id", storeController::onGetStore);
         app.put("/api/stores/:store-id", storeController::onPutStore);
@@ -73,6 +74,7 @@ public class WebServer {
         app.delete("/api/stores/:store-id/products/:product-id", productController::onDeleteProduct);
 
         app.get("/stores/:store-id", new VueComponent("store-frontpage"));
+        app.get("/", new VueComponent("prototype-hub"));
 
     }
 }
