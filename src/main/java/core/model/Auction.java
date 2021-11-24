@@ -27,8 +27,11 @@ public class Auction implements SaleMethod {
     }
 
     public boolean doBid(AuctionBid bid) {
-        if((bidHistory.size() == 0 && bid.bidPrice >= minimumBid)
-                || bid.bidPrice > getHighestBid().bidPrice + minimumBidIncrement) {
+        if(bid.bidPrice < minimumBid) {
+            return false;
+        }
+
+        if(bidHistory.size() == 0 || bid.bidPrice > getHighestBid().bidPrice + minimumBidIncrement) {
             bidHistory.add(bid);
             return true;
         }
