@@ -22,10 +22,20 @@
                 <li><a href="#"><i class="fas fa-expand"></i></a></li>
               </ul>
             </div>
-            <div class="part-2">
+            <div v-if="product.saleMethod?.sale" class="part-2">
               <h3 class="product-title">{{product.name}}</h3>
-              <h4 class="product-old-price">$79.99</h4>
-              <h4 class="product-price">$49.99</h4>
+              <h4 class="product-price">{{product.saleMethod.sale.price}}</h4>
+            </div>
+            <div v-else-if="product.saleMethod?.auction" class="part-2">
+              <h3 class="product-title">Product name: {{product.name}}</h3>
+              <h4 class="product-price">Minimum bid: {{product.saleMethod.auction.minimumBid}} NOK</h4>
+              <h4 class="product-price">Minimum allowed bid: {{product.saleMethod.auction.minimumBidIncrement}} NOK</h4>
+              <h4 class="product-price">Auction start time:{{new Date(product.saleMethod.auction.auctionStartTime).toLocaleString()}}</h4>
+              <h4 class="product-price">Auction end time:{{new Date(product.saleMethod.auction.auctionEndTime).toLocaleString()}}</h4>
+            </div>
+            <div v-else class="part-2">
+              <h3 class="product-title">{{product.name}}</h3>
+              <h4 class="product-price">Not for sale</h4>
             </div>
           </div>
         </div>
