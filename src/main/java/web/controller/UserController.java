@@ -4,8 +4,10 @@ import core.model.Store;
 import core.model.User;
 import core.repository.Repository;
 import core.service.Service;
+import io.javalin.http.BadRequestResponse;
 import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
+import io.javalin.http.UnauthorizedResponse;
 import io.javalin.plugin.json.JavalinJson;
 import web.dtos.PostUserBody;
 import web.dtos.PutUserBody;
@@ -40,6 +42,14 @@ public class UserController {
             List<User> users = service.repository.getAllUsers();
 
             ctx.json(users.stream().map(UserResponseBody::new).toArray());
+        });
+    }
+
+    public void onGetMe(Context ctx) {
+        ControllerUtils.exceptionHandler(ctx, ()->{
+            User me = ControllerUtils.getLoggedInUser(ctx, service.repository);
+            if(me == null) throw new UnauthorizedResponse();
+            ctx.json(new UserResponseBody(me));
         });
     }
 

@@ -1,5 +1,7 @@
 package web.controller;
 
+import core.model.Auction;
+import core.model.AuctionBid;
 import core.model.Product;
 import core.service.Service;
 import io.javalin.http.Context;
@@ -17,6 +19,10 @@ public class ProductController {
 
     public ProductController(Service service) {
         this.service = service;
+    }
+
+    public void onPostBid(AuctionBid bid) {
+
     }
 
     public void onGetProduct(Context ctx) {

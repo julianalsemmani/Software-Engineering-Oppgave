@@ -160,12 +160,19 @@ public class Service {
         return startUp;
     }
 
-    public void doBid(UUID bidderId, UUID storeId, UUID productId, int price) {
+    public boolean doBid(UUID bidderId, UUID storeId, UUID productId, int price) {
         User bidder = repository.getUserById(bidderId);
         Store store = repository.getStoreById(storeId);
         Product product = store.products.get(productId);
 
-        AuctionBid bid = new AuctionBid(bidder, price,);
+        if(product.saleMethod instanceof Auction) {
+            Auction auction = (Auction) product.saleMethod;
+            AuctionBid bid = new AuctionBid(bidder, price, Instant.now());
+
+            return auction.doBid(bid);
+        }
+
+        return false;
     }
 
 }

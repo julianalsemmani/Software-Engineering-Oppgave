@@ -53,6 +53,7 @@ public class WebServer {
         app.get("/login/:user-id", userController::onLogin);
 
         // API requests for user methods
+        app.get("/api/me", userController::onGetMe);
         app.get("/api/users", userController::onGetAllUsers);
         app.post("/api/users", userController::onPostUser);
         app.get("/api/users/:user-id", userController::onGetUser);
