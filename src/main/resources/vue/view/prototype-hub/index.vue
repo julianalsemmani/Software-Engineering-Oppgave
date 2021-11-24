@@ -2,6 +2,7 @@
   <div>
 
     <h1>Butikker</h1>
+    <a href="/register-store">Lag ny butikk</a>
     <ul>
       <li v-for="store in stores" >
         <a :href="`/stores/${store.id}`">{{store.storeName}}</a>
@@ -9,7 +10,7 @@
       </li>
     </ul>
     <h1>Brukere</h1>
-    <a href="/register">Lag ny bruker</a>
+    <a href="/register-user">Lag ny bruker</a>
     <ul>
       <li v-for="user in users" >
         <a :href="`/login/${user.id}`">Log inn som {{user.username}}</a>
@@ -29,14 +30,14 @@ Vue.component("prototype-hub", {
     fetch('/api/stores')
       .then(res => res.json())
       .then(res => {
-        this.stores = res
         console.log(res)
+        this.stores = res
       })
     fetch('/api/users')
       .then(res => res.json())
       .then(res => {
-        this.users = res
         console.log(res)
+        this.users = res
       })
   }
 })

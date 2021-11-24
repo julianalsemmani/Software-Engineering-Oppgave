@@ -78,7 +78,8 @@ public class WebServer {
         app.delete("/api/stores/:store-id/products/:product-id", productController::onDeleteProduct);
 
         app.get("/stores/:store-id", new VueComponent("store-frontpage"));
-        app.get("/register", new VueComponent("register-user"));
+        app.get("/register-user", new VueComponent("register-user"));
+        app.get("/register-store", new VueComponent("register-store"));
         app.get("/", new VueComponent("prototype-hub"));
 
     }

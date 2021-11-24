@@ -1,9 +1,12 @@
 package web.controller;
 
+import core.model.User;
+import core.repository.Repository;
 import io.javalin.http.Context;
 import io.javalin.http.HttpResponseException;
 
 import javax.validation.ConstraintViolationException;
+import java.util.UUID;
 
 public class ControllerUtils {
     public static void exceptionHandler(Context ctx, Runnable requestHandler) {
@@ -17,5 +20,14 @@ public class ControllerUtils {
             ctx.status(500).result("Internal server error");
             e.printStackTrace();
         }
+    }
+
+    public static User getLoggedInUser(Context ctx, Repository repository) {
+        String userCookie = ctx.cookie("user");
+        if(userCookie != null) {
+            UUID loggedInId = UUID.fromString(userCookie);
+            return repository.getUserById(loggedInId);
+        }
+        return null;
     }
 }

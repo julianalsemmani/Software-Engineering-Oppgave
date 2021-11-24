@@ -1,10 +1,12 @@
 package web.controller;
 
 import core.model.Store;
+import core.model.User;
 import core.repository.Repository;
 import core.service.Service;
 import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
+import io.javalin.http.UnauthorizedResponse;
 import io.javalin.plugin.json.JavalinJson;
 import web.dtos.store.PostStoreBody;
 import web.dtos.store.PutStoreBody;
@@ -43,8 +45,13 @@ public class StoreController {
 
     public void onPostStore(Context ctx) {
         ControllerUtils.exceptionHandler(ctx, () -> {
+            User loggedInUser = ControllerUtils.getLoggedInUser(ctx, service.repository);
+            if(loggedInUser == null)
+                throw new UnauthorizedResponse();
+
             PostStoreBody body = JavalinJson.fromJson(ctx.body(), PostStoreBody.class);
-            Store newStore = service.createStore(body.storeName, service.repository.getUserById(body.owner), body.address, body.phoneNumber);
+
+            Store newStore = service.createStore(body.storeName, loggedInUser, body.address, body.phoneNumber);
 
             ctx.status(201).json(new StoreResponseBody(newStore));
         });

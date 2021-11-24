@@ -16,9 +16,9 @@ public class PostStoreBody {
     @NotEmpty
     public String address;
     @NotNull
-    @NotEmpty
     public int phoneNumber;
-    @NotNull
-    @NotEmpty
-    public UUID owner;
+//    @NotNull
+//    @NotEmpty
+//    public UUID owner;
+    // This is assumed to be logged-in user.
 }
