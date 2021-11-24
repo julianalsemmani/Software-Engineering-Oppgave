@@ -7,8 +7,8 @@
 </template>
 
 <script>
-Vue.component("navbar", {
-  template: "#navbar",
+Vue.component("footer", {
+  template: "#footer",
   data: ({
     loggedIn: false,
     loggedInUser: {username: ""}
