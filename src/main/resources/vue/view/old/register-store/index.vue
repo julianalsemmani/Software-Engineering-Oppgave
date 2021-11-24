@@ -2,21 +2,21 @@
 <template id="register-store">
   <div id="container">
   <form class="text-center">
-    <h1 class="h3 mb-3 fw-normal">Registrer butikk</h1>
+    <h1 class="h3 mb-3 fw-normal">Register store</h1>
     <div class="form-floating">
       <input type="text" class="form-control" id="storeName" required>
-      <label for="storeName">Butikknavn</label>
+      <label for="storeName">Store name</label>
     </div>
     <div class="form-floating">
       <input type="text" class="form-control" id="address" required>
-      <label for="address">Adresse</label>
+      <label for="address">Address</label>
     </div>
     <div class="form-floating">
       <input type="tel" class="form-control" id="phoneNumber" required>
-      <label for="phoneNumber">Telefonnummer</label>
+      <label for="phoneNumber">Phone number</label>
     </div>
 
-    <button class="w-100 btn btn-lg btn-primary" v-on:click=submitUser()>Registrer</button>
+    <button class="w-100 btn btn-lg btn-primary" v-on:click=submitUser()>Register</button>
   </form>
   </div>
 </template>
@@ -36,14 +36,13 @@ Vue.component("register-store", {
         phoneNumber: phoneNumber.value,
         address: address.value,
       }
+
       fetch('/api/stores', {
         method: 'POST',
         body: JSON.stringify(store)
       })
-          .then(() => window.location.replace('/'))
-          .catch(err => console.log(err))
-
-      return false; // This prevents page refresh
+          .then(res => res.json())
+          .then(newStore => window.location.replace(`/stores/${newStore.id}`))
     }
   }
 })

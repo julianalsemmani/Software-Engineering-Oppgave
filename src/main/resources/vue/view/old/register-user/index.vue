@@ -2,34 +2,34 @@
 <template id="register-user">
   <div id="container">
   <form class="text-center">
-    <h1 class="h3 mb-3 fw-normal">Registrer bruker</h1>
+    <h1 class="h3 mb-3 fw-normal">Register user</h1>
 
     <div class="form-floating">
       <input type="text" class="form-control" id="username" required>
-      <label for="username">Brukernavn</label>
+      <label for="username">Username</label>
     </div>
     <div class="form-floating">
       <input type="password" class="form-control" id="password" required>
-      <label for="password">Passord</label>
+      <label for="password">Password</label>
     </div>
     <div class="form-floating">
       <input type="text" class="form-control" id="firstName" required>
-      <label for="firstName">Fornavn</label>
+      <label for="firstName">First name</label>
     </div>
     <div class="form-floating">
       <input type="text" class="form-control" id="lastName" required>
-      <label for="lastName">Etternavn</label>
+      <label for="lastName">Last name</label>
     </div>
     <div class="form-floating">
       <input type="email" class="form-control" id="email" required>
-      <label for="email">Epost</label>
+      <label for="email">Email</label>
     </div>
     <div class="form-floating">
       <input type="text" class="form-control" id="address" required>
-      <label for="address">Adresse</label>
+      <label for="address">Address</label>
     </div>
 
-    <button class="w-100 btn btn-lg btn-primary" type="submit" v-on:click=submitUser()>Registrer</button>
+    <button class="w-100 btn btn-lg btn-primary" v-on:click=submitUser()>Register</button>
   </form>
   </div>
 </template>
@@ -54,10 +54,11 @@ Vue.component("register-user", {
       }
       fetch('/api/users', {
         method: 'POST',
-        body: JSON.stringify(user)
+        body: JSON.stringify(user),
+        redirect: "follow"
       })
           .then(res => res.json())
-          .then(res => console.log(res))
+          .then(newUser => window.location.replace(`/login/${newUser.id}`))
     }
   }
 })
