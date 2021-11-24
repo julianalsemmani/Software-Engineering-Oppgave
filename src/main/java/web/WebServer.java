@@ -2,20 +2,20 @@ package web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import core.model.User;
 import core.repository.Repository;
 import core.service.Service;
 import io.javalin.Javalin;
 import io.javalin.core.validation.JavalinValidation;
 import io.javalin.plugin.json.JavalinJackson;
+import io.javalin.plugin.rendering.vue.JavalinVue;
 import io.javalin.plugin.rendering.vue.VueComponent;
-import web.controller.ProductController;
-import web.controller.StartUpController;
-import web.controller.StoreController;
-import web.controller.UserController;
+import web.controller.*;
 import org.unbrokendome.jackson.beanvalidation.BeanValidationModule;
 
 import javax.validation.Validation;
 import javax.validation.ValidatorFactory;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -41,6 +41,14 @@ public class WebServer {
                 .registerModule(new JavaTimeModule()); // This allows serialization of Instant class
 
         JavalinJackson.configure(objectMapper);
+
+        JavalinVue.stateFunction = ctx -> {
+            User me = ControllerUtils.getLoggedInUser(ctx, service.repository);
+            if(me != null) {
+                return Map.of("me", me);
+            }
+            return Map.of();
+        };
 
         JavalinValidation.register(UUID.class, UUID::fromString);
 
