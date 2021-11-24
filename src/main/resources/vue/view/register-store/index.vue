@@ -3,7 +3,6 @@
   <div id="container">
   <form class="text-center">
     <h1 class="h3 mb-3 fw-normal">Registrer butikk</h1>
-<!--    String storeName, User owner, String address, int phoneNumber-->
     <div class="form-floating">
       <input type="text" class="form-control" id="storeName" required>
       <label for="storeName">Butikknavn</label>
