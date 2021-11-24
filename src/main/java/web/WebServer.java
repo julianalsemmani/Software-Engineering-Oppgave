@@ -85,6 +85,7 @@ public class WebServer {
         app.get("/api/stores/:store-id/products/:product-id", productController::onGetProduct);
         app.put("/api/stores/:store-id/products/:product-id", productController::onPutProduct);
         app.delete("/api/stores/:store-id/products/:product-id", productController::onDeleteProduct);
+        app.post("/api/stores/:store-id/products/:product-id/bid", productController::onPostBid);
 
         app.get("/stores/:store-id", new VueComponent("store-frontpage"));
         app.get("/register-user", new VueComponent("register-user"));

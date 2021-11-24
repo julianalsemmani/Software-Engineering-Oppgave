@@ -3,13 +3,16 @@ package web.controller;
 import core.model.Auction;
 import core.model.AuctionBid;
 import core.model.Product;
+import core.model.User;
 import core.service.Service;
 import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
+import io.javalin.http.UnauthorizedResponse;
 import io.javalin.plugin.json.JavalinJson;
 import web.dtos.product.PostProductBody;
 import web.dtos.product.ProductResponseBody;
 import web.dtos.product.PutProductBody;
+import web.dtos.product.auction.PostBidBody;
 
 import java.util.UUID;
 
@@ -23,6 +26,26 @@ public class ProductController {
 
     public void onPostBid(AuctionBid bid) {
 
+    }
+
+    public void onPostBid(Context ctx) {
+        ControllerUtils.exceptionHandler(ctx, () -> {
+            UUID storeId = ctx.pathParam("store-id", UUID.class).get();
+            UUID productId = ctx.pathParam("product-id", UUID.class).get();
+
+            PostBidBody body = JavalinJson.fromJson(ctx.body(), PostBidBody.class);
+
+            User bidder = ControllerUtils.getLoggedInUser(ctx, service.repository);
+            if(bidder == null)
+                throw new UnauthorizedResponse();
+
+            if(service.doBid(bidder.id, storeId, productId, body.bid)) {
+                ctx.status(200).result("Bid success");
+            } else {
+                ctx.status(400).result("Bid failed");
+            }
+
+        });
     }
 
     public void onGetProduct(Context ctx) {
