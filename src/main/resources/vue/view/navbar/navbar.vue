@@ -1,19 +1,27 @@
 <template id="navbar">
-  <nav class="navbar">
+  <div>
     <section>
       <span>{{loggedInUser.username}}</span>
     </section>
-  </nav>
+  </div>
 </template>
 
 <script>
 Vue.component("navbar", {
   template: "#navbar",
   data: ({
-    loggedInUser: {}
+    loggedIn: false,
+    loggedInUser: {username: ""}
   }),
   created() {
-
+    fetch('/api/me')
+        .then(res => res.json())
+        .then(res => {
+          console.log({res})
+          loggedInUser = res
+          loggedIn = true
+        })
+        .catch(err => loggedIn = false);
   }
 })
 </script>
