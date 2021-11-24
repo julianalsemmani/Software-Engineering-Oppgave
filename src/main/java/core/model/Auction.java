@@ -27,7 +27,8 @@ public class Auction implements SaleMethod {
     }
 
     public boolean doBid(AuctionBid bid) {
-        if(bidHistory.size() == 0 || bid.bidPrice > getHighestBid().bidPrice + minimumBidIncrement) {
+        if((bidHistory.size() == 0 && bid.bidPrice >= minimumBid)
+                || bid.bidPrice > getHighestBid().bidPrice + minimumBidIncrement) {
             bidHistory.add(bid);
             return true;
         }
@@ -46,6 +47,7 @@ public class Auction implements SaleMethod {
     }
 
     public boolean hasEnded() {
-        return Instant.now().isAfter(auctionEndTime) || (bidHistory.size() > 0 && getHighestBid().bidPrice >= buyoutPrice);
+        return Instant.now().isAfter(auctionEndTime)
+                || (bidHistory.size() > 0 && getHighestBid().bidPrice >= buyoutPrice);
     }
 }
