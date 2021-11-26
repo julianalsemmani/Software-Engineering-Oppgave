@@ -3,15 +3,16 @@ package web;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import core.model.User;
-import core.repository.Repository;
 import core.service.Service;
 import io.javalin.Javalin;
 import io.javalin.core.validation.JavalinValidation;
+import io.javalin.http.staticfiles.Location;
 import io.javalin.plugin.json.JavalinJackson;
 import io.javalin.plugin.rendering.vue.JavalinVue;
 import io.javalin.plugin.rendering.vue.VueComponent;
 import web.controller.*;
 import org.unbrokendome.jackson.beanvalidation.BeanValidationModule;
+import web.dtos.UserResponseBody;
 
 import javax.validation.Validation;
 import javax.validation.ValidatorFactory;
@@ -33,6 +34,7 @@ public class WebServer {
         Javalin app = Javalin.create().start(port);
 
         app.config.enableWebjars();
+        app.config.addStaticFiles("vue/view/public", Location.CLASSPATH);
 
         ValidatorFactory validatorFactory = Validation.byDefaultProvider().configure().buildValidatorFactory();
 
@@ -45,7 +47,7 @@ public class WebServer {
         JavalinVue.stateFunction = ctx -> {
             User me = ControllerUtils.getLoggedInUser(ctx, service.repository);
             if(me != null) {
-                return Map.of("me", me);
+                return Map.of("me", new UserResponseBody(me));
             }
             return Map.of();
         };
@@ -87,7 +89,7 @@ public class WebServer {
         app.delete("/api/stores/:store-id/products/:product-id", productController::onDeleteProduct);
         app.post("/api/stores/:store-id/products/:product-id/bid", productController::onPostBid);
 
-        app.get("/stores/:store-id", new VueComponent("store-frontpage"));
+        app.get("/stores/:store-id", new VueComponent("store-home"));
         app.get("/register-user", new VueComponent("register-user"));
         app.get("/register-store", new VueComponent("register-store"));
         app.get("/", new VueComponent("prototype-hub"));
