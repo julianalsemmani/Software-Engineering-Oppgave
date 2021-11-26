@@ -45,6 +45,24 @@ body {
 	text-decoration: underline;
 }
 
+.logbutton {
+	float: right;
+	padding: 7px 15px;
+	margin-right: 20px;
+	border: solid 1px #280a4b;
+	border-radius: 50em;
+	background-color: #d0cbd6;
+}
+
+.signbutton {
+	float: right;
+	padding: 7px 15px;
+	margin-right: 20px;
+	border: solid 1px #f0752e;
+	border-radius: 50em;
+	background-color: #f0752e;
+}
+
 /* Dette er om main tag */ 
 #main {
 	display: flex;
