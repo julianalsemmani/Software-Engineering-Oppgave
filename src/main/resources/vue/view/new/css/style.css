@@ -142,11 +142,10 @@ body {
 		display: grid;
 		grid-gap: 0px;
 		grid-template-columns: 1fr;
-		grid-template-rows: 200px 190px 1fr 1fr 120px;
+		grid-template-rows: 200px 190px 1fr 120px;
 		grid-template-areas:"header"
 							"navbar"
 							"main"
-							"aside"
 							"footer";
 	}
 }
@@ -164,7 +163,7 @@ body {
 		grid-template-rows: 200px 140px 1fr 120px;
 		grid-template-areas:"header header"
 							"navbar navbar"
-							"main aside"
+							"main main"
 							"footer footer";
 	}
 }
