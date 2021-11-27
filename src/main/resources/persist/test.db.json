@@ -42,19 +42,19 @@
     "products" : [ {
       "id" : "f493793b-2d43-45e4-8600-a1969eca8a71",
       "name" : "test_product",
-      "productPicture" : "url",
+      "productPicture" : "https://tinyurl.com/3xnwja5k",
       "auction" : null,
       "sale" : null
     }, {
       "id" : "e646b8c9-ab8c-4ac8-858a-770d52332869",
       "name" : "test_product",
-      "productPicture" : "url",
+      "productPicture" : "https://tinyurl.com/3xnwja5k",
       "auction" : null,
       "sale" : null
     }, {
       "id" : "65ef4d23-1d47-46d0-bee0-b83d1d186ce8",
       "name" : "product_for_sale",
-      "productPicture" : "url",
+      "productPicture" : "https://tinyurl.com/yhpcttn5",
       "auction" : null,
       "sale" : {
         "price" : 100
@@ -62,13 +62,13 @@
     }, {
       "id" : "40559601-3b46-45fe-a5c9-fd8c1df1ef30",
       "name" : "test_product",
-      "productPicture" : "url",
+      "productPicture" : "https://tinyurl.com/3xnwja5k",
       "auction" : null,
       "sale" : null
     }, {
       "id" : "0983f9b5-6e01-4494-a4fc-7bbc50431fc9",
       "name" : "product_for_auction",
-      "productPicture" : "url",
+      "productPicture" : "https://tinyurl.com/2p87zm9d",
       "auction" : {
         "minimumBid" : 100,
         "minimumBidIncrement" : 10,
