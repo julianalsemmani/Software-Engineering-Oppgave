@@ -1,6 +1,7 @@
 package web.dtos.store;
 
 import core.model.Store;
+import web.dtos.UserResponseBody;
 import web.dtos.product.ProductResponseBody;
 
 import java.util.UUID;
@@ -10,7 +11,7 @@ public class StoreResponseBody {
     public String storeName;
     public String address;
     public int phoneNumber;
-    public UUID owner;
+    public UserResponseBody owner;
     public ProductResponseBody[] products;
 
     public StoreResponseBody(Store store) {
@@ -18,7 +19,7 @@ public class StoreResponseBody {
         this.storeName = store.storeName;
         this.address = store.address;
         this.phoneNumber = store.phoneNumber;
-        this.owner = store.owner.id;
+        this.owner = new UserResponseBody(store.owner);
         this.products = store.getAllProducts().stream().map(ProductResponseBody::new).toArray(ProductResponseBody[]::new);
     }
 }

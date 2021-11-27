@@ -1,7 +1,7 @@
 <template id="store-products">
-  <div id="page-container">
-    <store-header></store-header>
-    <store-navbar></store-navbar>
+  <div id="store_page">
+    <store-header v-bind:store="store"></store-header>
+    <store-navbar v-bind:store="store"></store-navbar>
     <main id="main">
       <article v-for="product in store.products">
         <section class="article-box" v-if="product.saleMethod?.sale" article>
@@ -23,7 +23,7 @@
         </section>
       </article>
     </main>
-    <store-footer></store-footer>
+    <store-footer v-bind:store="store"></store-footer>
   </div>
 </template>
 

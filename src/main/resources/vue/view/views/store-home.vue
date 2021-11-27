@@ -1,9 +1,8 @@
 <template id="store-home">
-  <div id="page-container">
+  <div id="store_page">
     <store-header v-bind:store="store"></store-header>
     <store-navbar v-bind:store="store"></store-navbar>
     <main>
-      <p>HELLO WORLD</p>
     </main>
     <store-footer v-bind:store="store"></store-footer>
   </div>
