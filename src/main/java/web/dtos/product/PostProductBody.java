@@ -1,7 +1,5 @@
 package web.dtos.product;
 
-import core.model.Store;
-
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
