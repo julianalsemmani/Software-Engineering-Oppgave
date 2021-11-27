@@ -1,5 +1,5 @@
 /* Dette er om #page-container tag */
-#store_page {
+#store-page {
 	font-size: 18px;
 	margin: 0px;
 	padding: 0px;
@@ -134,7 +134,7 @@
 
 /*Media Quaries - for mobile*/
 @media only screen and (max-width:600px){
-	#store_page {
+	#store-page {
 		font-size: 18px;
 		margin: 0px;
 		padding: 0px;
@@ -153,7 +153,7 @@
 
 /*Media Quaries - for tablet*/
 @media only screen and (max-width:1200px) and (min-width:600px) {
-	#store_page {
+	#store-page {
 		font-size: 18px;
 		margin: 0px;
 		padding: 0px;
