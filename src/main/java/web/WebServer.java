@@ -16,6 +16,7 @@ import web.dtos.UserResponseBody;
 
 import javax.validation.Validation;
 import javax.validation.ValidatorFactory;
+import java.nio.file.Path;
 import java.util.Map;
 import java.util.UUID;
 
@@ -34,7 +35,7 @@ public class WebServer {
         Javalin app = Javalin.create().start(port);
 
         app.config.enableWebjars();
-        app.config.addStaticFiles("vue/view/public", Location.CLASSPATH);
+        app.config.addStaticFiles("/web/public", Location.CLASSPATH);
 
         ValidatorFactory validatorFactory = Validation.byDefaultProvider().configure().buildValidatorFactory();
 
@@ -44,6 +45,7 @@ public class WebServer {
 
         JavalinJackson.configure(objectMapper);
 
+        JavalinVue.rootDirectory("/web/vue", Location.CLASSPATH);
         JavalinVue.stateFunction = ctx -> {
             User me = ControllerUtils.getLoggedInUser(ctx, service.repository);
             if(me != null) {
