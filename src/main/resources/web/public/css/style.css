@@ -76,9 +76,12 @@
 }
 
 .article-box {
+	font-size: small;
 	align-content: center;
-	width: 250px;
-	height: 250px;
+	width: auto;
+	height: auto;
+	max-height: 450px;
+	max-width: 300px;
 	grid-column-gap: 5px;
 	grid-row-gap: 5px;
 	margin: 10px;
