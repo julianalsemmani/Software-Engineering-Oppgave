@@ -1,51 +1,57 @@
-/* Dette er om #page-container tag */
-#store-page {
+body {
 	font-size: 18px;
-	margin: 0px;
+	margin: 1px;
 	padding: 0px;
-	background-color: #F6F5F1;
-	display: grid;
-	grid-gap: 0px;
-	grid-template-rows: 2fr 1fr auto 1fr;
-	grid-template-areas:"header"
-						"navbar"
-						"main"
-						"footer";
 }
 
-/* Dette er om headeren */ 
+/* Dette er om #store-page tag */
+#store-page {
+	font-size: 18px;
+	background-color: #F6F5F1;
+	display: grid;
+	grid-gap: 1px;
+	grid-template-rows: 0fr 2fr 0fr auto 1fr;
+	grid-template-areas:"navbar"
+                        "header"
+                        "store-navbar"
+                        "main"
+                        "footer";
+}
+
+
+/* Dette er om headeren */
 #header {
-	background-image: url(/images/image1.jpg);
+	background-image: url(../images/image1.jpg);
 	text-align: center;
 	grid-area: header;
 }
 
-/* Dette er om navigasjonsmenyen */ 
-#navbar {
+/* Dette er om navigasjonsmenyen */
+#store-navbar {
 	background-color:teal;
 	text-align: center;
-	grid-area: navbar;
+	grid-area: store-navbar;
 }
 
-#navbar ul {
+#store-navbar ul {
 	list-style:none;
 }
 
-#navbar li {
+#store-navbar li {
 	display:inline;
 }
 
-#navbar a {
+#store-navbar a {
 	color:black;
 	text-decoration: none;
 	display: inline-block;
 }
 
-#navbar ul li a:hover {
+#store-navbar ul li a:hover {
 	text-decoration: underline;
 }
 
-/* Dette er om main tag */ 
+/* Dette er om main tag */
 #main {
 	display: flex;
 	align-self: center;
@@ -56,14 +62,69 @@
 	grid-area: main;
 }
 
-/* Dette er om aside tag */ 
+/*MAIN FOR CONTACT SECTION*/
+* {
+	box-sizing: border-box;
+}
+
+/* Style inputs */
+input[type=text], select, textarea {
+	width: 100%;
+	padding: 12px;
+	border: 1px solid #ccc;
+	margin-top: 6px;
+	margin-bottom: 16px;
+	resize: vertical;
+}
+
+input[type=submit] {
+	background-color: #04AA6D;
+	color: white;
+	padding: 12px 20px;
+	border: none;
+	cursor: pointer;
+}
+
+input[type=submit]:hover {
+	background-color: #45a049;
+}
+
+/* Style the container/contact section */
+.container {
+	border-radius: 5px;
+	background-color: #f2f2f2;
+	padding: 10px;
+}
+
+/* Create two columns that float next to eachother */
+.column {
+	float: left;
+	width: 50%;
+	margin-top: 6px;
+	padding: 20px;
+}
+
+.storedetails {
+	text-align: center;
+	padding-top: 100px;
+	font-size: 23px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+/* Dette er om aside tag */
 #aside {
 	display:flex;
 	flex-direction: column;
 	grid-area: aside;
 }
 
-/* Dette er om footer tag */ 
+/* Dette er om footer tag */
 #footer {
 	background-color: teal;
 	color:#fdfff5;
@@ -72,23 +133,20 @@
 }
 
 #footer a {
-  color: #fdfff5;
+	color: #fdfff5;
 }
 
 .article-box {
-	font-size: small;
 	align-content: center;
-	width: auto;
-	height: auto;
-	max-height: 450px;
-	max-width: 300px;
+	width: 250px;
+	height: 250px;
 	grid-column-gap: 5px;
 	grid-row-gap: 5px;
 	margin: 10px;
 	padding: 10px;
 	border: teal solid;
-	border-radius:10px;	
-	text-align: left;
+	border-radius:10px;
+	text-align: center;
 }
 
 .section-box {
@@ -97,7 +155,7 @@
 	margin: 10px;
 	padding: 10px;
 	border: teal solid;
-	border-radius:10px;	
+	border-radius:10px;
 	text-decoration: none;
 }
 
@@ -132,7 +190,7 @@
 	margin:20px;
 	padding:20px;
 	border: teal solid;
-	border-radius:10px;	
+	border-radius:10px;
 }
 
 /*Media Quaries - for mobile*/
@@ -143,14 +201,13 @@
 		padding: 0px;
 		background-color: #F6F5F1;
 		display: grid;
-		grid-gap: 0px;
-		grid-template-columns: 1fr;
-		grid-template-rows: 200px 190px 1fr 1fr 120px;
-		grid-template-areas:"header"
-							"navbar"
-							"main"
-							"aside"
-							"footer";
+		grid-gap: 1px;
+		grid-template-rows: 0fr 2fr 0fr auto 1fr;
+		grid-template-areas:"navbar"
+                            "header"
+                            "store-navbar"
+		                    "main"
+                            "footer";
 	}
 }
 
@@ -162,12 +219,12 @@
 		padding: 0px;
 		background-color: #F6F5F1;
 		display: grid;
-		grid-gap: 0px;
-		grid-template-columns: 1fr 1fr;
-		grid-template-rows: 200px 140px 1fr 120px;
-		grid-template-areas:"header header"
-							"navbar navbar"
-							"main aside"
-							"footer footer";
+		grid-gap: 1px;
+		grid-template-rows: 0fr 2fr 0fr auto 1fr;
+		grid-template-areas:"navbar"
+                            "header"
+                            "store-navbar"
+                            "main"
+                            "footer";
 	}
 }

@@ -1,5 +1,6 @@
 <template id="store-home">
   <div id="store-page">
+    <navbar></navbar>
     <store-header v-bind:store="store"></store-header>
     <store-navbar v-bind:store="store"></store-navbar>
     <main>

@@ -1,5 +1,5 @@
 <template id="store-navbar">
-  <nav id="navbar">
+  <nav id="store-navbar">
     <ul>
       <li><a :href="`/stores/${this.store.id}`" class="button-box">Home</a></li>
       <li><a :href="`/stores/${this.store.id}/products`" class="button-box">Products</a></li>
