@@ -320,11 +320,11 @@ input[type=submit]:hover {
                             "footer";
 	}
 }
-
-.hero{
+/*Product Info side style*/
+.heroP{
     width: 100%;
 }
-.row{
+.rowP{
     width: 90%;
     height: 100vh;
     margin: auto;
@@ -332,64 +332,59 @@ input[type=submit]:hover {
     align-items: center;
     justify-content: space-between;
 }
-.col{
+.colP{
     flex-basis: 45%;
 }
-.slider{
+.sliderP{
     height: 80vh;
     display: flex;
 }
-.product img{
+.productP img{
     height: 19vh;
     margin-bottom: 9px;
     cursor: pointer;
     opacity: 0.6;
 }
 
-.product img:hover{
+.productP img:hover{
     opacity: 1;
 }
 
 
-.preview img{
+.previewP img{
     height: 100%;
     width: 100%;
 }
-p{
+.p_product{
     margin-bottom: 20px;
 }
-.brand{
+.brandP{
     background: #008000;
     width: fit-content;
     color: #fff;
     font-size: 12px;
     padding: 2px 5px;
 }
-h2{
+.h2_p{
     font-size: 45px;
     color: #555;
     margin-bottom: 20px;
 }
-.rating{
+.ratingP{
     display: flex;
     height: 15px;
 }
-.rating .fa{
+.ratingP .fa{
     color: #008000;
 }
-.price{
+.priceP{
     color: #fe980f;
     font-size: 26px;
     font-weight: bold;
     padding-top: 10px;
 }
-input{
-    width: 30px;
-    border: 1px solid #ccc;
-    font-weight: bold;
-    text-align: center;
-}
-button{
+
+.buttonP{
     color: #fff;
     font-size: 15px;
     outline: none;
@@ -400,31 +395,31 @@ button{
     box-sizing: border-box;
     cursor: pointer;
 }
-button .fa{
+.buttonP .fa{
     margin-right: 10px;
 }
-.related{
+.relatedP{
     width: 90%;
     margin: 0 auto 40px;
 }
-.related .row{
+.relatedP .rowP{
     width: 100%;
     height: auto;
 }
-.columns{
+.columnsP{
     flex-basis: 22%;
     height: 100%;
 }
-.items img{
+.itemsP img{
     width: 100%;
 }
-.details{
+.detailsP{
     margin-top: 20px;
 }
-.details p{
+.detailsP p{
     font-size: 14px;
     margin-bottom: 10px;
 }
-.details .rating{
+.detailsP .ratingP{
     margin: 10px 0;
 }
