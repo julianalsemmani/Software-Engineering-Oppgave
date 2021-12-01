@@ -1,10 +1,10 @@
 <template id="navbar">
   <nav id="navbar">
-    <ul class="nav1buttons" v-show="!me">
+    <ul class="nav1buttons">
       <li class="logbtn"><a href="#">Login</a></li>
       <li class="signbtn"><a href="#">Sign up</a></li>
     </ul>
-    <div class="dropdown" style="float:right;" v-show="me">
+    <div class="dropdown" style="float:right;">
       <button class="dropbtn">My Account</button>
       <div class="dropdown-content">
         <a href="#">Account Settings</a>
