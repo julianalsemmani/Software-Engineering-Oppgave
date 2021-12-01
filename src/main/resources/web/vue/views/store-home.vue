@@ -3,7 +3,8 @@
     <navbar></navbar>
     <store-header v-bind:store="store"></store-header>
     <store-navbar v-bind:store="store"></store-navbar>
-    <main>
+    <main id="main">
+      <h1>About Us</h1>
     </main>
     <store-footer v-bind:store="store"></store-footer>
   </div>

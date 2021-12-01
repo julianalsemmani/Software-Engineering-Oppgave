@@ -1,5 +1,6 @@
 <template id="store-products">
   <div id="store-page">
+    <navbar></navbar>
     <store-header v-bind:store="store"></store-header>
     <store-navbar v-bind:store="store"></store-navbar>
     <main id="main">
@@ -16,9 +17,9 @@
           <p>Sale type: Auction</p>
           <p>Product name: {{product.name}}</p>
           <p>Current bid: {{product.saleMethod.auction.minimumBid}} NOK</p>
-          <!-- <p>Minimum allowed bid: {{product.saleMethod.auction.minimumBidIncrement}} NOK</p> -->
+          <!-- <p>Minimum allowed bid: {{product.saleMethod.auction.minimumBidIncrement}} NOK</p>
           <p>Start time: {{new Date(product.saleMethod.auction.auctionStartTime).toLocaleString()}}</p>
-          <p>End time: {{new Date(product.saleMethod.auction.auctionEndTime).toLocaleString()}}</p>
+          <p>End time: {{new Date(product.saleMethod.auction.auctionEndTime).toLocaleString()}}</p> -->
         </section>
 
         <section class="article-box" v-else>
