@@ -4,7 +4,7 @@
     <store-header v-bind:store="store"></store-header>
     <store-navbar v-bind:store="store"></store-navbar>
     <main id="main">
-      <article v-for="product in store.products">
+      <article v-for="product in store.products" :key="product.id">
         <section class="article-box" v-if="product.saleMethod?.sale" article>
           <img v-bind:src="product.productPicture" alt="product ordinare sale" width="200" height="200">
           <p>Sale type: Ordinary</p>

@@ -36,9 +36,9 @@ Vue.component("navbar", {
 /*Bruker Navigasjonsmeny*/
 #navbar {
   grid-area: navbar;
-  background-color: whitesmoke;
+  background-color: teal;
   display: grid;
-  grid-template-column: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-areas: "buttons account"
 }
 
