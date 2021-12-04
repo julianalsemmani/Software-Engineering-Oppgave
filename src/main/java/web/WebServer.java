@@ -97,5 +97,9 @@ public class WebServer {
         app.get("/", new VueComponent("prototype-hub"));
         app.get("/stores/:store-id/products", new VueComponent("store-products"));
         app.get("/stores/:store-id/products/:product-id", new VueComponent("store-product"));
+
+        app.get("/stores/:store-id/add-product-sale", new VueComponent("store-add-product-sale"));
+        app.get("/stores/:store-id/add-product-auction", new VueComponent("store-add-product-auction"));
+
     }
 }
