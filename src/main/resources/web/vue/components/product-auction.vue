@@ -1,19 +1,24 @@
 <template id="product-auction">
   <section>
     <p>Sale type: Auction</p>
-    <p>Minimum bid: {{currentBid}} NOK</p>
-    <p>Bid increment: {{auction.minimumBidIncrement}} NOK</p>
-    <p>Buyout: {{auction.buyoutPrice}} NOK</p>
-    <p>Start time: {{new Date(auction.auctionStartTime).toLocaleString()}}</p>
-    <p>End time: {{new Date(auction.auctionEndTime).toLocaleString()}}</p>
-    <p>Time remaining: {{ timeRemaining }}</p>
+    <div v-if="!auction.hasEnded">
+      <p>Minimum bid: {{currentBid}} NOK</p>
+      <p>Bid increment: {{auction.minimumBidIncrement}} NOK</p>
+      <p>Buyout: {{auction.buyoutPrice}} NOK</p>
+      <p>Start time: {{new Date(auction.auctionStartTime).toLocaleString()}}</p>
+      <p>End time: {{new Date(auction.auctionEndTime).toLocaleString()}}</p>
+      <p>Time remaining: {{ timeRemaining }}</p>
 
-    <input id="bid-price" type="number" v-model="bidPrice"
-           :min="currentBid"
-           :max="auction.buyoutPrice">
-    <button id="bid-submit" class="buttonP" type="buttonP" v-on:click="doBid()">
-      <i class="fas fa-dollar-sign"></i>
-      Add bid</button>
+      <input id="bid-price" type="number" v-model="bidPrice"
+             :min="currentBid"
+             :max="auction.buyoutPrice">
+      <button id="bid-submit" class="buttonP" type="buttonP" v-on:click="doBid()">
+        <i class="fas fa-dollar-sign"></i>
+        Add bid</button>
+    </div>
+    <div v-else>
+      Auction has ended
+    </div>
 
     <ol>
       <li v-for="bid in auction.bidHistory">
@@ -29,8 +34,8 @@
 Vue.component("product-auction", {
   template: "#product-auction",
   data: () => ({
-    timeRemaining: "asd",
     bidPrice: 0,
+    timeRemaining: "",
     auction: {},
     currentBid: 0
   }),
@@ -78,8 +83,6 @@ Vue.component("product-auction", {
           const msRemaining = endDate.getTime() - new Date().getTime()
           if(msRemaining > 0) {
             this.timeRemaining = msToTime(msRemaining)
-          } else {
-            this.timeRemaining = "Auction ended"
           }
         },
         100

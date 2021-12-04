@@ -3,44 +3,34 @@
     <navbar></navbar>
     <store-header v-bind:store="store"></store-header>
     <store-navbar v-bind:store="store"></store-navbar>
-    <main class="form-signin">
-      <form>
-      <h1 class="h3 mb-3 fw-normal">Add Product Auction</h1>
-
-      <div class="form-floating">
+    <main class="main-pos">
+      <h1>Add Product Auction</h1>
+      <form method="post" class="form-box">
         <label for="floatingProdName">Product name</label>
-        <input type="text" class="form-control my-3" id="floatingProdName" placeholder="Product name">
-      </div>
-      <div class="form-floating">
-        <label for="floatingProdDesc">Product description</label>
-        <textarea type="text" style="height: 105px;" class="form-control my-3" id="floatingProdDesc" placeholder="Product description"></textarea>
-      </div>
-      <div class="form-floating">
+        <input type="text" id="floatingProdName" placeholder="Product name">
+      
+        <!-- <label for="floatingProdDesc">Product description</label>
+        <textarea type="text" id="floatingProdDesc" placeholder="Product description"></textarea> -->
+      
         <label for="floatingImage">Product picture</label>
-        <input type="text" class="form-control my-3" id="floatingImage" placeholder="https://example.com">
-      </div>
-      <div class="form-floating">
+        <input type="text" id="floatingImage" placeholder="https://example.com">
+      
+      
         <label for="floatingStartPrice">Start price</label>
-        <input type="number" class="form-control my-3" id="floatingStartPrice" placeholder="$4.99">
-      </div>
-      <div class="form-floating">
-        <label for="floatingBuyoutPrice">Buyout price</label>
-        <input type="number" class="form-control my-3" id="floatingBuyoutPrice" placeholder="$99.99">
-      </div>
-      <div class="form-floating">
+        <input type="number" id="floatingStartPrice" placeholder="$4.99">
+      
         <label for="floatingIncreasePrice">Minimum increase price</label>
-        <input type="number" class="form-control my-3" id="floatingIncreasePrice" placeholder="$0.99">
-      </div>
-      <div class="form-floating">
-        <label for="floatingStartPrice">Start date</label>
-        <input type="text" class="form-control my-3" id="floatingStartTime" placeholder="DD/MM/YYYY" onfocus="(this.type='date')">
-      </div>
-      <div class="form-floating">
-        <label for="floatingEndTime">End date</label>
-        <input type="text" class="form-control my-3" id="floatingEndTime" placeholder="DD/MM/YYYY" onfocus="(this.type='date')">
-      </div>
+        <input type="number" id="floatingIncreasePrice" placeholder="$0.99">
 
-      <button class="w-100 btn btn-lg btn-primary" type="submit">Add product</button>
+        <label for="floatingBuyoutPrice">Buyout price</label>
+        <input type="number" id="floatingBuyoutPrice" placeholder="$99.99">
+
+        <label for="floatingStartPrice">Start date</label>
+        <input type="text" id="floatingStartTime" placeholder="DD/MM/YYYY" onfocus="(this.type='date')">
+      
+        <label for="floatingEndTime">End date</label>
+        <input type="text" id="floatingEndTime" placeholder="DD/MM/YYYY" onfocus="(this.type='date')">
+      <button type="submit" v-on:click=submitProduct()>Add product</button>
       </form>
     </main>
     <store-footer v-bind:store="store"></store-footer>
@@ -59,9 +49,41 @@ Vue.component("store-add-product-auction", {
         .then(res => res.json())
         .then(res => { this.store = res; console.log(res); })
         .catch(() => alert("Data not found"));
+  },
+  methods: {
+    submitProduct: () => {
+      const product = {
+        name: floatingProdName.value,
+        productPicture: floatingImage.value,
+        minimumBid: floatingStartPrice.value,
+        minimumBidIncrement: floatingIncreasePrice.value,
+        buyoutPrice: floatingBuyoutPric.value,
+        auctionStartTime: floatingStartTime.value,
+        auctionEndTime: floatingEndTime.value
+      }
+      fetch(`/api/stores/:store-id/products`, { 
+        method: 'POST',
+        body: JSON.stringify(product)
+      })
+          .then(res => res.json())
+          .then(newProduct => window.location.replace(`/stores/${storeId}`))
+    }
   }
-});
+})
 </script>
 
+<style scoped>
 
+.form-box {
+  max-height: auto;
+  max-width: 200px;
+}
+
+.main-pos {
+  padding-left: 500px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+</style>
 

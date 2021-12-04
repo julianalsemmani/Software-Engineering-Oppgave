@@ -18,6 +18,7 @@ public class ProductResponseBody {
             public int buyoutPrice;
             public long auctionStartTime, auctionEndTime;
             public BidResponseBody[] bidHistory;
+            public boolean hasEnded;
 
             public AuctionResponseBody(Auction auction) {
                 minimumBid = auction.minimumBid;
@@ -26,6 +27,7 @@ public class ProductResponseBody {
                 auctionStartTime = auction.auctionStartTime.toEpochMilli();
                 auctionEndTime = auction.auctionEndTime.toEpochMilli();
                 bidHistory = auction.bidHistory.stream().map(BidResponseBody::new).toArray(BidResponseBody[]::new);
+                hasEnded = auction.hasEnded();
             }
         }
 
