@@ -66,7 +66,7 @@ Vue.component("store-add-product-auction", {
         body: JSON.stringify(product)
       })
           .then(res => res.json())
-          .then(newProduct => window.location.replace(`/stores/${storeId}`))
+          .then(newProduct => window.location.replace(`/stores/${this.store.id}`))
     }
   }
 })
