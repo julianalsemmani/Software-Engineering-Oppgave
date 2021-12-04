@@ -36,95 +36,13 @@
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star-half-o"></i>
               </section>
-              <p class="priceP">80$</p>
-              <button class="buttonP" type="buttonP">
-                <i class="fa fa-shopping-cart"></i>
-                Add to cart</button>
+
+              <product-auction v-bind:product="product"></product-auction>
+
             </section>
 
           </section>
         </section>
-
-
-<!--        <article class="relatedP">-->
-<!--          <h2 class="h2_p">related items</h2>-->
-<!--          <section class="rowP">-->
-<!--            <section class="columnsP">-->
-<!--              <section class="itemsP">-->
-<!--                <img src="images/item1.png" alt="">-->
-<!--                <section class="detailsP">-->
-<!--                  <p class="p_product">Woman Brown Solid Biker Jacket</p>-->
-<!--                  <section class="ratingP">-->
-<!--                    <i class="fa fa-star"></i>-->
-<!--                    <i class="fa fa-star"></i>-->
-<!--                    <i class="fa fa-star"></i>-->
-<!--                    <i class="fa fa-star"></i>-->
-<!--                    <i class="fa fa-star-half-o"></i>-->
-<!--                  </section>-->
-
-<!--                  <p class="p_product">USD $120.00</p>-->
-
-<!--                </section>-->
-<!--              </section>-->
-<!--            </section>-->
-<!--            <section class="columnsP">-->
-<!--              <section class="itemsP">-->
-<!--                <img src="images/stat1.jpg" alt="">-->
-<!--                <section class="detailsP">-->
-<!--                  <p class="p_product">Replica Statue</p>-->
-<!--                  <section class="ratingP">-->
-<!--                    <i class="fa fa-star"></i>-->
-<!--                    <i class="fa fa-star"></i>-->
-<!--                    <i class="fa fa-star"></i>-->
-<!--                    <i class="fa fa-star-half-o"></i>-->
-<!--                    <i class="fa fa-star-o"></i>-->
-<!--                  </section>-->
-
-<!--                  <p class="p_product">USD $80.00</p>-->
-
-<!--                </section>-->
-<!--              </section>-->
-<!--            </section>-->
-<!--            <section class="columnsP">-->
-<!--              <section class="itemsP">-->
-<!--                <img src="images/daggers1.jpg" alt="">-->
-<!--                <section class="detailsP">-->
-<!--                  <p class="p_product">Replica Daggers</p>-->
-<!--                  <section class="ratingP">-->
-<!--                    <i class="fa fa-star"></i>-->
-<!--                    <i class="fa fa-star"></i>-->
-<!--                    <i class="fa fa-star"></i>-->
-<!--                    <i class="fa fa-star"></i>-->
-<!--                    <i class="fa fa-star-o"></i>-->
-<!--                  </section>-->
-
-<!--                  <p class="p_product">USD $110.00</p>-->
-
-<!--                </section>-->
-<!--              </section>-->
-<!--            </section>-->
-<!--            <section class="columnsP">-->
-<!--              <section class="itemsP">-->
-<!--                <img src="images/daggers1.jpg" alt="">-->
-<!--                <section class="detailsP">-->
-<!--                  <p class="p_product">Replica Daggers</p>-->
-<!--                  <section class="ratingP">-->
-<!--                    <i class="fa fa-star"></i>-->
-<!--                    <i class="fa fa-star"></i>-->
-<!--                    <i class="fa fa-star"></i>-->
-<!--                    <i class="fa fa-star-half-o"></i>-->
-<!--                    <i class="fa fa-star-o"></i>-->
-<!--                  </section>-->
-
-<!--                  <p class="p_product">USD $100.00</p>-->
-
-<!--                </section>-->
-<!--              </section>-->
-<!--            </section>-->
-<!--          </section>-->
-<!--        </article>-->
-
-
 
       </article>
     </main>
@@ -140,17 +58,19 @@ Vue.component("store-product", {
     store: {},
     product: {}
   }),
-  created() {
+  async created() {
     const storeId = this.$javalin.pathParams["store-id"];
-    fetch(`/api/stores/${storeId}`)
+    await fetch(`/api/stores/${storeId}`)
         .then(res => res.json())
         .then(res => { this.store = res; console.log(res); })
         .catch(() => alert("Store not found"));
-    const productId = this.$javalin.pathParams["product-id"];
-    fetch(`/api/stores/${storeId}/products/${productId}`)
-        .then(res => res.json())
-        .then(res => { this.product = res; console.log(res); })
-        .catch(() => alert("Product not found"));
+
+    setInterval(async ()=> {
+      const productId = this.$javalin.pathParams["product-id"];
+      await fetch(`/api/stores/${storeId}/products/${productId}`)
+          .then(res => res.json())
+          .then(res => { this.product = res});
+    }, 1000)
   }
 });
 </script>
@@ -162,7 +82,6 @@ Vue.component("store-product", {
 }
 .rowP{
   width: 90%;
-  height: 100vh;
   margin: auto;
   display: flex;
   align-items: center;

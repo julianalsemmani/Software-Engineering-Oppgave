@@ -31,7 +31,7 @@ public class Auction implements SaleMethod {
             return false;
         }
 
-        if(bidHistory.size() == 0 || bid.bidPrice > getHighestBid().bidPrice + minimumBidIncrement) {
+        if(bidHistory.size() == 0 || bid.bidPrice >= getHighestBid().bidPrice + minimumBidIncrement) {
             bidHistory.add(bid);
             return true;
         }

@@ -161,6 +161,8 @@ public class Service {
     }
 
     public boolean doBid(UUID bidderId, UUID storeId, UUID productId, int price) {
+        boolean success = false;
+
         User bidder = repository.getUserById(bidderId);
         Store store = repository.getStoreById(storeId);
         Product product = store.products.get(productId);
@@ -169,10 +171,12 @@ public class Service {
             Auction auction = (Auction) product.saleMethod;
             AuctionBid bid = new AuctionBid(bidder, price, Instant.now());
 
-            return auction.doBid(bid);
+            success = auction.doBid(bid);
+
+            repository.updateStore(store);
         }
 
-        return false;
+        return success;
     }
 
 }

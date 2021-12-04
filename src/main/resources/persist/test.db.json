@@ -74,8 +74,20 @@
         "minimumBidIncrement" : 10,
         "buyoutPrice" : 2000,
         "auctionStartTime" : 1637535043.785973700,
-        "auctionEndTime" : 1638139843.785973700,
-        "bidHistory" : [ ]
+        "auctionEndTime" : 1938139843.785973700,
+        "bidHistory" : [ {
+          "bidder" : "cfdb5415-3ea5-4bb2-93ee-70dc1de28885",
+          "bidPrice" : 100,
+          "bidTime" : 1638643739.163294800
+        }, {
+          "bidder" : "cfdb5415-3ea5-4bb2-93ee-70dc1de28885",
+          "bidPrice" : 110,
+          "bidTime" : 1638643742.354775100
+        }, {
+          "bidder" : "cfdb5415-3ea5-4bb2-93ee-70dc1de28885",
+          "bidPrice" : 123,
+          "bidTime" : 1638643782.454197100
+        } ]
       },
       "sale" : null
     } ]
