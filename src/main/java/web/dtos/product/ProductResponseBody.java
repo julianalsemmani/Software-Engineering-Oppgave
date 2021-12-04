@@ -2,6 +2,7 @@ package web.dtos.product;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import core.model.*;
+import web.dtos.product.auction.BidResponseBody;
 
 import java.time.Instant;
 import java.util.List;
@@ -16,7 +17,7 @@ public class ProductResponseBody {
             public int minimumBidIncrement;
             public int buyoutPrice;
             public long auctionStartTime, auctionEndTime;
-            public List<AuctionBid> bidHistory;
+            public BidResponseBody[] bidHistory;
 
             public AuctionResponseBody(Auction auction) {
                 minimumBid = auction.minimumBid;
@@ -24,7 +25,7 @@ public class ProductResponseBody {
                 buyoutPrice = auction.buyoutPrice;
                 auctionStartTime = auction.auctionStartTime.toEpochMilli();
                 auctionEndTime = auction.auctionEndTime.toEpochMilli();
-                bidHistory = auction.bidHistory;
+                bidHistory = auction.bidHistory.stream().map(BidResponseBody::new).toArray(BidResponseBody[]::new);
             }
         }
 

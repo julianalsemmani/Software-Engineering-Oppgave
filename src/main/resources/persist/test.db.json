@@ -74,7 +74,7 @@
         "minimumBidIncrement" : 10,
         "buyoutPrice" : 2000,
         "auctionStartTime" : 1637535043.785973700,
-        "auctionEndTime" : 1638139843.785973700,
+        "auctionEndTime" : 1938139843.785973700,
         "bidHistory" : [ ]
       },
       "sale" : null
