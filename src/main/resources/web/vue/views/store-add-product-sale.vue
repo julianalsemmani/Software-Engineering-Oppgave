@@ -1,33 +1,24 @@
 <template id="store-add-product-sale">
   <div id="store-page">
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <navbar></navbar>
     <store-header v-bind:store="store"></store-header>
     <store-navbar v-bind:store="store"></store-navbar>
-    <main class="form-signin">
-        <form>
-          <h1 class="h3 mb-3 fw-normal">Add Product Sale</h1>
-
-          <div class="form-floating">
-            <input type="text" class="form-control my-3" id="floatingProdName" placeholder="Product name">
-            <label for="floatingProdName">Product name</label>
-          </div>
-          <div class="form-floating">
-            <textarea type="text" style="height: 105px;" class="form-control my-3" id="floatingProdDesc" placeholder="Product description"></textarea>
-            <label for="floatingProdDesc">Product description</label>
-          </div>
-          <div class="form-floating">
-            <input type="text" class="form-control my-3" id="floatingImage" placeholder="https://example.com">
-            <label for="floatingImage">Product picture</label>
-          </div>
-          <div class="form-floating">
-            <input type="number" class="form-control my-3" id="floatingPrice" placeholder="$9.99">
-            <label for="floatingPrice">Price</label>
-          </div>
-
-          <button class="w-100 btn btn-lg btn-primary" type="submit">Publish sale</button>
+    <main class="main-pos">
+      <h1>Add Product Sale</h1>
+        <form method="post" class="form-box">
+          <label for="floatingProdName">Product name</label>
+          <input type="text" id="floatingProdName" placeholder="Product name">
+          
+          <!-- <label for="floatingProdDesc">Product description</label>
+          <textarea type="text" id="floatingProdDesc" placeholder="Product description"></textarea> -->
+          
+          <label for="floatingImage">Product picture</label>
+          <input type="text" id="floatingImage" placeholder="https://example.com">
+          
+          <label for="floatingPrice">Price</label>
+          <input type="number" id="floatingPrice" placeholder="Price">
+          
+          <button type="submit" v-on:click=submitProduct()>Add product</button>
         </form>
     </main>
     <store-footer v-bind:store="store"></store-footer>
@@ -46,7 +37,37 @@ Vue.component("store-add-product-sale", {
         .then(res => res.json())
         .then(res => { this.store = res; console.log(res); })
         .catch(() => alert("Data not found"));
+  },
+  methods: {
+    submitProduct: () => {
+      const product = {
+        name: floatingProdName.value,
+        productPicture: floatingImage.value,
+        price: floatingStartPrice.value,
+      }
+      fetch(`/api/stores/:store-id/products`, { 
+        method: 'POST',
+        body: JSON.stringify(product)
+      })
+          .then(res => res.json())
+          .then(newProduct => window.location.replace(`/stores/${storeId}`))
+    }
   }
-});
+})
 </script>
+
+<style scoped>
+
+.form-box {
+  max-height: auto;
+  max-width: 200px;
+}
+
+.main-pos {
+  padding-left: 500px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+</style>
 
