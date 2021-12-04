@@ -81,8 +81,8 @@ public class WebServer {
         app.delete("/api/stores/:store-id", storeController::onDeleteStore);
 
         // API requests for startUp methods
-        app.get("/api/startUp/:startUp-id", startUpController::onGetStartUp);
-        app.put("/api/startUp/:startUp-id", startUpController::onPutStartUp);
+        app.get("/api/startUp", startUpController::onGetStartUp);
+        app.put("/api/startUp", startUpController::onPutStartUp);
 
         // API requests for product methods
         app.post("/api/stores/:store-id/products", productController::onPostProduct);
@@ -91,6 +91,8 @@ public class WebServer {
         app.delete("/api/stores/:store-id/products/:product-id", productController::onDeleteProduct);
         app.post("/api/stores/:store-id/products/:product-id/bid", productController::onPostBid);
 
+        app.get("/dashboard", new vueComponent("startup-dashboard"));
+        
         app.get("/stores/:store-id", new VueComponent("store-home"));
         app.get("/register-user", new VueComponent("register-user"));
         app.get("/register-store", new VueComponent("register-store"));
