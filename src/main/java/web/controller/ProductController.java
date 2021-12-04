@@ -1,6 +1,5 @@
 package web.controller;
 
-import core.model.Auction;
 import core.model.AuctionBid;
 import core.model.Product;
 import core.model.User;
@@ -14,6 +13,7 @@ import web.dtos.product.ProductResponseBody;
 import web.dtos.product.PutProductBody;
 import web.dtos.product.auction.PostBidBody;
 
+import java.time.Instant;
 import java.util.UUID;
 
 public class ProductController {
@@ -101,4 +101,7 @@ public class ProductController {
         });
     }
 
+    public void registerAuction(Context ctx) {
+
+    }
 }
