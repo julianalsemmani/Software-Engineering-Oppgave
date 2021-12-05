@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import core.model.*;
 import web.dtos.product.auction.BidResponseBody;
 
-import java.time.Instant;
-import java.util.List;
 import java.util.UUID;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -21,7 +19,7 @@ public class ProductResponseBody {
             public boolean hasEnded;
 
             public AuctionResponseBody(Auction auction) {
-                minimumBid = auction.minimumBid;
+                minimumBid = auction.startBid;
                 minimumBidIncrement = auction.minimumBidIncrement;
                 buyoutPrice = auction.buyoutPrice;
                 auctionStartTime = auction.auctionStartTime.toEpochMilli();

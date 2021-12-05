@@ -93,10 +93,10 @@ public class Service {
         return newProduct;
     }
 
-    public Auction registerAuction(UUID storeId, UUID productId, int minimumBid, int minimumBidIncrement, int buyoutPrice, Instant auctionStartTime, Instant auctionEndTime) {
+    public Auction registerAuction(UUID storeId, UUID productId, int startBid, int minimumBidIncrement, int buyoutPrice, Instant auctionStartTime, Instant auctionEndTime) {
         Store store = repository.getStoreById(storeId);
         Product product = store.products.get(productId);
-        Auction auction = new Auction(minimumBid, minimumBidIncrement, buyoutPrice, auctionStartTime, auctionEndTime, new ArrayList<>());
+        Auction auction = new Auction(startBid, minimumBidIncrement, buyoutPrice, auctionStartTime, auctionEndTime, new ArrayList<>());
         product.saleMethod = auction;
 
         repository.updateStore(store);

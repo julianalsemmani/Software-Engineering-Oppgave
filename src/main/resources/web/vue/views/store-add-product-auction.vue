@@ -66,7 +66,7 @@ Vue.component("store-add-product-auction", {
         .then(newProduct => productId = newProduct.id)
 
       const auction = {
-        minimumBid: floatingStartPrice.value,
+        startBid: floatingStartPrice.value,
         minimumBidIncrement: floatingIncreasePrice.value,
         buyoutPrice: floatingBuyoutPrice.value,
         auctionStartTime: new Date(floatingStartTime.value).getTime(),

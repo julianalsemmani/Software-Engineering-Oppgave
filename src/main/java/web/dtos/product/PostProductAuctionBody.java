@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class PostProductAuctionBody {
     @NotNull
-    public int minimumBid;
+    public int startBid;
     @NotNull
     public int minimumBidIncrement;
     @NotNull

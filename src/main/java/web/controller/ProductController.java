@@ -1,6 +1,5 @@
 package web.controller;
 
-import core.model.Auction;
 import core.model.Product;
 import core.model.User;
 import core.service.Service;
@@ -101,7 +100,7 @@ public class ProductController {
 
             PostProductAuctionBody body = JavalinJson.fromJson(ctx.body(), PostProductAuctionBody.class);
 
-            service.registerAuction(storeId, productId, body.minimumBid, body.minimumBidIncrement, body.buyoutPrice, body.auctionStartTime, body.auctionEndTime);
+            service.registerAuction(storeId, productId, body.startBid, body.minimumBidIncrement, body.buyoutPrice, body.auctionStartTime, body.auctionEndTime);
 
             ctx.status(201).result("");
         });
