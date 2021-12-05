@@ -61,12 +61,12 @@ Vue.component("store-add-product-auction", {
         auctionStartTime: floatingStartTime.value,
         auctionEndTime: floatingEndTime.value
       }
-      fetch(`/api/stores/:store-id/products`, { 
+      fetch(`/api/stores/${this.store.id}/products`, { 
         method: 'POST',
         body: JSON.stringify(product)
       })
           .then(res => res.json())
-          .then(newProduct => window.location.replace(`/stores/${storeId}`))
+          .then(newProduct => window.location.replace(`/stores/${this.store.id}`))
     }
   }
 })

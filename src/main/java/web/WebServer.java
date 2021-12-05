@@ -81,22 +81,22 @@ public class WebServer {
         app.delete("/api/stores/:store-id", storeController::onDeleteStore);
 
         // API requests for startUp methods
-        app.get("/api/startUp", startUpController::onGetStartUp);
-        app.put("/api/startUp", startUpController::onPutStartUp);
+        app.get("/api/startup", startUpController::onGetStartUp);
+        app.put("/api/startup", startUpController::onPutStartUp);
 
         // API requests for product methods
         app.post("/api/stores/:store-id/products", productController::onPostProduct);
+
         app.get("/api/stores/:store-id/products/:product-id", productController::onGetProduct);
         app.put("/api/stores/:store-id/products/:product-id", productController::onPutProduct);
         app.delete("/api/stores/:store-id/products/:product-id", productController::onDeleteProduct);
         app.post("/api/stores/:store-id/products/:product-id/bid", productController::onPostBid);
 
-        app.get("/dashboard", new vueComponent("startup-dashboard"));
-        
+        app.get("/", new VueComponent("prototype-hub"));
+        app.get("/dashboard", new VueComponent("startup-dashboard"));
         app.get("/stores/:store-id", new VueComponent("store-home"));
         app.get("/register-user", new VueComponent("register-user"));
         app.get("/register-store", new VueComponent("register-store"));
-        app.get("/", new VueComponent("prototype-hub"));
         app.get("/stores/:store-id/products", new VueComponent("store-products"));
         app.get("/stores/:store-id/products/:product-id", new VueComponent("store-product"));
 

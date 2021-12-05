@@ -1,6 +1,7 @@
 <template id="store-product">
-  <div id="store-page">
+  <div id="store-page" v-if="dataRetrieved">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
     <navbar></navbar>
     <store-header v-bind:store="store"></store-header>
     <store-navbar v-bind:store="store"></store-navbar>
@@ -37,7 +38,7 @@
                 <i class="fa fa-star-half-o"></i>
               </section>
 
-              <product-auction v-bind:product="product"></product-auction>
+              <product-auction v-bind:product="product" @bid="retrieveProduct"></product-auction>
 
             </section>
 
@@ -56,21 +57,33 @@ Vue.component("store-product", {
   template: "#store-product",
   data: () => ({
     store: {},
-    product: {}
+    product: {},
+    dataRetrieved: false
   }),
-  async created() {
-    const storeId = this.$javalin.pathParams["store-id"];
-    await fetch(`/api/stores/${storeId}`)
-        .then(res => res.json())
-        .then(res => { this.store = res; console.log(res); })
-        .catch(() => alert("Store not found"));
-
-    setInterval(async ()=> {
+  methods: {
+    retrieveStore: async function () {
+      const storeId = this.$javalin.pathParams["store-id"];
+      await fetch(`/api/stores/${storeId}`)
+          .then(res => res.json())
+          .then(store => this.store = store)
+    },
+    retrieveProduct: async function () {
+      const storeId = this.$javalin.pathParams["store-id"];
       const productId = this.$javalin.pathParams["product-id"];
       await fetch(`/api/stores/${storeId}/products/${productId}`)
           .then(res => res.json())
-          .then(res => { this.product = res});
-    }, 1000)
+          .then(product => this.product = product)
+    }
+  },
+  created() {
+    Promise.all([
+      this.retrieveStore(),
+      this.retrieveProduct()
+    ]).then(()=>this.dataRetrieved = true)
+
+    // Retrieve product continuously
+    setInterval( ()=>this.retrieveProduct(), 1000)
+
   }
 });
 </script>

@@ -1,7 +1,5 @@
 package web.controller;
 
-import core.model.Auction;
-import core.model.AuctionBid;
 import core.model.Product;
 import core.model.User;
 import core.service.Service;
@@ -22,10 +20,6 @@ public class ProductController {
 
     public ProductController(Service service) {
         this.service = service;
-    }
-
-    public void onPostBid(AuctionBid bid) {
-
     }
 
     public void onPostBid(Context ctx) {
@@ -101,4 +95,7 @@ public class ProductController {
         });
     }
 
+    public void registerAuction(Context ctx) {
+
+    }
 }
