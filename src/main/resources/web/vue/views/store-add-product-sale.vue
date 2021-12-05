@@ -57,7 +57,7 @@ Vue.component("store-add-product-sale", {
       }
       fetch(`/api/stores/${this.store.id}/products/${productId}/sale`, { 
         method: 'POST',
-        body: JSON.stringify(auction)
+        body: JSON.stringify(sale)
       })
           .then(() => window.location.replace(`/stores/${this.store.id}/products/${productId}`))
     }
