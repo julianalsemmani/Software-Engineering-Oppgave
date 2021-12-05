@@ -30,8 +30,9 @@
       
         <label for="floatingEndTime">End date</label>
         <input type="text" id="floatingEndTime" placeholder="DD/MM/YYYY" onfocus="(this.type='date')">
-      <button v-on:click=submitProduct()>Add product</button>
+
       </form>
+      <button v-on:click=submitProduct()>Add product</button>
     </main>
     <store-footer v-bind:store="store"></store-footer>
   </div>
@@ -51,13 +52,13 @@ Vue.component("store-add-product-auction", {
         .catch(() => alert("Data not found"));
   },
   methods: {
-     submitProduct: async () => {
+     submitProduct: async function () {
       const product = {
         name: floatingProdName.value,
         productPicture: floatingImage.value,
       }
       let productId;
-      await fetch(`/api/stores/${this.store.id}/products`, { 
+      await fetch(`/api/stores/${this.store.id}/products`, {
         method: 'POST',
         body: JSON.stringify(product)
       })
@@ -67,15 +68,14 @@ Vue.component("store-add-product-auction", {
       const auction = {
         minimumBid: floatingStartPrice.value,
         minimumBidIncrement: floatingIncreasePrice.value,
-        buyoutPrice: floatingBuyoutPric.value,
-        auctionStartTime: floatingStartTime.value,
-        auctionEndTime: floatingEndTime.value
+        buyoutPrice: floatingBuyoutPrice.value,
+        auctionStartTime: new Date(floatingStartTime.value).getTime(),
+        auctionEndTime: new Date(floatingEndTime.value).getTime()
       }
       fetch(`/api/stores/${this.store.id}/products/${productId}/auction`, { 
         method: 'POST',
         body: JSON.stringify(auction)
       })
-          .then(res => res.json())
           .then(() => window.location.replace(`/stores/${this.store.id}/products/${productId}`))
     }
   }
