@@ -95,6 +95,7 @@ public class WebServer {
         app.post("/api/stores/:store-id/products/:product-id/bid", productController::onPostBid);
 
         app.get("/", new VueComponent("prototype-hub"));
+        app.get("/startup", new VueComponent("startup-frontpage"));
         app.get("/dashboard", new VueComponent("startup-dashboard"));
         app.get("/stores/:store-id", new VueComponent("store-home"));
         app.get("/register-user", new VueComponent("register-user"));

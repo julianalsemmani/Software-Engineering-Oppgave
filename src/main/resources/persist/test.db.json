@@ -87,14 +87,18 @@
           "bidder" : "cfdb5415-3ea5-4bb2-93ee-70dc1de28885",
           "bidPrice" : 123,
           "bidTime" : 1638643782.454197100
+        }, {
+          "bidder" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8",
+          "bidPrice" : 200,
+          "bidTime" : 1638724150.706523300
         } ]
       },
       "sale" : null
     } ]
   } ],
   "startUp" : {
-    "name" : "",
-    "address" : "",
-    "phoneNumber" : 0
+    "name" : "Startup Navn",
+    "address" : "Adress 123, 0000 Oslo",
+    "phoneNumber" : 12345678
   }
 }
