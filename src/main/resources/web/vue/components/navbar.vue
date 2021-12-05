@@ -1,7 +1,19 @@
 <template id="navbar">
   <nav id="navbar">
     <ul class="nav1buttons">
-      <li class="logbtn"><a href="#">Login</a></li>
+      <li>
+        <div class="dropdown">
+          <button class="logbtn">My Account</button>
+          <div class="dropdown-content">
+            <a href="#">Account Settings</a>
+            <a href="#">My Favourites</a>
+            <a href="#">My Orders</a>
+            <a href="#">My Bids</a>
+            <a href="#">My Wallet</a>
+            <a href="#">Purchase History</a>
+          </div>
+        </div>
+      </li>
       <li class="signbtn"><a href="#">Sign up</a></li>
     </ul>
     <div class="dropdown" style="float:right;">
