@@ -5,7 +5,7 @@
     <store-navbar v-bind:store="store"></store-navbar>
     <main class="main-pos">
       <h1>Add Product Auction</h1>
-      <form method="post" class="form-box">
+      <form class="form-box">
         <label for="floatingProdName">Product name</label>
         <input type="text" id="floatingProdName" placeholder="Product name">
       
@@ -30,7 +30,7 @@
       
         <label for="floatingEndTime">End date</label>
         <input type="text" id="floatingEndTime" placeholder="DD/MM/YYYY" onfocus="(this.type='date')">
-      <button type="submit" v-on:click=submitProduct()>Add product</button>
+      <button v-on:click=submitProduct()>Add product</button>
       </form>
     </main>
     <store-footer v-bind:store="store"></store-footer>
@@ -51,22 +51,32 @@ Vue.component("store-add-product-auction", {
         .catch(() => alert("Data not found"));
   },
   methods: {
-    submitProduct: () => {
+     submitProduct: async () => {
       const product = {
         name: floatingProdName.value,
         productPicture: floatingImage.value,
+      }
+      let productId;
+      await fetch(`/api/stores/${this.store.id}/products`, { 
+        method: 'POST',
+        body: JSON.stringify(product)
+      })
+        .then(res => res.json())
+        .then(newProduct => productId = newProduct.id)
+
+      const auction = {
         minimumBid: floatingStartPrice.value,
         minimumBidIncrement: floatingIncreasePrice.value,
         buyoutPrice: floatingBuyoutPric.value,
         auctionStartTime: floatingStartTime.value,
         auctionEndTime: floatingEndTime.value
       }
-      fetch(`/api/stores/${this.store.id}/products`, { 
+      fetch(`/api/stores/${this.store.id}/products/${productId}/auction`, { 
         method: 'POST',
-        body: JSON.stringify(product)
+        body: JSON.stringify(auction)
       })
           .then(res => res.json())
-          .then(newProduct => window.location.replace(`/stores/${this.store.id}`))
+          .then(() => window.location.replace(`/stores/${this.store.id}/products/${productId}`))
     }
   }
 })

@@ -1,5 +1,6 @@
 package web.controller;
 
+import core.model.Auction;
 import core.model.Product;
 import core.model.User;
 import core.service.Service;
@@ -7,6 +8,7 @@ import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
 import io.javalin.http.UnauthorizedResponse;
 import io.javalin.plugin.json.JavalinJson;
+import web.dtos.product.PostProductAuctionBody;
 import web.dtos.product.PostProductBody;
 import web.dtos.product.ProductResponseBody;
 import web.dtos.product.PutProductBody;
@@ -59,7 +61,7 @@ public class ProductController {
     public void onPostProduct(Context ctx) {
         ControllerUtils.exceptionHandler(ctx, () -> {
             UUID storeId = ctx.pathParam("store-id", UUID.class).get();
-
+            System.out.print(storeId);
             PostProductBody body = JavalinJson.fromJson(ctx.body(), PostProductBody.class);
 
             Product newProduct = service.createProduct(storeId, body.name, body.productPicture);
@@ -96,6 +98,22 @@ public class ProductController {
     }
 
     public void registerAuction(Context ctx) {
+        ControllerUtils.exceptionHandler(ctx, () -> {
+            UUID storeId = ctx.pathParam("store-id", UUID.class).get();
+            UUID productId = ctx.pathParam("product-id", UUID.class).get();
 
+            System.out.print(storeId);
+            System.out.print(productId);
+
+            PostProductAuctionBody body = JavalinJson.fromJson(ctx.body(), PostProductAuctionBody.class);
+
+            service.registerAuction(storeId, productId, body.minimumBid, body.minimumBidIncrement, body.buyoutPrice, body.auctionStartTime, body.auctionEndTime);
+
+
+            ctx.status(201).result("");
+        });
+    }
+
+    public void registerSale(Context ctx) {
     }
 }

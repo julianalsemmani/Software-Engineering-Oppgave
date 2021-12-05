@@ -86,6 +86,8 @@ public class WebServer {
 
         // API requests for product methods
         app.post("/api/stores/:store-id/products", productController::onPostProduct);
+        app.post("/api/stores/:store-id/products/:product-id/sale", productController::registerSale);
+        app.post("/api/stores/:store-id/products/:product-id/auction", productController::registerAuction);
 
         app.get("/api/stores/:store-id/products/:product-id", productController::onGetProduct);
         app.put("/api/stores/:store-id/products/:product-id", productController::onPutProduct);
