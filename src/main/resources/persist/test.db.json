@@ -31,7 +31,32 @@
     "phoneNumber" : 12345678,
     "owner" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8",
     "employees" : [ ],
-    "products" : [ ]
+    "products" : [ {
+      "id" : "d5627c76-80ea-463a-baf3-137b70dc1aa2",
+      "name" : "Test",
+      "productPicture" : "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZHVjdCUyMHBob3RvZ3JhcGh5fGVufDB8fDB8fA%3D%3D&w=1000&q=80",
+      "auction" : {
+        "minimumBid" : 20,
+        "minimumBidIncrement" : 200,
+        "buyoutPrice" : 200000,
+        "auctionStartTime" : 1638662400000.000000000,
+        "auctionEndTime" : 1638748800000.000000000,
+        "bidHistory" : [ {
+          "bidder" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8",
+          "bidPrice" : 200,
+          "bidTime" : 1638730041.990265600
+        }, {
+          "bidder" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8",
+          "bidPrice" : 400,
+          "bidTime" : 1638730049.620756700
+        }, {
+          "bidder" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8",
+          "bidPrice" : 200000,
+          "bidTime" : 1638730054.031271200
+        } ]
+      },
+      "sale" : null
+    } ]
   }, {
     "id" : "c840b1c0-82bb-4f55-85d3-580ba0f11290",
     "storeName" : "test_store",
@@ -44,6 +69,19 @@
       "name" : "test_product",
       "productPicture" : "https://tinyurl.com/3xnwja5k",
       "auction" : null,
+      "sale" : null
+    }, {
+      "id" : "d9a440cf-9c66-43a0-abe5-467a2bc991df",
+      "name" : "test2",
+      "productPicture" : "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZHVjdCUyMHBob3RvZ3JhcGh5fGVufDB8fDB8fA%3D%3D&w=1000&q=80",
+      "auction" : {
+        "minimumBid" : 22,
+        "minimumBidIncrement" : 1,
+        "buyoutPrice" : 20,
+        "auctionStartTime" : 1638662400000.000000000,
+        "auctionEndTime" : 1639094400000.000000000,
+        "bidHistory" : [ ]
+      },
       "sale" : null
     }, {
       "id" : "e646b8c9-ab8c-4ac8-858a-770d52332869",
@@ -91,6 +129,10 @@
           "bidder" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8",
           "bidPrice" : 200,
           "bidTime" : 1638724150.706523300
+        }, {
+          "bidder" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8",
+          "bidPrice" : 300,
+          "bidTime" : 1638730654.164069700
         } ]
       },
       "sale" : null

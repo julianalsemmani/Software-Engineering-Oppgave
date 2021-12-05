@@ -17,7 +17,7 @@
               <img v-bind:src="product.productPicture" alt="product auction" width="200" height="200">
               <p>Sale type: Auction</p>
               <p>Product name: {{product.name}}</p>
-              <p>Current bid: {{product.saleMethod.auction.minimumBid}} NOK</p>
+              <p>Current bid: {{product.saleMethod.auction.bidHistory.at(-1).bidPrice}} NOK</p>
               <!-- <p>Minimum allowed bid: {{product.saleMethod.auction.minimumBidIncrement}} NOK</p>
               <p>Start time: {{new Date(product.saleMethod.auction.auctionStartTime).toLocaleString()}}</p>
               <p>End time: {{new Date(product.saleMethod.auction.auctionEndTime).toLocaleString()}}</p> -->
