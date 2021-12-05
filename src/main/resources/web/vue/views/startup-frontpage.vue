@@ -24,7 +24,7 @@
       </div>
     </section>
     <div class="clr"></div>
-    <footer>
+    <footer id="startup-footer">
       <p>{{ startupInformation.address }}, phone: {{ startupInformation.phoneNumber }}</p>
       <p id="copyright">Copyright &copy; <a class="link-h" href="index.html">Startup Bedrift</a>. All rights reserved.</p>
       <p>Website made with ❤️ by <a class="link-h" href="https://github.com/julianalsemmani/EnklereCSS">Julian Alsemmani</a></p>
@@ -160,16 +160,16 @@ a {
   margin: 100px 0px;
 }
 
-footer {
+#startup-footer {
   margin-top: 135px;
   margin-bottom: 10px;
 }
 
-footer p {
+#startup-footer p {
   text-align: center;
 }
 
-footer .copyright {
+#startup-footer .copyright {
   font-size: 18px;
   text-align: center;
 }
