@@ -18,6 +18,7 @@
               <p>Sale type: Auction</p>
               <p>Product name: {{product.name}}</p>
               <p>Current bid: {{product.saleMethod.auction.bidHistory.at(-1).bidPrice}} NOK</p>
+              <p>Start bid: {{product.saleMethod.auction.startBid}} NOK</p>
               <!-- <p>Minimum allowed bid: {{product.saleMethod.auction.minimumBidIncrement}} NOK</p>
               <p>Start time: {{new Date(product.saleMethod.auction.auctionStartTime).toLocaleString()}}</p>
               <p>End time: {{new Date(product.saleMethod.auction.auctionEndTime).toLocaleString()}}</p> -->

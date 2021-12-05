@@ -4,14 +4,14 @@ import java.time.Instant;
 import java.util.List;
 
 public class Auction implements SaleMethod {
-    public int minimumBid;
+    public int startBid;
     public int minimumBidIncrement;
     public int buyoutPrice;
     public Instant auctionStartTime, auctionEndTime;
     public List<AuctionBid> bidHistory;
 
-    public Auction(int minimumBid, int minimumBidIncrement, int buyoutPrice, Instant auctionStartTime, Instant auctionEndTime, List<AuctionBid> bidHistory) {
-        this.minimumBid = minimumBid;
+    public Auction(int startBid, int minimumBidIncrement, int buyoutPrice, Instant auctionStartTime, Instant auctionEndTime, List<AuctionBid> bidHistory) {
+        this.startBid = startBid;
         this.minimumBidIncrement = minimumBidIncrement;
         this.buyoutPrice = buyoutPrice;
         this.auctionStartTime = auctionStartTime;
@@ -27,7 +27,7 @@ public class Auction implements SaleMethod {
     }
 
     public boolean doBid(AuctionBid bid) {
-        if(bid.bidPrice < minimumBid) {
+        if(bid.bidPrice < startBid) {
             return false;
         }
 

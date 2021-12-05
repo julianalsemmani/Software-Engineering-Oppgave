@@ -1,7 +1,6 @@
 package persist.json;
 
 import core.model.Auction;
-import core.model.AuctionBid;
 import core.model.Store;
 import core.model.User;
 
@@ -10,7 +9,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class JSONAuction implements JSONDeserializer<Auction> {
-    public int minimumBid;
+    public int startBid;
     public int minimumBidIncrement;
     public int buyoutPrice;
     public Instant auctionStartTime, auctionEndTime;
@@ -21,7 +20,7 @@ public class JSONAuction implements JSONDeserializer<Auction> {
     }
 
     public JSONAuction(Auction auction) {
-        minimumBid = auction.minimumBid;
+        startBid = auction.startBid;
         minimumBidIncrement = auction.minimumBidIncrement;
         buyoutPrice = auction.buyoutPrice;
         auctionStartTime = auction.auctionStartTime;
@@ -31,7 +30,7 @@ public class JSONAuction implements JSONDeserializer<Auction> {
 
     @Override
     public Auction deserialize(Map<UUID, User> idUserMap, Map<UUID, Store> idStoreMap) {
-        return new Auction(minimumBid, minimumBidIncrement, buyoutPrice, auctionStartTime, auctionEndTime,
+        return new Auction(startBid, minimumBidIncrement, buyoutPrice, auctionStartTime, auctionEndTime,
                 Arrays.stream(bidHistory)
                         .map(bid -> bid.deserialize(idUserMap, idStoreMap))
                         .collect(Collectors.toCollection(ArrayList::new)));

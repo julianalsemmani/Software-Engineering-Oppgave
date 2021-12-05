@@ -5,7 +5,7 @@
     <store-navbar v-bind:store="store"></store-navbar>
     <main class="main-pos">
       <h1>Add Product Sale</h1>
-        <form method="post" class="form-box">
+        <form class="form-box">
           <label for="floatingProdName">Product name</label>
           <input type="text" id="floatingProdName" placeholder="Product name">
           
@@ -17,9 +17,8 @@
           
           <label for="floatingPrice">Price</label>
           <input type="number" id="floatingPrice" placeholder="Price">
-          
-          <button type="submit" v-on:click=submitProduct()>Add product</button>
         </form>
+      <button v-on:click=submitProduct()>Add product</button>
     </main>
     <store-footer v-bind:store="store"></store-footer>
   </div>
@@ -39,18 +38,27 @@ Vue.component("store-add-product-sale", {
         .catch(() => alert("Data not found"));
   },
   methods: {
-    submitProduct: () => {
+     submitProduct: async function () {
       const product = {
         name: floatingProdName.value,
         productPicture: floatingImage.value,
-        price: floatingStartPrice.value,
       }
-      fetch(`/api/stores/${this.store.id}/products`, { 
+      let productId;
+      await fetch(`/api/stores/${this.store.id}/products`, {
         method: 'POST',
         body: JSON.stringify(product)
       })
-          .then(res => res.json())
-          .then(newProduct => window.location.replace(`/stores/${this.store.id}`))
+        .then(res => res.json())
+        .then(newProduct => productId = newProduct.id)
+
+      const sale = {
+        price: floatingPrice.value,
+      }
+      fetch(`/api/stores/${this.store.id}/products/${productId}/sale`, { 
+        method: 'POST',
+        body: JSON.stringify(sale)
+      })
+          .then(() => window.location.replace(`/stores/${this.store.id}/products/${productId}`))
     }
   }
 })
