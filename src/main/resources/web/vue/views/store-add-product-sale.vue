@@ -17,9 +17,8 @@
           
           <label for="floatingPrice">Price</label>
           <input type="number" id="floatingPrice" placeholder="Price">
-          
-          <button v-on:click=submitProduct()>Add product</button>
         </form>
+      <button v-on:click=submitProduct()>Add product</button>
     </main>
     <store-footer v-bind:store="store"></store-footer>
   </div>
@@ -57,7 +56,7 @@ Vue.component("store-add-product-sale", {
       }
       fetch(`/api/stores/${this.store.id}/products/${productId}/sale`, { 
         method: 'POST',
-        body: JSON.stringify(auction)
+        body: JSON.stringify(sale)
       })
           .then(() => window.location.replace(`/stores/${this.store.id}/products/${productId}`))
     }
