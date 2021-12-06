@@ -1,0 +1,30 @@
+@startuml
+participant "Bruker" as B
+participant "Front-End" as FE
+participant "Back-End" as BE
+
+B -> FE: naviger til produkt
+
+FE -> BE: hent produkt inforamsjon og auksjon
+BE -> FE: 
+FE -> B: vis produkt og auksjon informasjon
+
+B -> FE: legg inn bud
+
+FE -> BE: varsle at bruker vil legge inn bud
+
+BE -> BE: verifiser bruker
+
+BE -> BE: verifiser bud
+
+BE -> BE: verifiser at bruker har nok penger
+
+BE -> BE: legg inn bud
+
+BE -> FE: varlse at bud er lagt inn
+
+FE -> BE: hent oppdatert informasjon om auksjon
+BE -> FE:
+
+FE -> B: vis oppdatert auksjon med bruker sitt bud
+@enduml
