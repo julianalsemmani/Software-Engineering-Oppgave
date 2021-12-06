@@ -1,0 +1,11 @@
+@startuml
+(*) --> "Brukeren legger til et produkt"
+"Brukeren legger til et produkt" --> "Skriver detaljene til varen"
+"Skriver detaljene til varen" --> "Legger til varen"
+"Legger til varen" --> "Backend tar imot request fra frontend"
+"Backend tar imot request fra frontend" --> "Verfiserer om innholdet er gyldig"
+"Verfiserer om innholdet er gyldig" --> "Innholdet blir godkjent"
+"Innholdet blir godkjent" --> "Produktet lagres" 
+"Produktet lagres" --> "Brukeren sendes til produktsiden" 
+"Brukeren sendes til produktsiden" -->(*)
+@enduml
