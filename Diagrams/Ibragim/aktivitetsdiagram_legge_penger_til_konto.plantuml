@@ -1,0 +1,19 @@
+@startuml legge penger til konto
+(*) --> "Legg til penger på kontoen"
+if "Penger på kortet?" then
+    -->[ ja ] "Velg betalingsmetode"
+    --> "Gjennomfør betaling"
+    if "Betaling godkjent?" then
+        -->[ ja ] "Betaling godkjent"
+        "Betaling godkjent" --> "Penger er lagt til kontoen" 
+        "Penger er lagt til kontoen" -->(*)
+        
+    else
+        -->[ nei ] "Betaling ikke godkjent"
+        -->"Prøv på nytt"
+        "Prøv på nytt" -> "Velg betalingsmetode"
+    endif
+else
+    -->[ nei ] "Legg til penger på kortet"
+    "Legg til penger på kortet" --> "Velg betalingsmetode"
+@enduml
