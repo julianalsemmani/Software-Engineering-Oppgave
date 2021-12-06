@@ -1,0 +1,16 @@
+@startuml
+Bruker -> Frontend : Navigering til Registrering
+Frontend -> Frontend : Henter registering skjema
+Frontend -> Bruker: Sender skjema til brukeren
+Frontend -> Backend : Sender inn brukerinformasjon til database
+alt #palegreen Success registration
+ Backend -> Backend : Verifisere at brukerinformasjonen ikke eksisterer
+ Backend -> Backend : POSTer data til databasen, hvis informasjonen ikke eksisterer
+ Backend -> Frontend : Sender tilbakemelding at registering er godkjent
+ Frontend -> Bruker : Viser melding om at registrering er godkjent
+else #pink Failed registration
+ Backend -> Backend : Brukerinformasjonen eksisterer i databasen
+ Backend -> Frontend : Sender tilbake melding om at konto allerede finnes
+ Frontend -> Bruker : Viser melding om at kontoen allerede finnes
+end
+@enduml
