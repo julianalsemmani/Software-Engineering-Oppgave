@@ -28,7 +28,6 @@
             <img v-bind:src="product.productPicture" alt="product not for sale" width="200" height="200">
             <p>Sale type: Not for sale</p>
             <p>Product name: {{product.name}}</p>
-            <p>Product price: Not for sale</p>
           </section>
         </a>
       </article>

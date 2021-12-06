@@ -2,6 +2,7 @@
   <section>
     <p>Sale type: Auction</p>
     <div class="auction-info" v-if="!auction.hasEnded">
+      <p>Start bid: {{auction.startBid}} NOK</p>
       <p>Minimum bid: {{minimumBid}} NOK</p>
       <p>Bid increment: {{auction.minimumBidIncrement}} NOK</p>
       <p>Buyout: {{auction.buyoutPrice}} NOK</p>
@@ -56,7 +57,7 @@ Vue.component("product-auction", {
       this.auction.bidHistory = this.auction.bidHistory.reverse()
 
       this.minimumBid = this.auction.bidHistory.length > 0 ?
-          this.auction.bidHistory[0].bidPrice + this.auction.minimumBidIncrement : this.auction.minimumBid
+          this.auction.bidHistory[0].bidPrice + this.auction.minimumBidIncrement : this.auction.startBid
 
       this.bidPriceInvalid = this.bidPrice < this.minimumBid || this.bidPrice > this.auction.buyoutPrice
     }

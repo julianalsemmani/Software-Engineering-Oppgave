@@ -11,7 +11,7 @@ public class ProductResponseBody {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class SaleMethodResponseBody {
         public static class AuctionResponseBody {
-            public int minimumBid;
+            public int startBid;
             public int minimumBidIncrement;
             public int buyoutPrice;
             public long auctionStartTime, auctionEndTime;
@@ -19,7 +19,7 @@ public class ProductResponseBody {
             public boolean hasEnded;
 
             public AuctionResponseBody(Auction auction) {
-                minimumBid = auction.startBid;
+                startBid = auction.startBid;
                 minimumBidIncrement = auction.minimumBidIncrement;
                 buyoutPrice = auction.buyoutPrice;
                 auctionStartTime = auction.auctionStartTime.toEpochMilli();
