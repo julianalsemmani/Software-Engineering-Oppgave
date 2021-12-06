@@ -1,0 +1,20 @@
+@startuml
+start
+repeat
+
+:Kjøpe produkt;
+if (Er brukeren registrert?) then (Ja)
+    if (Har brukeren penger nok på brukerkonto?) then (Ja)
+
+    else (Nei)
+        :Feilmelding(Ikke nok penger på brukerkonto);
+    end
+
+endif
+:Fullfør kjøp;
+stop
+
+else (Nei)
+    :Registrer bruker;
+
+@enduml
