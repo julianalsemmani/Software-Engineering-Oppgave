@@ -1,165 +1,95 @@
-//package core.repository.fakes;
-//
-//import core.model.Product;
-//import core.model.StartUp;
-//import core.model.Store;
-//import core.model.User;
-//import core.repository.Repository;
-//
-//import java.util.*;
-//
-//public class FakeRepository implements Repository {
-//    private final Map<UUID, Store> idStoreMap = new HashMap<>();
-//    private final Map<UUID, User> idUserMap = new HashMap<>();
-//    private final Map<UUID, Product> idProductMap = new HashMap<>();
-//
-//    public void dumpFakeData() {
-//        idUserMap.clear();
-//        idStoreMap.clear();
-//        idProductMap.clear();
-//    }
-//
-//    @Override
-//    public List<Store> getAllStores() {
-//        return new ArrayList<>(idStoreMap.values());
-//    }
-//
-//    @Override
-//    public Set<User> getAllEmployees(UUID storeId) {
-//        return idStoreMap.get(storeId).employees;
-//    }
-//
-//    @Override
-//    public List<Product> getAllProducts(UUID storeId) {
-//        return idStoreMap.get(storeId).getAllProducts();
-//    }
-//
-//    @Override
-//    public Store getStoreById(UUID storeId) {
-//        return idStoreMap.get(storeId);
-//    }
-//
-//    @Override
-//    public Product getProductById(UUID productId) {
-//        return idProductMap.get(productId);
-//    }
-//
-//    @Override
-//    public Store createStore(String storeName, User owner, String address, int phoneNumber) {
-//        Store newStore = new Store(UUID.randomUUID(), storeName, owner, new HashSet<>(), address, phoneNumber, new HashSet<>());
-//        idStoreMap.put(newStore.id, newStore);
-//        return newStore;
-//    }
-//
-//    @Override
-//    public Store updateStore(UUID storeId, String storeName, User owner, String address, int phoneNumber) {
-//        return null;
-//    }
-//
-//    @Override
-//    public Store deleteStore(UUID id) {
-//        return null;
-//    }
-//
-//    @Override
-//    public User getUserById(UUID userId) {
-//        return idUserMap.get(userId);
-//    }
-//
-//    @Override
-//    public User createUser(String username, String password, String firstName, String lastName, String address, String email) {
-//        User newUser = new User(UUID.randomUUID(), username, password, firstName, lastName, address, email, 0, false);
-//        idUserMap.put(newUser.id, newUser);
-//
-//        return newUser;
-//    }
-//
-//    @Override
-//    public User updateUser(UUID userId, String username, String password, String firstName, String lastName, String address, String email) {
-//        User user = this.idUserMap.get(userId);
-//        if(user != null) {
-//            if(username != null) user.username = username;
-//            if(password != null) user.password = password;
-//            if(firstName != null) user.firstName = firstName;
-//            if(lastName != null) user.lastName = lastName;
-//            if(address != null) user.address = address;
-//            if(email != null) user.email = email;
-//        }
-//
-//        return user;
-//    }
-//
-//    @Override
-//    public User deleteUser(UUID userId) {
-//        User user = idUserMap.remove(userId);
-//        if(user != null) {
-//            for (Store store : getAllStores()) {
-//                store.employees.removeIf(theEmployee -> theEmployee.id == userId);
-//            }
-//        }
-//        return user;
-//    }
-//
-//    @Override
-//    public Product createProduct(UUID storeId, String name, String productPicture) {
-//        Store store = idStoreMap.get(storeId);
-//        if(store != null) {
-//            Product newProduct = new Product(UUID.randomUUID(), name, productPicture);
-//            store.addProduct(newProduct);
-//
-//            return newProduct;
-//        }
-//
-//        return null;
-//    }
-//
-//    @Override
-//    public Product updateProduct(UUID productId, String name, String productPicture) {
-//        Product product = idProductMap.get(productId);
-//        if(product != null) {
-//            if(name != null) product.name = name;
-//            if(productPicture != null) product.productPicture = productPicture;
-//
-//            return product;
-//        }
-//
-//        return null;
-//    }
-//
-//    @Override
-//    public Product deleteProduct(UUID productId) {
-//        Product product = idProductMap.get(productId);
-//        product.store.products.remove(product);
-//        idProductMap.remove(productId);
-//        return product;
-//    }
-//
-//    @Override
-//    public void registerEmployee(UUID storeId, UUID newEmployeeId) {
-//        Store store = idStoreMap.get(storeId);
-//        User newEmployee = idUserMap.get(newEmployeeId);
-//        if(store != null && newEmployee != null) {
-//            store.employees.add(newEmployee);
-//        }
-//    }
-//
-//    @Override
-//    public StartUp getStartUp() {
-//        return null;
-//    }
-//
-//    @Override
-//    public StartUp createStartUp(String startUpName, int phoneNumber, String address) {
-//        return null;
-//    }
-//
-//    @Override
-//    public StartUp updateStartUp(UUID id, String startUpName, int phoneNumber, String address) {
-//        return null;
-//    }
-//
-//    @Override
-//    public StartUp deleteStartUp(UUID id) {
-//        return null;
-//    }
-//}
+package core.repository.fakes;
+
+import core.model.*;
+import core.repository.Repository;
+
+import java.util.*;
+
+/**
+ * A repository that stores data in memory only. Comes with some initial data.
+ */
+public class FakeRepository implements Repository {
+    private final Map<UUID, Store> idStoreMap = new HashMap<>();
+    private final Map<UUID, User> idUserMap = new HashMap<>();
+    private final StartUp startUp = new StartUp("", "", 0);
+
+    public User user1, user2;
+    public Store store1;
+
+    public FakeRepository() {
+        user1 = new User(UUID.randomUUID(), "user1", "password", "number", "one", "user1 address", "user1@fake.com", 500, false);
+        user2 = new User(UUID.randomUUID(), "user2", "password", "number", "two", "user2 address", "user2@fake.com", 500, false);
+        addUser(user1);
+        addUser(user2);
+
+        store1 = new Store(UUID.randomUUID(), "store one", user1, new HashSet<>(), "store1Address", 12, new HashSet<>(
+                Set.of(new Product(UUID.randomUUID(), "product1", "", new Sale(500)))
+        ));
+        addStore(store1);
+    }
+
+    public void dumpFakeData() {
+        idUserMap.clear();
+        idStoreMap.clear();
+    }
+
+    @Override
+    public List<Store> getAllStores() {
+        return new ArrayList<>(idStoreMap.values());
+    }
+
+    @Override
+    public Store getStoreById(UUID storeId) {
+        return idStoreMap.get(storeId);
+    }
+
+    @Override
+    public void addStore(Store newStore) {
+        idStoreMap.put(newStore.id, newStore);
+    }
+
+    @Override
+    public void updateStore(Store newStore) {
+
+    }
+
+    @Override
+    public void deleteStore(Store store) {
+        idStoreMap.remove(store.id);
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return new ArrayList<>(idUserMap.values());
+    }
+
+    @Override
+    public User getUserById(UUID userId) {
+        return idUserMap.get(userId);
+    }
+
+    @Override
+    public void addUser(User user) {
+        idUserMap.put(user.id, user);
+    }
+
+    @Override
+    public void updateUser(User user) {
+
+    }
+
+    @Override
+    public void deleteUser(User user) {
+        idUserMap.remove(user.id);
+    }
+
+    @Override
+    public StartUp getStartUp() {
+        return startUp;
+    }
+
+    @Override
+    public void updateStartUp() {
+
+    }
+}
