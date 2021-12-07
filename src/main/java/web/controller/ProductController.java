@@ -10,6 +10,7 @@ import io.javalin.plugin.json.JavalinJson;
 import web.dtos.product.*;
 import web.dtos.product.auction.PostBidBody;
 
+import java.time.Instant;
 import java.util.UUID;
 
 public class ProductController {
@@ -100,9 +101,22 @@ public class ProductController {
 
             PostProductAuctionBody body = JavalinJson.fromJson(ctx.body(), PostProductAuctionBody.class);
 
-            service.registerAuction(storeId, productId, body.startBid, body.minimumBidIncrement, body.buyoutPrice, body.auctionStartTime, body.auctionEndTime);
+            service.registerAuction(storeId, productId, body.startBid, body.minimumBidIncrement, body.buyoutPrice, Instant.ofEpochMilli(body.auctionStartTime), Instant.ofEpochMilli(body.auctionEndTime));
 
             ctx.status(201).result("");
+        });
+    }
+
+    public void updateAuction(Context ctx) {
+        ControllerUtils.exceptionHandler(ctx, () -> {
+            UUID storeId = ctx.pathParam("store-id", UUID.class).get();
+            UUID productId = ctx.pathParam("product-id", UUID.class).get();
+
+            PutProductAuctionBody body = JavalinJson.fromJson(ctx.body(), PutProductAuctionBody.class);
+
+            service.updateAuction(storeId, productId, body.startBid, body.minimumBidIncrement, body.buyoutPrice, Instant.ofEpochMilli(body.auctionStartTime), Instant.ofEpochMilli(body.auctionEndTime));
+
+            ctx.status(200).result("");
         });
     }
 

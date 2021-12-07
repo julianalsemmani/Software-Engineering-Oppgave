@@ -105,6 +105,7 @@ public class WebServer {
         app.post("/api/stores/:store-id/products", productController::onPostProduct);
         app.post("/api/stores/:store-id/products/:product-id/sale", productController::registerSale);
         app.post("/api/stores/:store-id/products/:product-id/auction", productController::registerAuction);
+        app.put("/api/stores/:store-id/products/:product-id/auction", productController::updateAuction);
 
         app.get("/api/stores/:store-id/products/:product-id", productController::onGetProduct);
         app.put("/api/stores/:store-id/products/:product-id", productController::onPutProduct);
@@ -124,6 +125,7 @@ public class WebServer {
 
         app.get("/stores/:store-id/add-product-sale", new VueComponent("store-add-product-sale"));
         app.get("/stores/:store-id/add-product-auction", new VueComponent("store-add-product-auction"));
+        app.get("/stores/:store-id/products/:product-id/edit-product-auction", new VueComponent("store-edit-product-auction"));
 
     }
 }

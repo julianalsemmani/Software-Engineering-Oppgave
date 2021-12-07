@@ -41,6 +41,10 @@
               <product-auction v-if="product.saleMethod?.auction" v-bind:product="product" @bid="retrieveProduct"></product-auction>
               <product-sale v-else-if="product.saleMethod?.sale" v-bind:product="product" @buy="retrieveProduct"></product-sale>
               <div v-else>Not for sale</div>
+              <div v-if="this.owner == true || this.employee == true">
+
+                <a :href="`/stores/${store.id}/products/${product.id}/edit-product-auction`" class="logbtn">Edit Product</a>
+              </div>
 
             </section>
 
@@ -60,7 +64,9 @@ Vue.component("store-product", {
   data: () => ({
     store: {},
     product: {},
-    dataRetrieved: false
+    dataRetrieved: false,
+    owner: false,
+    employee: false
   }),
   methods: {
     retrieveStore: async function () {
@@ -86,6 +92,8 @@ Vue.component("store-product", {
     // Retrieve product continuously
     setInterval( ()=>this.retrieveProduct(), 1000)
 
+    this.owner = this.$javalin.state.isOwner
+    this.employee = this.$javalin.state.isEmployee
   }
 });
 </script>

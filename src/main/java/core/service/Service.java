@@ -104,6 +104,25 @@ public class Service {
         return auction;
     }
 
+    public Auction updateAuction(UUID storeId, UUID productId, int startBid, int minimumBidIncrement, int buyoutPrice, Instant auctionStartTime, Instant auctionEndTime) {
+        Store store = repository.getStoreById(storeId);
+        Product product = store.products.get(productId);
+        if(product.saleMethod instanceof Auction) {
+            Auction auction = (Auction) product.saleMethod;
+            auction.startBid = startBid;
+            auction.minimumBidIncrement = minimumBidIncrement;
+            auction.buyoutPrice = buyoutPrice;
+            auction.auctionStartTime = auctionStartTime;
+            auction.auctionEndTime = auctionEndTime;
+
+            repository.updateStore(store);
+
+            return auction;
+        }
+
+        return null;
+    }
+
     public Sale registerSale(UUID storeId, UUID productId, int price) {
         Store store = repository.getStoreById(storeId);
         Product product = store.products.get(productId);

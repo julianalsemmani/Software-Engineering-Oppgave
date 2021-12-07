@@ -6,7 +6,7 @@
         <li class="signbtn"><a href="#">Sign up</a></li>
       </span>
       <span v-else>
-        <li class="signbtn"><a href="#">Log out</a></li>
+        <li class="signbtn"><a hreF="">Log out</a></li>
       </span>
     </ul>
     <div v-if="this.me != null" class="dropdown" style="float:right;">
