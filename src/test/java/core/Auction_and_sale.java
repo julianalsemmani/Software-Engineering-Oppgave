@@ -54,6 +54,7 @@ public class Auction_and_sale {
         Auction auction = service.registerAuction(store1.id, product.id, 100, 10, 2000,
                 Instant.now(), Instant.now().plusSeconds(3600*24*7));
 
+
         service.doBid(user1.id, store1.id, product.id, 100);
         service.doBid(user1.id, store1.id, product.id, 150);
         service.doBid(user1.id, store1.id, product.id, 151);
