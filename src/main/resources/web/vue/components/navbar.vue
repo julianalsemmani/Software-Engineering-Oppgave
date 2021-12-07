@@ -18,6 +18,7 @@
         <a href="#">My Bids</a>
         <a href="#">My Wallet</a>
         <a href="#">Purchase History</a>
+        <a href="#">Delete Account</a>
       </div>
     </div>
   </nav>
