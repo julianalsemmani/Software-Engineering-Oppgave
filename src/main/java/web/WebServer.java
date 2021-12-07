@@ -2,6 +2,7 @@ package web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import core.model.Store;
 import core.model.User;
 import core.service.Service;
 import io.javalin.Javalin;
@@ -49,7 +50,23 @@ public class WebServer {
         JavalinVue.stateFunction = ctx -> {
             User me = ControllerUtils.getLoggedInUser(ctx, service.repository);
             if(me != null) {
-                return Map.of("me", new UserResponseBody(me));
+                boolean isOwner = false;
+                boolean isEmployee = false;
+
+                if(ctx.path().contains("stores")) {
+                    UUID storeId = ctx.pathParam("store-id", UUID.class).getOrNull();
+                    if(storeId != null) {
+                        Store store = service.repository.getStoreById(storeId);
+                        if(store != null) {
+                            if(me == store.owner) {
+                                isOwner = true;
+                            } else if(store.employees.contains(me)) {
+                                isEmployee = true;
+                            }
+                        }
+                    }
+                }
+                return Map.of("me", new UserResponseBody(me), "isOwner", isOwner, "isEmployee", isEmployee);
             }
             return Map.of();
         };
@@ -101,6 +118,7 @@ public class WebServer {
         app.get("/stores/:store-id", new VueComponent("store-home"));
         app.get("/register-user", new VueComponent("register-user"));
         app.get("/register-store", new VueComponent("register-store"));
+        app.get("/stores/:store-id/contact", new VueComponent("store-contact"));
         app.get("/stores/:store-id/products", new VueComponent("store-products"));
         app.get("/stores/:store-id/products/:product-id", new VueComponent("store-product"));
 

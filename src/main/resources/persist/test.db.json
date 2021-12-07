@@ -143,6 +143,10 @@
           "bidder" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8",
           "bidPrice" : 300,
           "bidTime" : 1638730654.164069700
+        }, {
+          "bidder" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8",
+          "bidPrice" : 2000,
+          "bidTime" : 1638843288.386700100
         } ]
       },
       "sale" : null
@@ -171,6 +175,15 @@
       "auction" : null,
       "sale" : {
         "price" : 125125125,
+        "buyer" : null
+      }
+    }, {
+      "id" : "3775a5dd-fb85-4797-a831-fbee4a8e045e",
+      "name" : "Catgirl12512",
+      "productPicture" : "https://www.catgirl.io/images/catgirl_logo.png",
+      "auction" : null,
+      "sale" : {
+        "price" : 12512,
         "buyer" : null
       }
     }, {

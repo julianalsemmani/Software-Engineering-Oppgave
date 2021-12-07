@@ -1,10 +1,15 @@
 <template id="navbar">
   <nav id="navbar">
     <ul class="nav1buttons">
-      <li class="logbtn"><a href="#">Login</a></li>
-      <li class="signbtn"><a href="#">Sign up</a></li>
+      <span v-if="this.me == null">
+        <li class="logbtn"><a href="#">Login</a></li>
+        <li class="signbtn"><a href="#">Sign up</a></li>
+      </span>
+      <span v-else>
+        <li class="signbtn"><a href="#">Log out</a></li>
+      </span>
     </ul>
-    <div class="dropdown" style="float:right;">
+    <div v-if="this.me != null" class="dropdown" style="float:right;">
       <button class="dropbtn">My Account</button>
       <div class="dropdown-content">
         <a href="#">Account Settings</a>
@@ -25,8 +30,8 @@ Vue.component("navbar", {
     me: null
   },
   created() {
-    me = this.$javalin.state.me
-    console.log({me});
+    this.me = this.$javalin.state.me
+    console.log(me)
   }
 })
 </script>

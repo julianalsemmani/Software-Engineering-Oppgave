@@ -93,6 +93,16 @@ public class Auction_and_sale {
     }
 
     @Test
+    public void user_can_buy_out_product_from_auction() {
+        Product product = service.createProduct(store1.id, "product_for_auction", "url");
+        Auction auction = service.registerAuction(store1.id, product.id, 100, 10, 1000, Instant.now(), Instant.now());
+
+        assertSame(auction, product.saleMethod);
+        assertTrue(service.doBid(user1.id, store1.id, product.id, 1000));
+        assertTrue(auction.hasBeenSold());
+    }
+
+    @Test
     public void employee_can_setup_sale_for_a_product() {
         Product product = service.createProduct(store1.id, "product_for_sale", "url");
         Sale sale = service.registerSale(store1.id, product.id, 200);

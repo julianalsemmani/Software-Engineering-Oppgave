@@ -2,13 +2,16 @@
   <section>
     <p>Sale type: Sale</p>
     <p>Price: {{sale.price}} NOK</p>
-    <div v-if="sale.buyer == null" class="auction-info" >
+    <div v-if="sale.buyer == null && this.me != null" class="auction-info" >
       <button id="bid-submit" class="buttonP" type="buttonP" v-on:click="buy()">
         <i class="fas fa-dollar-sign"></i>
         Buy</button>
     </div>
-    <div v-else>
+    <div v-else-if="sale.buyer != null">
       Sold
+    </div>
+    <div v-else>
+      You have to login to bid/buy a product.
     </div>
   </section>
 </template>
@@ -18,6 +21,7 @@ Vue.component("product-sale", {
   template: "#product-sale",
   data: () => ({
     sale: {},
+    me: null,
   }),
   props: {
     product: Object
@@ -38,6 +42,7 @@ Vue.component("product-sale", {
   },
   mounted() {
     this.sale = this.product.saleMethod.sale
+    this.me = this.$javalin.state.me
   }
 })
 </script>
