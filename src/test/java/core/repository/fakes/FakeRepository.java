@@ -13,19 +13,7 @@ public class FakeRepository implements Repository {
     private final Map<UUID, User> idUserMap = new HashMap<>();
     private final StartUp startUp = new StartUp("", "", 0);
 
-    public User user1, user2;
-    public Store store1;
-
     public FakeRepository() {
-        user1 = new User(UUID.randomUUID(), "user1", "password", "number", "one", "user1 address", "user1@fake.com", 500, false);
-        user2 = new User(UUID.randomUUID(), "user2", "password", "number", "two", "user2 address", "user2@fake.com", 500, false);
-        addUser(user1);
-        addUser(user2);
-
-        store1 = new Store(UUID.randomUUID(), "store one", user1, new HashSet<>(), "store1Address", 12, new HashSet<>(
-                Set.of(new Product(UUID.randomUUID(), "product1", "", new Sale(500)))
-        ));
-        addStore(store1);
     }
 
     public void dumpFakeData() {

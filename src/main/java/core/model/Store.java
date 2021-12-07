@@ -27,9 +27,9 @@ public class Store implements Identified {
 
     }
 
-//    public Product getProduct(UUID productId) {
-//        return products.(productId);
-//    }
+    public Product getProduct(UUID productId) {
+        return products.get(productId);
+    }
 
     public User getEmployee(String userName) {
         for (User employee : employees) {
