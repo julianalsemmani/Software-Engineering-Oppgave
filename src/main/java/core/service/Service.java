@@ -134,6 +134,22 @@ public class Service {
         return sale;
     }
 
+    public Sale updateSale(UUID storeId, UUID productId, int price) {
+        Store store = repository.getStoreById(storeId);
+        Product product = store.products.get(productId);
+
+        if(product.saleMethod instanceof Sale) {
+            Sale sale = (Sale) product.saleMethod;
+
+            sale.price = price;
+
+            repository.updateStore(store);
+            return sale;
+        }
+
+        return null;
+    }
+
     public Product updateProduct(UUID storeId, UUID productId, String name, String productPicture) {
         Store store = repository.getStoreById(storeId);
 
@@ -215,5 +231,4 @@ public class Service {
 
         return success;
     }
-
 }

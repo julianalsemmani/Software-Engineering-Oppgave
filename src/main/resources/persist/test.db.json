@@ -71,150 +71,33 @@
     "owner" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8",
     "employees" : [ ],
     "products" : [ {
-      "id" : "f493793b-2d43-45e4-8600-a1969eca8a71",
-      "name" : "test_product",
-      "productPicture" : "https://tinyurl.com/3xnwja5k",
-      "auction" : null,
-      "sale" : null
-    }, {
-      "id" : "25601ac5-00fd-4551-8d2e-9d3413f495a4",
-      "name" : "Catgirl34",
-      "productPicture" : "https://www.catgirl.io/images/catgirl_logo.png",
-      "auction" : null,
-      "sale" : {
-        "price" : 124125,
-        "buyer" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8"
-      }
-    }, {
-      "id" : "d9a440cf-9c66-43a0-abe5-467a2bc991df",
-      "name" : "test2",
-      "productPicture" : "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZHVjdCUyMHBob3RvZ3JhcGh5fGVufDB8fDB8fA%3D%3D&w=1000&q=80",
-      "auction" : {
-        "startBid" : 22,
-        "minimumBidIncrement" : 1,
-        "buyoutPrice" : 20,
-        "auctionStartTime" : 1638662400000.000000000,
-        "auctionEndTime" : 1639094400000.000000000,
-        "bidHistory" : [ ]
-      },
-      "sale" : null
-    }, {
-      "id" : "bc6c7e07-8dc6-4bfc-8d85-32507316a977",
+      "id" : "d6a58f5d-7646-4219-9965-2de0cbf76d02",
       "name" : "Catgirl",
       "productPicture" : "https://www.catgirl.io/images/catgirl_logo.png",
-      "auction" : null,
-      "sale" : {
-        "price" : 12412,
-        "buyer" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8"
-      }
-    }, {
-      "id" : "40559601-3b46-45fe-a5c9-fd8c1df1ef30",
-      "name" : "test_product",
-      "productPicture" : "https://tinyurl.com/3xnwja5k",
-      "auction" : null,
-      "sale" : null
-    }, {
-      "id" : "0983f9b5-6e01-4494-a4fc-7bbc50431fc9",
-      "name" : "product_for_auction",
-      "productPicture" : "https://tinyurl.com/2p87zm9d",
       "auction" : {
-        "startBid" : 100,
-        "minimumBidIncrement" : 10,
-        "buyoutPrice" : 2000,
-        "auctionStartTime" : 1637535043.785973700,
-        "auctionEndTime" : 1938139843.785973700,
+        "startBid" : 200,
+        "minimumBidIncrement" : 20,
+        "buyoutPrice" : 5000,
+        "auctionStartTime" : 1638835200.000000000,
+        "auctionEndTime" : 1639440000.000000000,
         "bidHistory" : [ {
-          "bidder" : "cfdb5415-3ea5-4bb2-93ee-70dc1de28885",
-          "bidPrice" : 100,
-          "bidTime" : 1638643739.163294800
-        }, {
-          "bidder" : "cfdb5415-3ea5-4bb2-93ee-70dc1de28885",
-          "bidPrice" : 110,
-          "bidTime" : 1638643742.354775100
-        }, {
-          "bidder" : "cfdb5415-3ea5-4bb2-93ee-70dc1de28885",
-          "bidPrice" : 123,
-          "bidTime" : 1638643782.454197100
-        }, {
           "bidder" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8",
           "bidPrice" : 200,
-          "bidTime" : 1638724150.706523300
+          "bidTime" : 1638851167.852100400
         }, {
           "bidder" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8",
-          "bidPrice" : 300,
-          "bidTime" : 1638730654.164069700
+          "bidPrice" : 220,
+          "bidTime" : 1638851172.289142300
         }, {
           "bidder" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8",
-          "bidPrice" : 2000,
-          "bidTime" : 1638843288.386700100
+          "bidPrice" : 240,
+          "bidTime" : 1638851175.722075900
+        }, {
+          "bidder" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8",
+          "bidPrice" : 260,
+          "bidTime" : 1638851179.678510900
         } ]
       },
-      "sale" : null
-    }, {
-      "id" : "c6a9193c-b249-4cef-a740-f1ae61864a0a",
-      "name" : "Catgirl5125",
-      "productPicture" : "https://www.catgirl.io/images/catgirl_logo.png",
-      "auction" : null,
-      "sale" : {
-        "price" : 152152,
-        "buyer" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8"
-      }
-    }, {
-      "id" : "9ec62ca2-7153-46a2-8cbd-308b9135dc84",
-      "name" : "Catgirl152521",
-      "productPicture" : "https://www.catgirl.io/images/catgirl_logo.png",
-      "auction" : null,
-      "sale" : {
-        "price" : 123124,
-        "buyer" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8"
-      }
-    }, {
-      "id" : "5acb3bcf-6c9d-4476-8def-4ff43d6ce6cb",
-      "name" : "Catgirl",
-      "productPicture" : "https://www.catgirl.io/images/catgirl_logo.png",
-      "auction" : null,
-      "sale" : {
-        "price" : 125125125,
-        "buyer" : null
-      }
-    }, {
-      "id" : "3775a5dd-fb85-4797-a831-fbee4a8e045e",
-      "name" : "Catgirl12512",
-      "productPicture" : "https://www.catgirl.io/images/catgirl_logo.png",
-      "auction" : null,
-      "sale" : {
-        "price" : 12512,
-        "buyer" : null
-      }
-    }, {
-      "id" : "e646b8c9-ab8c-4ac8-858a-770d52332869",
-      "name" : "test_product",
-      "productPicture" : "https://tinyurl.com/3xnwja5k",
-      "auction" : null,
-      "sale" : null
-    }, {
-      "id" : "65ef4d23-1d47-46d0-bee0-b83d1d186ce8",
-      "name" : "product_for_sale",
-      "productPicture" : "https://tinyurl.com/yhpcttn5",
-      "auction" : null,
-      "sale" : {
-        "price" : 100,
-        "buyer" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8"
-      }
-    }, {
-      "id" : "ea8da564-7291-4714-b4f0-41988ca65f1a",
-      "name" : "Catgirl412",
-      "productPicture" : "https://www.catgirl.io/images/catgirl_logo.png",
-      "auction" : null,
-      "sale" : {
-        "price" : 125125,
-        "buyer" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8"
-      }
-    }, {
-      "id" : "0f23088c-07d0-4b8c-a8cf-0290c5258597",
-      "name" : "Catgirl",
-      "productPicture" : "https://www.catgirl.io/images/catgirl_logo.png",
-      "auction" : null,
       "sale" : null
     } ]
   } ],

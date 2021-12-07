@@ -21,6 +21,7 @@
       Auction has ended
     </div>
 
+
     <ol>
       <li v-for="bid in auction.bidHistory">
         <span>Bid: {{bid.bidPrice}} NOK - </span>
@@ -28,6 +29,10 @@
         <span>Time: {{new Date(bid.bidTime).toLocaleString()}}</span>
       </li>
     </ol>
+    <div v-if="this.owner || this.employee" style="margin-top: 1.5rem;">
+      <a :href="`/stores/${store.id}/products/${product.id}/edit-product-auction`" class="logbtn">Edit Product</a>
+    </div>
+
   </section>
 </template>
 
@@ -39,10 +44,13 @@ Vue.component("product-auction", {
     bidPriceInvalid: true,
     timeRemaining: "",
     auction: {},
-    minimumBid: 0
+    minimumBid: 0,
+    owner: false,
+    employee: false
   }),
   props: {
-    product: Object
+    product: Object,
+    store: Object
   },
   methods: {
     doBid: function () {
@@ -99,6 +107,10 @@ Vue.component("product-auction", {
         },
         100
     )
+  },
+  created() {
+    this.owner = this.$javalin.state.isOwner
+    this.employee = this.$javalin.state.isEmployee
   }
 })
 </script>

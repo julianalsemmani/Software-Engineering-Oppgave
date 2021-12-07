@@ -38,12 +38,11 @@
                 <i class="fa fa-star-half-o"></i>
               </section>
 
-              <product-auction v-if="product.saleMethod?.auction" v-bind:product="product" @bid="retrieveProduct"></product-auction>
-              <product-sale v-else-if="product.saleMethod?.sale" v-bind:product="product" @buy="retrieveProduct"></product-sale>
+              <product-auction v-if="product.saleMethod?.auction" v-bind:product="product" v-bind:store="store" @bid="retrieveProduct"></product-auction>
+              <product-sale v-else-if="product.saleMethod?.sale" v-bind:product="product" v-bind:store="store" @buy="retrieveProduct"></product-sale>
               <div v-else>Not for sale</div>
-              <div v-if="this.owner == true || this.employee == true">
-
-                <a :href="`/stores/${store.id}/products/${product.id}/edit-product-auction`" class="logbtn">Edit Product</a>
+              <div v-if="this.owner == true || this.employee == true" style="margin-top: 1.5rem;">
+                <a v-on:click="deleteProduct()" href="#" class="logbtn">Remove Product</a>
               </div>
 
             </section>
@@ -81,6 +80,12 @@ Vue.component("store-product", {
       await fetch(`/api/stores/${storeId}/products/${productId}`)
           .then(res => res.json())
           .then(product => this.product = product)
+    },
+    deleteProduct: function () {
+      const storeId = this.$javalin.pathParams["store-id"];
+      const productId = this.$javalin.pathParams["product-id"];
+      fetch(`/api/stores/${storeId}/products/${productId}`, {method: 'DELETE'})
+        .then(()=>window.location.replace(`/stores/${storeId}/products`))
     }
   },
   created() {

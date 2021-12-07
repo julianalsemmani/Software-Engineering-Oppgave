@@ -13,6 +13,10 @@
     <div v-else>
       You have to login to bid/buy a product.
     </div>
+    <div v-if="this.owner == true || this.employee == true" style="margin-top: 1.5rem;">
+      <a :href="`/stores/${store.id}/products/${product.id}/edit-product-sale`" class="logbtn">Edit Product</a>
+    </div>
+
   </section>
 </template>
 
@@ -21,10 +25,12 @@ Vue.component("product-sale", {
   template: "#product-sale",
   data: () => ({
     sale: {},
-    me: null,
+    owner: false,
+    employee: false
   }),
   props: {
-    product: Object
+    product: Object,
+    store: Object
   },
   watch: {
     product: function () {
@@ -43,7 +49,9 @@ Vue.component("product-sale", {
   mounted() {
     this.sale = this.product.saleMethod.sale
     this.me = this.$javalin.state.me
-  }
+    this.owner = this.$javalin.state.isOwner
+    this.employee = this.$javalin.state.isEmployee
+  },
 })
 </script>
 

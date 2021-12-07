@@ -133,6 +133,19 @@ public class ProductController {
         });
     }
 
+    public void updateSale(Context ctx) {
+        ControllerUtils.exceptionHandler(ctx, () -> {
+            UUID storeId = ctx.pathParam("store-id", UUID.class).get();
+            UUID productId = ctx.pathParam("product-id", UUID.class).get();
+
+            PutProductSaleBody body = JavalinJson.fromJson(ctx.body(), PutProductSaleBody.class);
+
+            service.updateSale(storeId, productId, body.price);
+
+            ctx.status(200).result("");
+        });
+    }
+
     public void buyProduct(Context ctx) {
         ControllerUtils.exceptionHandler(ctx, () -> {
             UUID storeId = ctx.pathParam("store-id", UUID.class).get();
