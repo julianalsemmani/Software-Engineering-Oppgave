@@ -8,8 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
 
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class Auction_and_sale {
 
@@ -47,5 +46,19 @@ public class Auction_and_sale {
 
         assertSame(sale, product.saleMethod);
         assertTrue(store1.getAllProducts().contains(product));
+    }
+
+    @Test
+    public void users_can_see_the_current_highest_bid_in_an_auction() {
+        Product product = service.createProduct(store1.id, "product_for_auction", "url");
+        Auction auction = service.registerAuction(store1.id, product.id, 100, 10, 2000,
+                Instant.now(), Instant.now().plusSeconds(3600*24*7));
+
+        service.doBid(user1.id, store1.id, product.id, 100);
+        service.doBid(user1.id, store1.id, product.id, 150);
+        service.doBid(user1.id, store1.id, product.id, 151);
+        service.doBid(user1.id, store1.id, product.id, 1000);
+
+        assertEquals(1000, auction.getHighestBid().bidPrice);
     }
 }
