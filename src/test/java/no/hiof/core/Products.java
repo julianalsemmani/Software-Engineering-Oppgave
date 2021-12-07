@@ -31,6 +31,8 @@ public class Products {
 
     @Test
     public void employees_can_register_a_product_for_their_store() {
+        //FK032
+
         Product product = service.createProduct(store1.id, "test_product", "url");
 
         assertNotNull(service.getProductById(store1.id, product.id));
@@ -39,6 +41,8 @@ public class Products {
 
     @Test
     public void employees_can_update_existing_products() {
+        //FK033
+
         Product product = service.createProduct(store1.id, "test_product", "url");
 
         service.updateProduct(store1.id, product.id, "new name", "new picture");
@@ -49,6 +53,8 @@ public class Products {
 
     @Test
     public void employees_can_remove_products() {
+        //FK034
+
         Product product = service.createProduct(store1.id, "product_for_auction", "url");
 
         assertNotNull(store1.getProduct(product.id));
@@ -60,6 +66,8 @@ public class Products {
 
     @Test
     public void user_can_see_all_products() {
+        //FK030
+
         Product product = service.createProduct(store1.id, "product_for_auction", "url");
         Product product2 = service.createProduct(store1.id, "product_for_auction", "url");
         Product product3 = service.createProduct(store1.id, "product_for_auction", "url");

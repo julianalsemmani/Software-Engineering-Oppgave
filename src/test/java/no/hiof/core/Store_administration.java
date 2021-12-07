@@ -30,6 +30,8 @@ public class Store_administration {
 
     @Test
     public void users_can_register_a_store_and_become_the_owner() {
+        //FK021
+
         Store newStore = service.createStore("new_store", repository.getUserById(user1.id), "store_address", 12345678);
 
         assertNotNull(newStore);
@@ -38,6 +40,8 @@ public class Store_administration {
 
     @Test
     public void employees_can_update_store_information() {
+        //FK019
+
         service.updateStore(store1.id, "new name", user1, "new address", 21);
 
         assertEquals("new name", store1.storeName);
@@ -48,6 +52,8 @@ public class Store_administration {
 
     @Test
     public void owner_can_change_owner_of_store() {
+        //FK017
+
         service.updateStore(store1.id, store1.storeName, user2, store1.address, store1.phoneNumber);
 
         assertSame(user2, store1.owner);
@@ -55,6 +61,8 @@ public class Store_administration {
 
     @Test
     public void owner_can_register_other_users_as_employees() {
+        //FK017
+
         service.registerEmployee(store1.id, user2.id);
 
         assertTrue(store1.employees.contains(user2));

@@ -25,6 +25,8 @@ public class User_service {
 
     @Test
     public void users_can_register_a_new_user() {
+        //FK005
+
         User newUser = service.createUser("newuser", "newpassword", "newfirstname", "newlastname", "newaddress", "newemail@fake.com");
 
         assertEquals("newuser", newUser.username);
@@ -37,6 +39,8 @@ public class User_service {
 
     @Test
     public void users_can_delete_themselves() {
+        //FK004
+
         assertNotNull(repository.getUserById(user1.id));
 
         service.deleteUser(user1.id);
@@ -46,6 +50,8 @@ public class User_service {
 
     @Test
     public void users_can_change_their_own_info() {
+        //FK002
+
         service.updateUser(user1.id, "updateduser", "updatedpassword", "updatedfirstname", "updatedlastname", "updatedaddress", "updatedemail@fake.com");
 
         assertEquals("updateduser", user1.username);

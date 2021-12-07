@@ -31,6 +31,8 @@ public class Auction_and_sale {
 
     @Test
     public void employees_can_set_up_an_auction_for_a_product() {
+        //FK013
+
         Product product = service.createProduct(store1.id, "product_for_auction", "url");
         Auction auction = service.registerAuction(store1.id, product.id, 100, 10, 2000,
                 Instant.now(), Instant.now().plusSeconds(3600*24*7));
@@ -41,6 +43,8 @@ public class Auction_and_sale {
 
     @Test
     public void employees_can_set_up_a_sale_for_a_product() {
+        //FK014
+
         Product product = service.createProduct(store1.id, "product_for_sale", "url");
         Sale sale = service.registerSale(store1.id, product.id, 100);
 
@@ -50,6 +54,8 @@ public class Auction_and_sale {
 
     @Test
     public void users_can_see_the_current_highest_bid_in_an_auction() {
+        //FK012
+
         Product product = service.createProduct(store1.id, "product_for_auction", "url");
         Auction auction = service.registerAuction(store1.id, product.id, 100, 10, 2000,
                 Instant.now(), Instant.now().plusSeconds(3600*24*7));
@@ -65,6 +71,8 @@ public class Auction_and_sale {
 
     @Test
     public void user_can_bid_on_product() {
+        //FK009
+
         Product product = service.createProduct(store1.id, "product_for_auction", "url");
         Auction auction = service.registerAuction(store1.id, product.id, 100, 10, 1000, Instant.now(), Instant.now());
 
@@ -74,6 +82,8 @@ public class Auction_and_sale {
 
     @Test
     public void user_can_bid_over_current_bid() {
+        //FK009
+
         Product product = service.createProduct(store1.id, "product_for_auction", "url");
         Auction auction = service.registerAuction(store1.id, product.id, 100, 10, 1000, Instant.now(), Instant.now());
 
@@ -84,6 +94,8 @@ public class Auction_and_sale {
 
     @Test
     public void user_can_not_bid_under_current_bid() {
+        //FK009
+
         Product product = service.createProduct(store1.id, "product_for_auction", "url");
         Auction auction = service.registerAuction(store1.id, product.id, 100, 10, 1000, Instant.now(), Instant.now());
 
@@ -94,6 +106,8 @@ public class Auction_and_sale {
 
     @Test
     public void user_can_buy_out_product_from_auction() {
+        //FK015
+
         Product product = service.createProduct(store1.id, "product_for_auction", "url");
         Auction auction = service.registerAuction(store1.id, product.id, 100, 10, 1000, Instant.now(), Instant.now());
 
@@ -104,6 +118,8 @@ public class Auction_and_sale {
 
     @Test
     public void employee_can_setup_sale_for_a_product() {
+        //FK014
+
         Product product = service.createProduct(store1.id, "product_for_sale", "url");
         Sale sale = service.registerSale(store1.id, product.id, 200);
 
@@ -113,6 +129,8 @@ public class Auction_and_sale {
 
     @Test
     public void user_can_buy_product() {
+        //FK011
+
         Product product = service.createProduct(store1.id, "product_for_sale", "url");
         Sale sale = service.registerSale(store1.id, product.id, 200);
 
@@ -122,6 +140,8 @@ public class Auction_and_sale {
 
     @Test
     public void user_can_not_buy_an_sold_product() {
+        //FK011
+
         Product product = service.createProduct(store1.id, "product_for_sale", "url");
         Sale sale = service.registerSale(store1.id, product.id, 200);
 
