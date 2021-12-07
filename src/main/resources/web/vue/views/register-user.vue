@@ -30,9 +30,9 @@
       <input type="text" class="form-control" id="address" required>
       <label for="address">Address</label>
     </div>
+    </form>
 
-    <button class="w-100 btn btn-lg btn-primary" v-on:click=submitUser()>Register</button>
-  </form>
+    <button class="btn btn-lg btn-primary" v-on:click=submitUser()>Register</button>
   </div>
 
   </template>
