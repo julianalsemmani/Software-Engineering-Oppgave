@@ -6,7 +6,7 @@
         <li class="signbtn"><a href="#">Sign up</a></li>
       </span>
       <span v-else>
-        <li class="signbtn"><a hreF="">Log out</a></li>
+        <li class="signbtn"><a v-on:click="logout"  href="">Log out</a></li>
       </span>
     </ul>
     <div v-if="this.me != null" class="dropdown" style="float:right;">
@@ -28,6 +28,12 @@ Vue.component("navbar", {
   template: "#navbar",
   data: {
     me: null
+  },
+  methods: {
+    logout: function () {
+      document.cookie = "user"+'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+      window.location.replace(window.href)
+    }
   },
   created() {
     this.me = this.$javalin.state.me
