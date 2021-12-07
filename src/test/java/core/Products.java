@@ -8,6 +8,9 @@ import core.service.Service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.validation.constraints.AssertTrue;
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -56,5 +59,17 @@ public class Products {
         service.deleteProduct(store1.id, product.id);
 
         assertNull(store1.getProduct(product.id));
+    }
+
+    @Test
+    public void user_can_see_all_products() {
+        Product product = service.createProduct(store1.id, "product_for_auction", "url");
+        Product product2 = service.createProduct(store1.id, "product_for_auction", "url");
+        Product product3 = service.createProduct(store1.id, "product_for_auction", "url");
+
+        assertNotNull(store1.getAllProducts());
+        assertTrue(store1.getAllProducts().contains(product));
+        assertTrue(store1.getAllProducts().contains(product2));
+        assertTrue(store1.getAllProducts().contains(product3));
     }
 }
