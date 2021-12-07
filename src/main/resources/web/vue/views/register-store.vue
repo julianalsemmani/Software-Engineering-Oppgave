@@ -19,7 +19,7 @@
     </div>
   </form>
 
-  <button class="w-100 btn btn-lg btn-primary" v-on:click=submitUser()>Register</button>
+  <button class="btn btn-lg btn-primary" v-on:click=submitUser()>Register</button>
   </div>
 </template>
 
