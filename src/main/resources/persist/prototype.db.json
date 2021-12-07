@@ -1,0 +1,60 @@
+{
+  "users" : [ {
+    "id" : "383bfde7-3071-4aa2-8cf6-501ef3e91ec4",
+    "firstName" : "Ole",
+    "lastName" : "Olsen",
+    "address" : "B R A Veien 4, 1757 Halden",
+    "email" : "oleolsen@example.com",
+    "username" : "Ole",
+    "password" : "12345678",
+    "isAdmin" : false,
+    "balance" : 0,
+    "favorites" : [ ],
+    "productsBidOn" : [ ]
+  } ],
+  "stores" : [ {
+    "id" : "271ffb76-1742-40a5-b847-fde92368a33f",
+    "storeName" : "Old Roots",
+    "address" : "B R A Veien 4, 1757 Halden",
+    "phoneNumber" : 12345678,
+    "owner" : "383bfde7-3071-4aa2-8cf6-501ef3e91ec4",
+    "employees" : [ ],
+    "products" : [ {
+      "id" : "c54ef7a2-842b-43f7-a034-a512450ec260",
+      "name" : "",
+      "productPicture" : "https://images.ctfassets.net/2d5q1td6cyxq/4kmwcxuqXxUxUVfggQhbiI/650b0af104bfdf9979545eb326786243/Hero-hottoddy_.jpg",
+      "auction" : null,
+      "sale" : {
+        "price" : 299,
+        "buyer" : null
+      }
+    }, {
+      "id" : "27c899d9-f7eb-4f2d-a71c-503701d78fa3",
+      "name" : "Mona Lisa",
+      "productPicture" : "http://cdn.cnn.com/cnnnext/dam/assets/190430171751-mona-lisa.jpg",
+      "auction" : null,
+      "sale" : {
+        "price" : 860000000,
+        "buyer" : null
+      }
+    }, {
+      "id" : "6b4bd1ea-d6db-4861-a13f-d2799a0b7eca",
+      "name" : "Skrik",
+      "productPicture" : "https://posteryard.no/wp-content/uploads/sites/5/2020/09/02162.01.013018.02.jpg",
+      "auction" : {
+        "startBid" : 120000000,
+        "minimumBidIncrement" : 10000,
+        "buyoutPrice" : 250000000,
+        "auctionStartTime" : 1638835200.000000000,
+        "auctionEndTime" : 1643068800.000000000,
+        "bidHistory" : [ ]
+      },
+      "sale" : null
+    } ]
+  } ],
+  "startUp" : {
+    "name" : "",
+    "address" : "",
+    "phoneNumber" : 0
+  }
+}
