@@ -1,0 +1,9 @@
+@startuml
+Ansatt -> Frontend : Naviger til redigering
+Frontend -> Frontend : Henter redigerings skjema
+Frontend -> Ansatt : Sender tilbake til Bruker
+Frontend -> Backend : Sender inn informasjon til backend
+Backend -> Backend : Gjør endringer på produktet man redigerer
+Backend -> Frontend : Tilbakemelding om at endring er gjort
+Frontend -> Ansatt : Viser tilbakemelding om at endringen er gjort.
+@enduml
