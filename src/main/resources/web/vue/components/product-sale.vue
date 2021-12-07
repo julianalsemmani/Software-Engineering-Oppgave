@@ -2,13 +2,16 @@
   <section>
     <p>Sale type: Sale</p>
     <p>Price: {{sale.price}} NOK</p>
-    <div v-if="sale.buyer == null && this.me != null" class="auction-info" >
+    <div v-if="sale.buyer == null && this.me != null && (this.owner == false && this.employee == false)" class="auction-info" >
       <button id="bid-submit" class="buttonP" type="buttonP" v-on:click="buy()">
         <i class="fas fa-dollar-sign"></i>
         Buy</button>
     </div>
     <div v-else-if="sale.buyer != null">
       Sold
+    </div>
+    <div v-else-if="this.owner == true && this.employee == true">
+      You can not buy a product as a store owner/employee.
     </div>
     <div v-else>
       You have to login to bid/buy a product.
