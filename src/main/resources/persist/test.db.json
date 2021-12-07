@@ -31,7 +31,38 @@
     "phoneNumber" : 12345678,
     "owner" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8",
     "employees" : [ ],
-    "products" : [ ]
+    "products" : [ {
+      "id" : "d5627c76-80ea-463a-baf3-137b70dc1aa2",
+      "name" : "Test",
+      "productPicture" : "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZHVjdCUyMHBob3RvZ3JhcGh5fGVufDB8fDB8fA%3D%3D&w=1000&q=80",
+      "auction" : {
+        "minimumBid" : 20,
+        "minimumBidIncrement" : 200,
+        "buyoutPrice" : 200000,
+        "auctionStartTime" : 1638662400000.000000000,
+        "auctionEndTime" : 1638748800000.000000000,
+        "bidHistory" : [ {
+          "bidder" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8",
+          "bidPrice" : 200,
+          "bidTime" : 1638730041.990265600
+        }, {
+          "bidder" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8",
+          "bidPrice" : 400,
+          "bidTime" : 1638730049.620756700
+        }, {
+          "bidder" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8",
+          "bidPrice" : 200000,
+          "bidTime" : 1638730054.031271200
+        } ]
+      },
+      "sale" : null
+    }, {
+      "id" : "29c9c5a7-d2b8-4192-82b0-a79fe3bc0982",
+      "name" : "test",
+      "productPicture" : "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZHVjdCUyMHBob3RvZ3JhcGh5fGVufDB8fDB8fA%3D%3D&w=1000&q=80",
+      "auction" : null,
+      "sale" : null
+    } ]
   }, {
     "id" : "c840b1c0-82bb-4f55-85d3-580ba0f11290",
     "storeName" : "test_store",
@@ -46,10 +77,17 @@
       "auction" : null,
       "sale" : null
     }, {
-      "id" : "05954810-e9b7-4fa7-99e6-0277abf70006",
-      "name" : "Catgirl",
-      "productPicture" : "https://www.catgirl.io/images/catgirl_logo.png",
-      "auction" : null,
+      "id" : "d9a440cf-9c66-43a0-abe5-467a2bc991df",
+      "name" : "test2",
+      "productPicture" : "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZHVjdCUyMHBob3RvZ3JhcGh5fGVufDB8fDB8fA%3D%3D&w=1000&q=80",
+      "auction" : {
+        "minimumBid" : 22,
+        "minimumBidIncrement" : 1,
+        "buyoutPrice" : 20,
+        "auctionStartTime" : 1638662400000.000000000,
+        "auctionEndTime" : 1639094400000.000000000,
+        "bidHistory" : [ ]
+      },
       "sale" : null
     }, {
       "id" : "e646b8c9-ab8c-4ac8-858a-770d52332869",
@@ -76,7 +114,7 @@
       "name" : "product_for_auction",
       "productPicture" : "https://tinyurl.com/2p87zm9d",
       "auction" : {
-        "startBid" : 100,
+        "minimumBid" : 100,
         "minimumBidIncrement" : 10,
         "buyoutPrice" : 2000,
         "auctionStartTime" : 1637535043.785973700,
@@ -98,20 +136,12 @@
           "bidPrice" : 200,
           "bidTime" : 1638724150.706523300
         }, {
-          "bidder" : "cfdb5415-3ea5-4bb2-93ee-70dc1de28885",
-          "bidPrice" : 210,
-          "bidTime" : 1638730192.500393800
+          "bidder" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8",
+          "bidPrice" : 300,
+          "bidTime" : 1638730654.164069700
         } ]
       },
       "sale" : null
-    }, {
-      "id" : "4e31204d-915c-44b3-9c3d-1fb42b63e463",
-      "name" : "Catgirl",
-      "productPicture" : "https://www.catgirl.io/images/catgirl_logo.png",
-      "auction" : null,
-      "sale" : {
-        "price" : 696969
-      }
     } ]
   } ],
   "startUp" : {
