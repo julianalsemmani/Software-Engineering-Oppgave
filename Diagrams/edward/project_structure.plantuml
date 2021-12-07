@@ -1,0 +1,32 @@
+@startuml
+package "core" as c {
+  interface Repository
+  class Service
+}
+package "web" as w {
+  class WebServer
+}
+package "persist" as p {
+  class JSONRepository
+}
+class Application
+
+package "jackson" {}
+package "javalin" {}
+package "vue" {}
+
+w --> jackson
+w --> javalin
+w --> vue
+p --> jackson
+
+
+JSONRepository --|> Repository 
+Service --> Repository
+
+WebServer --> Service
+
+Application --> JSONRepository
+Application --> Service
+Application --> WebServer
+@enduml
