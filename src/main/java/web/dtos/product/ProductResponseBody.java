@@ -2,6 +2,7 @@ package web.dtos.product;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import core.model.*;
+import web.dtos.UserResponseBody;
 import web.dtos.product.auction.BidResponseBody;
 
 import java.util.UUID;
@@ -31,9 +32,13 @@ public class ProductResponseBody {
 
         public static class SaleResponseBody {
             public int price;
+            public UserResponseBody buyer;
 
             public SaleResponseBody(Sale sale) {
                 price = sale.price;
+                if(sale.buyer != null) {
+                    buyer = new UserResponseBody(sale.buyer);
+                }
             }
 
         }

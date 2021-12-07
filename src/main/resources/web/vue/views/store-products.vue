@@ -10,14 +10,15 @@
             <img v-bind:src="product.productPicture" alt="product ordinare sale" width="200" height="200">
             <p>Sale type: Ordinary</p>
             <p>Product name: {{product.name}}</p>
-            <p>Product price: {{product.saleMethod.sale.price}} NOK</p>
+            <p>Product price: {{product.saleMethod.sale.buyer ? product.saleMethod.sale.price + " NOK" : "Sold"}} </p>
           </section>
 
           <section class="article-box" v-else-if="product.saleMethod?.auction">
               <img v-bind:src="product.productPicture" alt="product auction" width="200" height="200">
               <p>Sale type: Auction</p>
               <p>Product name: {{product.name}}</p>
-              <p>Current bid: {{product.saleMethod.auction.bidHistory.at(-1).bidPrice}} NOK</p>
+              <p>Current bid: {{product.saleMethod.auction.bidHistory.length > 0 ?
+                  product.saleMethod.auction.bidHistory.at(-1).bidPrice + " NOK": "None"}}</p>
               <p>Start bid: {{product.saleMethod.auction.startBid}} NOK</p>
               <!-- <p>Minimum allowed bid: {{product.saleMethod.auction.minimumBidIncrement}} NOK</p>
               <p>Start time: {{new Date(product.saleMethod.auction.auctionStartTime).toLocaleString()}}</p>

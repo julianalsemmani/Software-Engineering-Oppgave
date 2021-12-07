@@ -107,7 +107,7 @@ public class Service {
     public Sale registerSale(UUID storeId, UUID productId, int price) {
         Store store = repository.getStoreById(storeId);
         Product product = store.products.get(productId);
-        Sale sale = new Sale(price);
+        Sale sale = new Sale(null, price);
         product.saleMethod = sale;
 
         repository.updateStore(store);
@@ -172,6 +172,24 @@ public class Service {
             AuctionBid bid = new AuctionBid(bidder, price, Instant.now());
 
             success = auction.doBid(bid);
+
+            repository.updateStore(store);
+        }
+
+        return success;
+    }
+
+    public boolean doSale(UUID storeId, UUID productId, UUID buyerId) {
+        boolean success = false;
+
+        User buyer = repository.getUserById(buyerId);
+        Store store = repository.getStoreById(storeId);
+        Product product = store.products.get(productId);
+
+        if (product.saleMethod instanceof Sale) {
+            Sale sale = (Sale) product.saleMethod;
+
+            success = sale.doSale(buyer);
 
             repository.updateStore(store);
         }

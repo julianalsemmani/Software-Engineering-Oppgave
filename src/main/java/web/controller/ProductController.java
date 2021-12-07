@@ -118,4 +118,21 @@ public class ProductController {
             ctx.status(201).result("");
         });
     }
+
+    public void buyProduct(Context ctx) {
+        ControllerUtils.exceptionHandler(ctx, () -> {
+            UUID storeId = ctx.pathParam("store-id", UUID.class).get();
+            UUID productId = ctx.pathParam("product-id", UUID.class).get();
+
+            User buyer = ControllerUtils.getLoggedInUser(ctx, service.repository);
+            if(buyer == null)
+                throw new UnauthorizedResponse();
+
+            if(service.doSale(storeId, productId, buyer.id)) {
+                ctx.status(200).result("Success");
+            } else {
+                ctx.status(400).result("Failed to buy");
+            }
+        });
+    }
 }

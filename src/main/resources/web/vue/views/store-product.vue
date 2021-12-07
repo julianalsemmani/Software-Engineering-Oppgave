@@ -39,7 +39,7 @@
               </section>
 
               <product-auction v-if="product.saleMethod?.auction" v-bind:product="product" @bid="retrieveProduct"></product-auction>
-              <product-sale v-else-if="product.saleMethod?.sale" v-bind:product="product"></product-sale>
+              <product-sale v-else-if="product.saleMethod?.sale" v-bind:product="product" @buy="retrieveProduct"></product-sale>
               <div v-else>Not for sale</div>
 
             </section>

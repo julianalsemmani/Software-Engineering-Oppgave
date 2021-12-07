@@ -93,6 +93,7 @@ public class WebServer {
         app.put("/api/stores/:store-id/products/:product-id", productController::onPutProduct);
         app.delete("/api/stores/:store-id/products/:product-id", productController::onDeleteProduct);
         app.post("/api/stores/:store-id/products/:product-id/bid", productController::onPostBid);
+        app.post("/api/stores/:store-id/products/:product-id/buy", productController::buyProduct);
 
         app.get("/", new VueComponent("prototype-hub"));
         app.get("/startup", new VueComponent("startup-frontpage"));

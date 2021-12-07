@@ -38,19 +38,19 @@ public class Auction implements SaleMethod {
         return false;
     }
 
-    public User getWinner() {
-        if(hasWinner()) {
-            return getHighestBid().bidder;
-        }
-        return null;
-    }
-
-    public boolean hasWinner() {
-        return hasEnded() && bidHistory.size() > 0;
-    }
-
     public boolean hasEnded() {
         return Instant.now().isAfter(auctionEndTime)
                 || (bidHistory.size() > 0 && getHighestBid().bidPrice >= buyoutPrice);
+    }
+
+    @Override
+    public boolean hasBeenSold() {
+        return hasEnded() && bidHistory.size() > 0;
+    }
+
+    @Override
+    public User getBuyer() {
+        if(hasBeenSold()) return getHighestBid().bidder;
+        return null;
     }
 }

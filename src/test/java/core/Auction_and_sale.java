@@ -91,4 +91,22 @@ public class Auction_and_sale {
         assertTrue(service.doBid(user1.id, store1.id, product.id, 200));
         assertFalse(service.doBid(user2.id, store1.id, product.id, 100));
     }
+
+    @Test
+    public void employee_can_setup_sale_for_a_product() {
+        Product product = service.createProduct(store1.id, "product_for_sale", "url");
+        Sale sale = service.registerSale(store1.id, product.id, 200);
+
+        assertSame(sale, product.saleMethod);
+        assertEquals(200, sale.price);
+    }
+
+    @Test
+    public void user_can_buy_product() {
+        Product product = service.createProduct(store1.id, "product_for_sale", "url");
+        Sale sale = service.registerSale(store1.id, product.id, 200);
+
+        assertSame(sale, product.saleMethod);
+        assertTrue(service.doSale(store1.id, product.id, user1.id));
+    }
 }
