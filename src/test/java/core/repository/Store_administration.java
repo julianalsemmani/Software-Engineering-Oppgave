@@ -1,15 +1,12 @@
 package core.repository;
 
-import core.model.*;
+import core.model.Product;
+import core.model.Store;
+import core.model.User;
 import core.repository.fakes.FakeRepository;
 import core.service.Service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -79,5 +76,17 @@ public class Store_administration {
         assertEquals(21, store1.phoneNumber);
     }
 
+    @Test
+    public void owner_can_change_owner_of_store() {
+        service.updateStore(store1.id, store1.storeName, user2, store1.address, store1.phoneNumber);
 
+        assertSame(user2, store1.owner);
+    }
+
+    @Test
+    public void owner_can_register_other_users_as_employees() {
+        service.registerEmployee(store1.id, user2.id);
+
+        assertTrue(store1.employees.contains(user2));
+    }
 }

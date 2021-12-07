@@ -140,7 +140,7 @@ public class Service {
         return product;
     }
 
-    void registerEmployee(UUID storeId, UUID newEmployeeId) {
+    public void registerEmployee(UUID storeId, UUID newEmployeeId) {
         Store store = repository.getStoreById(storeId);
 
         User newEmployee = repository.getUserById(newEmployeeId);
