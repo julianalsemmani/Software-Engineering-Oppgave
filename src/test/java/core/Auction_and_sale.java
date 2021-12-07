@@ -119,4 +119,13 @@ public class Auction_and_sale {
         assertSame(sale, product.saleMethod);
         assertTrue(service.doSale(store1.id, product.id, user1.id));
     }
+
+    @Test
+    public void user_can_not_buy_an_sold_product() {
+        Product product = service.createProduct(store1.id, "product_for_sale", "url");
+        Sale sale = service.registerSale(store1.id, product.id, 200);
+
+        assertTrue(service.doSale(store1.id, product.id, user1.id));
+        assertFalse(service.doSale(store1.id, product.id, user2.id));
+    }
 }
