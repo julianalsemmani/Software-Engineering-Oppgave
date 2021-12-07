@@ -2,8 +2,8 @@
   <nav id="navbar">
     <ul class="nav1buttons">
       <span v-if="this.me == null">
-        <li class="logbtn"><a href="#">Login</a></li>
-        <li class="signbtn"><a href="#">Sign up</a></li>
+        <li class="logbtn"><a href="/">Login</a></li>
+        <li class="signbtn"><a href="/register-user">Sign up</a></li>
       </span>
       <span v-else>
         <li class="signbtn"><a v-on:click="logout"  href="">Log out</a></li>
