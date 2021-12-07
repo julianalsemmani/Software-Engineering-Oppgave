@@ -62,4 +62,33 @@ public class Auction_and_sale {
 
         assertEquals(1000, auction.getHighestBid().bidPrice);
     }
+
+    @Test
+    public void user_can_bid_on_product() {
+        Product product = service.createProduct(store1.id, "product_for_auction", "url");
+        Auction auction = service.registerAuction(store1.id, product.id, 100, 10, 1000, Instant.now(), Instant.now());
+
+        assertSame(auction, product.saleMethod);
+        assertTrue(service.doBid(user1.id, store1.id, product.id, 200));
+    }
+
+    @Test
+    public void user_can_bid_over_current_bid() {
+        Product product = service.createProduct(store1.id, "product_for_auction", "url");
+        Auction auction = service.registerAuction(store1.id, product.id, 100, 10, 1000, Instant.now(), Instant.now());
+
+        assertSame(auction, product.saleMethod);
+        assertTrue(service.doBid(user1.id, store1.id, product.id, 200));
+        assertTrue(service.doBid(user2.id, store1.id, product.id, 210));
+    }
+
+    @Test
+    public void user_can_not_bid_under_current_bid() {
+        Product product = service.createProduct(store1.id, "product_for_auction", "url");
+        Auction auction = service.registerAuction(store1.id, product.id, 100, 10, 1000, Instant.now(), Instant.now());
+
+        assertSame(auction, product.saleMethod);
+        assertTrue(service.doBid(user1.id, store1.id, product.id, 200));
+        assertFalse(service.doBid(user2.id, store1.id, product.id, 100));
+    }
 }
