@@ -57,11 +57,14 @@
       },
       "sale" : null
     }, {
-      "id" : "29c9c5a7-d2b8-4192-82b0-a79fe3bc0982",
-      "name" : "test",
-      "productPicture" : "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZHVjdCUyMHBob3RvZ3JhcGh5fGVufDB8fDB8fA%3D%3D&w=1000&q=80",
+      "id" : "9f380599-d908-429e-8e74-4eda481a5da6",
+      "name" : "Hot Toddy",
+      "productPicture" : "https://images.ctfassets.net/2d5q1td6cyxq/4kmwcxuqXxUxUVfggQhbiI/650b0af104bfdf9979545eb326786243/Hero-hottoddy_.jpg",
       "auction" : null,
-      "sale" : null
+      "sale" : {
+        "price" : 29,
+        "buyer" : "0b665927-79c1-4d31-a6b6-23c2d85c86b8"
+      }
     } ]
   }, {
     "id" : "c840b1c0-82bb-4f55-85d3-580ba0f11290",

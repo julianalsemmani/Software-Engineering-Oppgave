@@ -10,7 +10,7 @@
             <img v-bind:src="product.productPicture" alt="product ordinare sale" width="200" height="200">
             <p>Sale type: Ordinary</p>
             <p>Product name: {{product.name}}</p>
-            <p>Product price: {{product.saleMethod.sale.buyer ? product.saleMethod.sale.price + " NOK" : "Sold"}} </p>
+            <p>Product price: {{!product.saleMethod.sale.buyer ? product.saleMethod.sale.price + " NOK" : "Sold"}} </p>
           </section>
 
           <section class="article-box" v-else-if="product.saleMethod?.auction">
