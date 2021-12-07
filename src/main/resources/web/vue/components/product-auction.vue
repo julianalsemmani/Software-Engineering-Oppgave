@@ -1,7 +1,7 @@
 <template id="product-auction">
   <section>
     <p>Sale type: Auction</p>
-    <div class="auction-info" v-if="!auction.hasEnded">
+    <div class="auction-info" v-if="!auction.hasEnded && this.me != null && (this.owner == false && this.employee == false)">
       <p>Start bid: {{auction.startBid}} NOK</p>
       <p>Minimum bid: {{minimumBid}} NOK</p>
       <p>Bid increment: {{auction.minimumBidIncrement}} NOK</p>
@@ -17,8 +17,14 @@
         <i class="fas fa-dollar-sign"></i>
         Add bid</button>
     </div>
-    <div v-else>
+    <div v-else-if="auction.hasEnded">
       Auction has ended
+    </div>
+    <div v-else-if="this.owner == true || this.employee == true">
+      You can not buy a product as a store owner/employee.
+    </div>
+    <div v-else>
+      You have to login to bid/buy a product.
     </div>
 
 
@@ -46,7 +52,8 @@ Vue.component("product-auction", {
     auction: {},
     minimumBid: 0,
     owner: false,
-    employee: false
+    employee: false,
+    me: null
   }),
   props: {
     product: Object,
@@ -111,6 +118,7 @@ Vue.component("product-auction", {
   created() {
     this.owner = this.$javalin.state.isOwner
     this.employee = this.$javalin.state.isEmployee
+    this.me = this.$javalin.state.me
   }
 })
 </script>
