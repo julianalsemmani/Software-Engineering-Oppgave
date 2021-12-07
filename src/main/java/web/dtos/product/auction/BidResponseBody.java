@@ -1,7 +1,7 @@
 package web.dtos.product.auction;
 
 import core.model.AuctionBid;
-import web.dtos.UserResponseBody;
+import web.dtos.user.UserResponseBody;
 
 public class BidResponseBody {
     public UserResponseBody bidder;

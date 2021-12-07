@@ -1,4 +1,4 @@
-package web.dtos;
+package web.dtos.user;
 
 import org.unbrokendome.jackson.beanvalidation.JsonValidated;
 

@@ -13,7 +13,7 @@ import io.javalin.plugin.rendering.vue.JavalinVue;
 import io.javalin.plugin.rendering.vue.VueComponent;
 import web.controller.*;
 import org.unbrokendome.jackson.beanvalidation.BeanValidationModule;
-import web.dtos.UserResponseBody;
+import web.dtos.user.UserResponseBody;
 
 import javax.validation.Validation;
 import javax.validation.ValidatorFactory;
