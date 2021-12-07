@@ -1,4 +1,4 @@
-package core.repository.fakes;
+package core.fakes;
 
 import core.model.*;
 import core.repository.Repository;

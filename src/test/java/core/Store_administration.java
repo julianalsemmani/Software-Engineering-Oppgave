@@ -1,9 +1,9 @@
-package core.repository;
+package core;
 
 import core.model.Product;
 import core.model.Store;
 import core.model.User;
-import core.repository.fakes.FakeRepository;
+import core.fakes.FakeRepository;
 import core.service.Service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
