@@ -2,7 +2,7 @@ package web.dtos.product;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import core.model.*;
-import web.dtos.UserResponseBody;
+import web.dtos.user.UserResponseBody;
 import web.dtos.product.auction.BidResponseBody;
 
 import java.util.UUID;

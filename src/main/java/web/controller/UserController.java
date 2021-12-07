@@ -1,18 +1,14 @@
 package web.controller;
 
-import core.model.Store;
 import core.model.User;
-import core.repository.Repository;
 import core.service.Service;
-import io.javalin.http.BadRequestResponse;
 import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
 import io.javalin.http.UnauthorizedResponse;
 import io.javalin.plugin.json.JavalinJson;
-import web.dtos.PostUserBody;
-import web.dtos.PutUserBody;
-import web.dtos.UserResponseBody;
-import web.dtos.store.StoreResponseBody;
+import web.dtos.user.PostUserBody;
+import web.dtos.user.PutUserBody;
+import web.dtos.user.UserResponseBody;
 
 import java.util.List;
 import java.util.UUID;
