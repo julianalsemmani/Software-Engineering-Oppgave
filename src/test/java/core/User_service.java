@@ -43,7 +43,7 @@ public class User_service {
 
         assertNull(repository.getUserById(user1.id));
     }
-    
+
     @Test
     public void users_can_change_their_own_info() {
         service.updateUser(user1.id, "updateduser", "updatedpassword", "updatedfirstname", "updatedlastname", "updatedaddress", "updatedemail@fake.com");

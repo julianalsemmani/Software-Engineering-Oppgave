@@ -38,35 +38,6 @@ public class Store_administration {
     }
 
     @Test
-    public void employees_can_register_a_product_for_their_store() {
-        Product product = service.createProduct(store1.id, "test_product", "url");
-
-        assertNotNull(service.getProductById(store1.id, product.id));
-        assertTrue(store1.getAllProducts().contains(product));
-    }
-
-    @Test
-    public void employees_can_update_existing_products() {
-        Product product = service.createProduct(store1.id, "test_product", "url");
-
-        service.updateProduct(store1.id, product.id, "new name", "new picture");
-
-        assertEquals("new name", product.name);
-        assertEquals("new picture", product.productPicture);
-    }
-
-    @Test
-    public void employees_can_remove_products() {
-        Product product = service.createProduct(store1.id, "product_for_auction", "url");
-
-        assertNotNull(store1.getProduct(product.id));
-
-        service.deleteProduct(store1.id, product.id);
-
-        assertNull(store1.getProduct(product.id));
-    }
-
-    @Test
     public void employees_can_update_store_information() {
         service.updateStore(store1.id, "new name", user1, "new address", 21);
 
