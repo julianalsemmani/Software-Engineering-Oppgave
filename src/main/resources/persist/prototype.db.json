@@ -1,5 +1,17 @@
 {
   "users" : [ {
+    "id" : "8c0c57f0-342a-4423-a523-5b16ebfb82ac",
+    "firstName" : "Lars",
+    "lastName" : "Larsen",
+    "address" : "Braveien 5, 1785 Halden",
+    "email" : "lars.larsen@hotmail.com",
+    "username" : "larsmannen",
+    "password" : "123456",
+    "isAdmin" : false,
+    "balance" : 0,
+    "favorites" : [ ],
+    "productsBidOn" : [ ]
+  }, {
     "id" : "383bfde7-3071-4aa2-8cf6-501ef3e91ec4",
     "firstName" : "Ole",
     "lastName" : "Olsen",
@@ -13,6 +25,63 @@
     "productsBidOn" : [ ]
   } ],
   "stores" : [ {
+    "id" : "069726c8-8ac8-47c6-aeab-82586ce6f3d4",
+    "storeName" : "Old Spice Antiques",
+    "address" : "Braveien 5, 1785 Halden",
+    "phoneNumber" : 123456,
+    "owner" : "8c0c57f0-342a-4423-a523-5b16ebfb82ac",
+    "employees" : [ ],
+    "products" : [ {
+      "id" : "3c5868a3-fb8a-4a81-b1e0-e90401f321e4",
+      "name" : "Spartan Helmet",
+      "productPicture" : "https://temarte.com/4198-thickbox_default/spartan-helmet-in-bronze.jpg",
+      "auction" : null,
+      "sale" : {
+        "price" : 450000,
+        "buyer" : null
+      }
+    }, {
+      "id" : "f39e6bf5-b1c3-4d1d-aac4-bfaacb6ae835",
+      "name" : "Old Spice",
+      "productPicture" : "https://www.sparkjop.no/media/catalog/product/cache/db12b821a15c22821e90fcd4f557572e/9/8/98998_o_98998_d_4.jpg",
+      "auction" : null,
+      "sale" : {
+        "price" : 1000,
+        "buyer" : null
+      }
+    }, {
+      "id" : "05ccacc7-da2b-4516-ae95-dd772b254de8",
+      "name" : "Bald Mona Lisa painting",
+      "productPicture" : "https://imaginary.abcmedia.no/resize?force=false&width=980&aspectratio=16:9&nocrop=false&interlace=true&url=https%3A%2F%2Fimaginary.abcmedia.no%2Fpipe%3Furl%3Dhttps%253A%252F%252Fabcnyheter.drpublish.aptoma.no%252Fout%252Fimages%252Farticle%252F%252F2013%252F11%252F06%252F195151679%252F1%252Foriginal%252F2234089.jpg",
+      "auction" : {
+        "startBid" : 850000,
+        "minimumBidIncrement" : 50000,
+        "buyoutPrice" : 2000000,
+        "auctionStartTime" : 1638835200.000000000,
+        "auctionEndTime" : 1639526400.000000000,
+        "bidHistory" : [ ]
+      },
+      "sale" : null
+    }, {
+      "id" : "ff4a36b2-bcc5-4a9e-93e3-1edf976a535e",
+      "name" : "Ancient Roman Sword",
+      "productPicture" : "https://m.media-amazon.com/images/I/71s9THJmnoL._AC_SX355_.jpg",
+      "auction" : null,
+      "sale" : {
+        "price" : 500000,
+        "buyer" : null
+      }
+    }, {
+      "id" : "ae88de26-d8e0-48f5-a09a-712119e74869",
+      "name" : "Scream",
+      "productPicture" : "https://i.guim.co.uk/img/media/8a840f693b91fe67d42555b24c6334e9298f4680/251_1497_2178_1306/master/2178.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=9ff658ed0e9b905fa583c592cc2342f5",
+      "auction" : null,
+      "sale" : {
+        "price" : 10000000,
+        "buyer" : null
+      }
+    } ]
+  }, {
     "id" : "271ffb76-1742-40a5-b847-fde92368a33f",
     "storeName" : "Old Roots",
     "address" : "B R A Veien 4, 1757 Halden",

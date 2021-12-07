@@ -1,7 +1,7 @@
 package web.dtos.store;
 
 import core.model.Store;
-import web.dtos.UserResponseBody;
+import web.dtos.user.UserResponseBody;
 import web.dtos.product.ProductResponseBody;
 
 import java.util.UUID;

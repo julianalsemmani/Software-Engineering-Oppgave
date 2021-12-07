@@ -17,9 +17,9 @@
       <input type="tel" class="form-control" id="phoneNumber" required>
       <label for="phoneNumber">Phone number</label>
     </div>
-
-    <button class="w-100 btn btn-lg btn-primary" v-on:click=submitUser()>Register</button>
   </form>
+
+  <button class="w-100 btn btn-lg btn-primary" v-on:click=submitUser()>Register</button>
   </div>
 </template>
 

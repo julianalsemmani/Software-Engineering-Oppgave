@@ -10,7 +10,7 @@
       </span>
     </ul>
     <div v-if="this.me != null" class="dropdown" style="float:right;">
-      <button class="dropbtn">My Account</button>
+      <button class="dropbtn">My Account - {{me.username}}</button>
       <div class="dropdown-content">
         <a href="#">Account Settings</a>
         <a href="#">My Favourites</a>
